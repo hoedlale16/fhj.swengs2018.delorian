@@ -1,7 +1,8 @@
 # fhj.swengs2018.timeomat
 
+# Time-O-Mat
 
-
+SWENGS Project
 
 
 Team Members:

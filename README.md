@@ -1,6 +1,4 @@
-# fhj.swengs2018.timeomat
-
-# Time-O-Mat
+# DeLorean - Get your Time
 
 SWENGS Project
 

@@ -21,4 +21,8 @@ public class UserService {
         return userRepository.save(entity);
     }
 
+    public void delete(String username) {
+        userRepository.deleteById(username);
+    }
+
 }

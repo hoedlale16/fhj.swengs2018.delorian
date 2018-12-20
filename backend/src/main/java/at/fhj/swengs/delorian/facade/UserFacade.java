@@ -80,6 +80,10 @@ public class UserFacade {
         return dto;
     }
 
+    public void delete(String username) {
+        userService.delete(username);
+    }
+
     public UserDTO getByUsername(String username) {
         User entity = userService.findByUserName(username).get();
         UserDTO dto = new UserDTO();

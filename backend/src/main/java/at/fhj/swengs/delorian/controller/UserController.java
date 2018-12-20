@@ -19,12 +19,17 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    UserDTO  create(@RequestBody @Valid UserDTO dto) {
+    UserDTO create(@RequestBody @Valid UserDTO dto) {
         return userFacade.create(dto);
     }
 
     @PutMapping("/users/{username}")
     UserDTO update(@RequestBody @Valid UserDTO dto, @PathVariable String username) {
         return userFacade.update(username, dto);
+    }
+
+    @DeleteMapping("/users/{username}")
+    void delete(@RequestBody @Valid UserDTO dto, @PathVariable String username) {
+        userFacade.delete(username);
     }
 }

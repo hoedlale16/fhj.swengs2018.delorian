@@ -33,5 +33,10 @@ SWENGS Project. A application to track working time for projects. A project mana
           - Password: delorian
 
 
-
+# Possible REST Calls
+ - /auth -> Post to authenticate user and get a JWT
+ - /users -> GET,POST,PUT, DELETE - Manage users [ROLE_ADMIN]
+ - /userroles -> GET,POST,PUT, DELETE - Manage userroles [ROLE_ADMIN]
+ - /projects -> GET,POST,PUT, DELETE - Manage projects [ROLE_PRJMGR]
+ - /projecttimes ->  GET,POST,PUT, DELETE - Manage projects [ROLE_USER]
 

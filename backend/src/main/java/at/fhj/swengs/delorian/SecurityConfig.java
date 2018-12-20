@@ -45,10 +45,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig))
                 .addFilterAfter(new JwtTokenAuthenticationFilter(jwtConfig), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                // allow all POST requests
+
+                // allow all POST requests to /auth to authenticate users
                 .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
-                // must be an admin if trying to access admin area (authentication is also required here)
-                .antMatchers("/admin/**").hasRole("ADMIN")
+
+                // Define RBAC -Conect: Roles are NOT inherited (ADMIN > PRJMGR -> USER.
+                // If a user is requested to handle the full app, all three roles must be assigned to user!
+                .antMatchers("projectTimes/**").hasRole("USER")
+                .antMatchers(HttpMethod.GET,"/projects/**").hasRole("USER")
+
+                .antMatchers("/projects/**").hasRole("PRJMGR")
+
+                .antMatchers("/users/**").hasRole("ADMIN")
+                .antMatchers( "userroles/**").hasRole("ADMIN")
                 // any other requests must be authenticated
                 .anyRequest().authenticated();
     }

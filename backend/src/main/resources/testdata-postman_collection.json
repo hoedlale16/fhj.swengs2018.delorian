@@ -1,0 +1,264 @@
+{
+	"info": {
+		"_postman_id": "4a2a9e91-2fdf-4b74-9176-16941d373b96",
+		"name": "PRJ - DELORAIN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentifizieren",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"delorian\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/auth/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alle UserRollen lesen",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iLCJST0xFX1BSSk1HUiIsIlJPTEVfVVNFUiJdLCJpYXQiOjE1NDUzMTEzNzAsImV4cCI6MTU0NTM5Nzc3MH0.o0ae6x9Ki0e_rckv5cnYd8PyHMoFCCMn4u7SatXwtCapihZ5DPo3mKyl8Sx-B6gMgXNKxiaJU_bRptb9mZziBA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/userroles/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"userroles",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserRolle lesen",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iLCJST0xFX1BSSk1HUiIsIlJPTEVfVVNFUiJdLCJpYXQiOjE1NDUzMTEzNzAsImV4cCI6MTU0NTM5Nzc3MH0.o0ae6x9Ki0e_rckv5cnYd8PyHMoFCCMn4u7SatXwtCapihZ5DPo3mKyl8Sx-B6gMgXNKxiaJU_bRptb9mZziBA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/userroles/ROLE_PRJMGR",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"userroles",
+						"ROLE_PRJMGR"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alle User lesen",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iLCJST0xFX1BSSk1HUiIsIlJPTEVfVVNFUiJdLCJpYXQiOjE1NDUzMTEzNzAsImV4cCI6MTU0NTM5Nzc3MH0.o0ae6x9Ki0e_rckv5cnYd8PyHMoFCCMn4u7SatXwtCapihZ5DPo3mKyl8Sx-B6gMgXNKxiaJU_bRptb9mZziBA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User lesen",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iLCJST0xFX1BSSk1HUiIsIlJPTEVfVVNFUiJdLCJpYXQiOjE1NDUzMTEzNzAsImV4cCI6MTU0NTM5Nzc3MH0.o0ae6x9Ki0e_rckv5cnYd8PyHMoFCCMn4u7SatXwtCapihZ5DPo3mKyl8Sx-B6gMgXNKxiaJU_bRptb9mZziBA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TODO User anlegen",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Nokolos\",\n    \"lastName\": \"Spitz\",\n    \"dayOfBirth\": \"31.01.2017\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/actors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User ändern",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"dayOfBirth\": \"31.03.2017\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/actors/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User löschen",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/actors/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

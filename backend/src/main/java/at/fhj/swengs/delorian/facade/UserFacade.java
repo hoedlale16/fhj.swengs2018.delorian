@@ -64,7 +64,7 @@ public class UserFacade {
 
         dto.setUserRoles(entity.getUserRoles().stream().map(r -> r.getRoleName()).collect(Collectors.toSet()));
         dto.setManagedProjects(entity.getManagedProjects().stream().map(p -> p.getId()).collect(Collectors.toSet()));
-        
+
         //Do nOT set allready booked project times. not relevant in frontend!
         //dto.setProjectTimes(entity.getProjectTimes().stream().map(t -> t.getId()).collect(Collectors.toList()));
     }

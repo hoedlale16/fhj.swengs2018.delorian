@@ -6,12 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class UserController {
 
     @Autowired
     private UserFacade userFacade;
+
+    @GetMapping("/users/")
+    List<UserDTO> getAllUsers() {
+        return userFacade.getAllUsers();
+    }
 
     @GetMapping("/users/{username}")
     UserDTO getById(@PathVariable String username) {

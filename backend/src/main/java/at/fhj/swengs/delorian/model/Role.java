@@ -20,17 +20,17 @@ public class Role {
 
     private String description;
 
-    @ManyToMany
-    private Set<User> users;
+    @ManyToMany(mappedBy = "userRoles")
+    private Set<User> assignedUsers;
 
     @Version
     @JsonIgnore
     private long version;
 
-    public Role(String roleName, String description, Set<User> users) {
+    public Role(String roleName, String description, Set<User> assignedUsers) {
         this.roleName = roleName;
         this.description = description;
-        this.users = users;
+        this.assignedUsers = assignedUsers;
     }
 
     public Role(String roleName, String description) {
@@ -57,12 +57,12 @@ public class Role {
         this.description = description;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public Set<User> getAssignedUsers() {
+        return assignedUsers;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setAssignedUsers(Set<User> assignedUsers) {
+        this.assignedUsers = assignedUsers;
     }
 
     @Override

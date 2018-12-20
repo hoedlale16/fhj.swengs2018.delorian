@@ -41,7 +41,7 @@ public class AuthenticationService implements UserDetailsService {
                 at.fhj.swengs.delorian.model.User user = optUser.get();
 
                 // 2. Set all assigned Roles of user to 'grandedAuthorities' list
-                List<String> userRoles = user.getUserRoles().stream().map(r -> r.getRoleName()).collect(Collectors.toList());
+                Set<String> userRoles = user.getUserRoles().stream().map(r -> r.getRoleName()).collect(Collectors.toSet());
                 List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList(String.join(",", userRoles));
 
                 // 3. Return new user with password and grandtedAuthroties
@@ -50,6 +50,7 @@ public class AuthenticationService implements UserDetailsService {
                 return new User(user.getUserName(), user.getPassword(), grantedAuthorities);
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         // If user not found. Throw this exception.
         throw new UsernameNotFoundException("Username: " + username + " not found");

@@ -27,7 +27,7 @@ public class User {
 
     private String eMail;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Role> userRoles;
 
     @OneToMany(mappedBy = "projectManager")

@@ -45,6 +45,7 @@ export class AuthService {
       const decodedToken = this.jwtHelperService.decodeToken(token);
       this.currLoggedInUserName = decodedToken.sub;
       this.userRoles = decodedToken.authorities;
+      console.log('Roles after login: ' + this.userRoles)
 
       // Navigate to project list
       this.loggedInChange.next(true);

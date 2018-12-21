@@ -1,14 +1,25 @@
-<div>
-  <h1>WELCOME {{currLoggedInUser}}!</h1>
+<div class="card bg-light">
+  <div class="card-body">
+    <div class="col-md-12">
+      <div class="row">
+        <h1>WELCOME {{currLoggedInUser}}!</h1>
+        <div class="col-12">
+          TODO: Hier kommen noch fancy Funktionen:
+        </div>
+      </div>
 
-  <div>
-    <a [routerLink]="'/user-management/'">User Management</a>
+      <div class="row">
+        <div class="col-4 card text-dark">
+            Letztes gebuchtes Projekt gleich zum erneuten Buchen für heutiges Datum
+        </div>
+        <!--  <div class="card text-dark"> -->
+        <div class="col-4 card text-dark">
+            Coole diagramme für Prj Manager (gebuchte Stunden pro Projekt oder so
+        </div>
+        <div class="col-4 card text-dark">
+            und vieles mehr.
+        </div>
+      </div>
+    </div>
   </div>
-  <div>
-    <a [routerLink]="'/project-management/'">Project Management</a>
-  </div>
-  <div>
-    <a [routerLink]="'/time-tracking/'">Time Tracking</a>
-  </div>
-
 </div>

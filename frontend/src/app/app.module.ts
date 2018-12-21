@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { LogoutComponent } from './components/logout/logout.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -13,8 +12,10 @@ import { UserManagementComponent } from './components/user-management/user-manag
 import { ProjectManagementComponent } from './components/project-management/project-management.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { TimeTrackingComponent } from './components/time-tracking/time-tracking.component';
-import { ReturnToDashboardComponent } from './components/return-to-dashboard/return-to-dashboard.component';
-
+import { NgxSelectModule } from 'ngx-select-ex';
+import { RatingModule } from 'ngx-bootstrap/rating';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { AppNavigationComponent } from './components/app-navigation/app-navigation.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -24,13 +25,12 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     LoginComponent,
-    LogoutComponent,
+    AppNavigationComponent,
     DashboardComponent,
     UserManagementComponent,
-    ProjectManagementComponent,
     UserFormComponent,
+    ProjectManagementComponent,
     TimeTrackingComponent,
-    ReturnToDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +42,11 @@ export function tokenGetter() {
         tokenGetter: tokenGetter,
         whitelistedDomains: ['localhost:4200']
       }
-    })
+    }),
+    RatingModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    NgxSelectModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,33 @@
-<div *ngFor="let user of users">
-  {{user.username}} {{user.firstName}} {{user.lastName}} <a [routerLink]="'/user-form/' + user.username">Edit</a> <button type="button" (click)="deleteUser(user)">Delete</button>
+<div class="container mb-5" role="main">
+  <div class="card bg-light">
+    <div class="card-body text-dark">
+        <a class="btn btn-outline-success navbar-btn" [routerLink]="'/user-form/'">New user</a>
+    </div>
+  </div>
 </div>
-<button type="button" (click)="createUser()">
-  New user
-</button>
+
+<div class="card bg-light">
+  <div class="card-body">
+    <div class="col-md-12">
+      <div class="row">
+        <div *ngFor="let user of users" class="col-4">
+
+          <div class="card text-dark">
+            <div class="card-header">
+              <strong>{{user.username}}</strong>
+            </div>
+
+            <div class="card-body">
+              <strong>First name:</strong> <em>{{user.firstName}}</em><br>
+              <strong>Last name:</strong> <em>{{user.lastName}}</em><br>
+              <div>
+                <a class="btn btn-outline-success" title="Edit" [routerLink]="'/user-form/' + user.username">Edit</a>
+                <button class="btn btn-dark" type="button" (click)="deleteUser(user)">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

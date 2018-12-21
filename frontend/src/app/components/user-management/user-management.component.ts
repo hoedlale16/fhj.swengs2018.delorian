@@ -30,8 +30,4 @@ export class UserManagementComponent implements OnInit {
       });
 
   }
-
-  createUser() {
-    this.router.navigate(['/user-form']);
-  }
 }

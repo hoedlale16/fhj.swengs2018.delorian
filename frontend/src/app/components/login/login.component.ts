@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,20 +10,32 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  user: any;
+  //user: any;
 
-  constructor(private userService: AuthService, private router: Router) {
+  loginForm: FormGroup;
+
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   ngOnInit() {
-    this.user = {
+
+    this.loginForm = new FormGroup( {
+      'username': new FormControl('',[Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
+      'password': new FormControl('',[Validators.required, Validators.minLength(1)] )
+    });
+
+
+    /*this.user = {
       username: '',
       password: ''
-    };
+    };*/
   }
 
   login() {
-    this.userService.login(this.user)
+
+    const user = this.loginForm.value;
+
+    this.authService.login(user)
       .subscribe((res: any) => {
       }, (error) => {
         alert('wrong username or password');

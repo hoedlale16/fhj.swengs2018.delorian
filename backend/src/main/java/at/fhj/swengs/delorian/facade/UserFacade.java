@@ -39,7 +39,7 @@ public class UserFacade {
     private void mapDtoToEntity(UserDTO dto, User entity) {
         entity.setUserName(dto.getUsername());
 
-        if(dto.getPassword() != null ) {
+        if(dto.getPassword() != null || ! dto.getPassword().isEmpty() ) {
             String encodedPW = encoder.encode(dto.getPassword());
             entity.setPassword(encodedPW);
         }

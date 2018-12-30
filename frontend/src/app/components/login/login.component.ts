@@ -9,9 +9,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  //user: any;
-
   loginForm: FormGroup;
 
   constructor(private authService: AuthService, private router: Router) {
@@ -23,12 +20,6 @@ export class LoginComponent implements OnInit {
       'username': new FormControl('',[Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
       'password': new FormControl('',[Validators.required, Validators.minLength(1)] )
     });
-
-
-    /*this.user = {
-      username: '',
-      password: ''
-    };*/
   }
 
   login() {

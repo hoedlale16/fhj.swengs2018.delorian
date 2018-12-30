@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @DeleteMapping("/users/{username}")
-    void delete(@RequestBody @Valid UserDTO dto, @PathVariable String username) {
+    void delete(@PathVariable String username) {
         userFacade.delete(username);
     }
 }

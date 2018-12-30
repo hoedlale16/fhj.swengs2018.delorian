@@ -8,6 +8,9 @@ import {UserListResolver} from './resolver/user-list.resolver';
 import {AdminRoleGuardGuard} from './guards/admin-role-guard.guard';
 import {UserManagementComponent} from './components/user-management/user-management.component';
 import {TimeTrackingComponent} from './components/time-tracking/time-tracking.component';
+import {UserFormComponent} from './components/user-form/user-form.component';
+import {UserRolesResolver} from './resolver/user-roles.resolver';
+import {UserResolver} from './resolver/user.resolver';
 
 const routes: Routes = [
   {
@@ -21,9 +24,23 @@ const routes: Routes = [
   },
   {
     path: 'user-management', component: UserManagementComponent, canActivate: [AdminRoleGuardGuard],
-     resolve: {
+    runGuardsAndResolvers: 'always',
+    resolve: {
        users: UserListResolver
      }
+  },
+  {
+    path: 'user-form', component: UserFormComponent, canActivate: [AdminRoleGuardGuard],
+    resolve: {
+      usersRoles: UserRolesResolver
+    }
+  },
+  {
+    path: 'user-form/:username', component: UserFormComponent, canActivate: [AdminRoleGuardGuard],
+    resolve: {
+      user: UserResolver,
+      usersRoles: UserRolesResolver
+    }
   },
   {
     path: 'project-management', component: ProjectManagementComponent, canActivate: [AuthGuard],
@@ -38,7 +55,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

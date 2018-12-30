@@ -29,6 +29,12 @@ export class AuthService {
     }
     this.loggedInChange.subscribe((value) => {
       this.isLoggedIn = value;
+
+      // Reset Data if user logged out
+      if (this.isLoggedIn === false) {
+        this.currLoggedInUserName = '';
+        this.userRoles = [];
+      }
     });
   }
 
@@ -42,12 +48,13 @@ export class AuthService {
       const token = res.headers.get('Authorization').replace(/^Bearer /, '');
       localStorage.setItem(this.accessTokenLocalStorageKey, token);
 
+      // Set login data parsed from JWT
       const decodedToken = this.jwtHelperService.decodeToken(token);
       this.currLoggedInUserName = decodedToken.sub;
       this.userRoles = decodedToken.authorities;
-      console.log('Roles after login: ' + this.userRoles)
 
-      // Navigate to project list
+
+      // Trigger that login was done and navigate to dashboard
       this.loggedInChange.next(true);
       this.router.navigate(['/dashboard']);
       return res;

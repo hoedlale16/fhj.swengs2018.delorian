@@ -53,6 +53,6 @@ export class UserService {
   }
 
   getOfflineUsers(): Array<any> {
-    return localStorage.getItem('offlinceUsers') ? <Array<any>>JSON.parse(localStorage.getItem('offlineUsers')) : [];
+    return localStorage.getItem('offlineUsers') ? <Array<any>>JSON.parse(localStorage.getItem('offlineUsers')) : [];
   }
 }

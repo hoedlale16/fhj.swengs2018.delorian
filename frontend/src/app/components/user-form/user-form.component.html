@@ -1,3 +1,54 @@
-<p>
-  user-form works!
-</p>
+<form [formGroup]="userForm" (ngSubmit)="saveUser()">
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input id="username" type="text" name="username" formControlName="username" class="form-control"/>
+          <div *ngIf="userForm.controls.username.invalid && (userForm.controls.username.dirty || userForm.controls.username.touched)"
+               class="alert alert-danger">
+            <div *ngIf="userForm.controls.username.errors.required">
+              Username is required.
+            </div>
+            <div *ngIf="userForm.controls.username.errors.minLength">
+              Username must be at least 2 characters long.
+            </div>
+            <div *ngIf="userForm.controls.username.errors.maxLength">
+              Username max lengh is 32 characters!
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <label for="password">Password:</label>
+        <input id="password" type="password" name="password" formControlName="password" class="form-control"/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label for="firstName">Firstname:</label>
+        <input id="firstName" type="text" name="firstName" formControlName="firstName" class="form-control"/>
+      </div>
+      <div class="col">
+        <label for="lastName">Lastname:</label>
+        <input id="lastName" type="text" name="lastName" formControlName="lastName" class="form-control"/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label for="eMail">E-M@il:</label>
+        <input id="eMail" type="text" name="eMail" formControlName="eMail" class="form-control"/>
+      </div>
+      <div class="col">
+        <label for="userRoles">Userroles:</label>
+        <ngx-select id="userRoles" [items]="userRoleOptions" name="userRoles" [multiple]="true"
+                    formControlName="userRoles" optionTextField="roleName"></ngx-select>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Save</button>
+      <a class="btn btn-outline-success navbar-btn" [routerLink]="'/user-management/'">Cancel</a>
+    </div>
+</form>

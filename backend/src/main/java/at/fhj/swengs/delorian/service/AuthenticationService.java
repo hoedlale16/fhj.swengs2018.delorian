@@ -35,6 +35,7 @@ public class AuthenticationService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
+            System.out.println("loadUserByUsername <" + username + ">");
             // 1. Get User by given username
             Optional<at.fhj.swengs.delorian.model.User> optUser = userRepository.findById(username);
             if (optUser.isPresent()) {

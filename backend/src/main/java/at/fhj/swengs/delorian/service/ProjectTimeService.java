@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service()
 public class ProjectTimeService {
@@ -14,7 +16,32 @@ public class ProjectTimeService {
     @Autowired
     private ProjectTimeRepository projectTimeRepository;
 
-    public List<ProjectTime> getProjectTimes(List<Long> dtos) {
+    public ProjectTime save(ProjectTime entity) {
+        return projectTimeRepository.save(entity);
+    }
+
+    public void delete(long projectTimeID) {
+        projectTimeRepository.deleteById(projectTimeID);
+    }
+
+    public Optional<ProjectTime> findById(long projectTimeID) {
+        return projectTimeRepository.findById(projectTimeID);
+    }
+
+    public List<ProjectTime> getAllProjectTimesOfProject(long projectID) {
+        return projectTimeRepository.findProjectTimesByProjectId(projectID);
+    }
+
+    public List<ProjectTime> getAllProjectTimesOfUser(String username) {
+        return projectTimeRepository.findProjectTimesByUserUserName(username);
+    }
+
+    //Not secure. Just return either all project times of a user or all project times of a project
+    /*public List<ProjectTime> getAllProjectTimes() {
+        return projectTimeRepository.findAll();
+    }*/
+
+    public List<ProjectTime> getProjectTimes(Set<Long> dtos) {
         List<ProjectTime> entities = new ArrayList<>();
         if (dtos != null) {
             dtos.forEach((dto) -> entities.add(projectTimeRepository.findById(dto).get()));

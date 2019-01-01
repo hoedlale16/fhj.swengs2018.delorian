@@ -14,7 +14,7 @@ public class UserDTO {
     private Set<String> userRoles;
     private Set<Long> managedProjects;
 
-    private List<Long> projectTimes;
+    private Set<Long> projectTimes;
 
     public String getUsername() {
         return username;
@@ -72,11 +72,11 @@ public class UserDTO {
         this.managedProjects = managedProjects;
     }
 
-    public List<Long> getProjectTimes() {
+    public Set<Long> getProjectTimes() {
         return projectTimes;
     }
 
-    public void setProjectTimes(List<Long> projectTimes) {
+    public void setProjectTimes(Set<Long> projectTimes) {
         this.projectTimes = projectTimes;
     }
 }

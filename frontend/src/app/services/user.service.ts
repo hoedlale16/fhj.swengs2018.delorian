@@ -35,24 +35,6 @@ export class UserService {
   }
 
   create(user: User) {
-    return this.http.post('/api/users', user)
-      .pipe(
-        catchError((err: HttpErrorResponse) => {
-          if (!navigator.onLine) {
-            const offlineUsers = this.getOfflineUsers();
-            offlineUsers.push(user);
-            this.setOfflineUsers(user);
-          }
-          return of(user);
-        })
-      );
-  }
-
-  setOfflineUsers(offlinceUsers: User) {
-    localStorage.setItem('offlineUsers', JSON.stringify(offlinceUsers));
-  }
-
-  getOfflineUsers(): Array<any> {
-    return localStorage.getItem('offlineUsers') ? <Array<any>>JSON.parse(localStorage.getItem('offlineUsers')) : [];
+    return this.http.post('/api/users', user);
   }
 }

@@ -6,12 +6,9 @@ import {AuthService} from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminRoleGuardGuard implements CanActivate {
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {
-  }
+export class PrjMgrRoleGuard implements CanActivate {
+
+  constructor( private authService: AuthService, private router: Router) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -23,13 +20,13 @@ export class AdminRoleGuardGuard implements CanActivate {
       return false;
     }
 
-    if (! this.authService.userRoles.includes('ROLE_ADMIN')) {
-      // We know that user is authenticated but has no ROLE_ADMIN!
+    if (! this.authService.userRoles.includes('ROLE_PRJMGR')) {
+      // We know that user is authenticated but has no ROLE_PRJMGR!
       this.router.navigate(['/dashboard']);
       return false;
     }
 
-    // User is authenticated and has ROLE_ADMIN
+    // User is authenticated and has ROLE_PRJMGR
     return true;
   }
 }

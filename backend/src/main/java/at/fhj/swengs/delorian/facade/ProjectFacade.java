@@ -33,7 +33,7 @@ public class ProjectFacade {
 
         entity.setId(dto.getId());
         entity.setTopic(dto.getTopic());
-        entity.setDescription(entity.getDescription());
+        entity.setDescription(dto.getDescription());
 
         Optional<User> optPrjMgr = userService.findByUserName(dto.getProjectManager());
         if(((Optional) optPrjMgr).isPresent()) {
@@ -83,6 +83,18 @@ public class ProjectFacade {
         List<ProjectDTO> projects = new ArrayList<ProjectDTO>();
 
         projectService.getAllProjects().forEach(entity -> {
+            ProjectDTO dto = new ProjectDTO();
+            mapEntityToDto(entity,dto);
+            projects.add(dto);
+        });
+
+        return projects;
+    }
+
+    public List<ProjectDTO> getAllProjectsOfPrjMgr(String prjMgrUserName) {
+        List<ProjectDTO> projects = new ArrayList<ProjectDTO>();
+
+        projectService.getAllProjectsOfPrjMgr(prjMgrUserName).forEach(entity -> {
             ProjectDTO dto = new ProjectDTO();
             mapEntityToDto(entity,dto);
             projects.add(dto);

@@ -39,4 +39,9 @@ public class ProjectService {
     public List<Project> getAllProjects() {
         return projectRepository.findAll();
     }
+
+    public List<Project> getAllProjectsOfPrjMgr(String prjMgrUserName) {
+        return projectRepository.findProjectsByProjectManagerUserName(prjMgrUserName);
+    }
+
 }

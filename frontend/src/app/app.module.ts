@@ -16,6 +16,7 @@ import { NgxSelectModule } from 'ngx-select-ex';
 import { RatingModule } from 'ngx-bootstrap/rating';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AppNavigationComponent } from './components/app-navigation/app-navigation.component';
+import { ProjectFormComponent } from './components/project-form/project-form.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -31,6 +32,7 @@ export function tokenGetter() {
     UserFormComponent,
     ProjectManagementComponent,
     TimeTrackingComponent,
+    ProjectFormComponent,
   ],
   imports: [
     BrowserModule,

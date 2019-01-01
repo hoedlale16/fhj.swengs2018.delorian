@@ -1,0 +1,40 @@
+<form [formGroup]="projectForm" (ngSubmit)="saveProject()">
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="topic">Projectname (Topic):</label>
+        <input id="topic" type="text" name="topic" formControlName="topic" class="form-control"/>
+        <div *ngIf="projectForm.controls.topic.invalid && (projectForm.controls.topic.dirty || projectForm.controls.topic.touched)"
+             class="alert alert-danger">
+          <div *ngIf="projectForm.controls.topic.errors.required">
+            Project name is required.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <label for="projectManager">Project manager:</label>
+      <input id="projectManager" type="text" name="projectManager" formControlName="projectManager" class="form-control" [value]="currLoggedInUser"/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <label for="totalPlannedHours">Planned project hours:</label>
+      <input id="totalPlannedHours" type="number" name="totalPlannedHours" formControlName="totalPlannedHours" class="form-control"/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <label for="description">Description:</label>
+      <textarea rows="5" id="description" type="text" name="description" formControlName="description" class="form-control"></textarea>
+    </div>
+  </div>
+
+  <div class="btn-group">
+    <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid">Save</button>
+    <a class="btn btn-outline-success navbar-btn" [routerLink]="'/project-management/'">Cancel</a>
+  </div>
+</form>

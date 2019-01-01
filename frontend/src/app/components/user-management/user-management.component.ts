@@ -42,7 +42,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
 
   loadData() {
     const data = this.route.snapshot.data;
-    this.users = data.users.concat(this.userService.getOfflineUsers());
+    this.users = data.users;
   }
 
   deleteUser(user: User) {

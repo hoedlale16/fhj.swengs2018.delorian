@@ -19,6 +19,8 @@ import { AppNavigationComponent } from './components/app-navigation/app-navigati
 import { ProjectFormComponent } from './components/project-form/project-form.component';
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import {ChartsModule} from 'ng2-charts';
+import { TimeTrackingListComponent } from './components/time-tracking-list/time-tracking-list.component';
+import { TimeTrackingComponent } from './components/time-tracking/time-tracking.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -36,6 +38,8 @@ export function tokenGetter() {
     TimeTrackingFormComponent,
     ProjectFormComponent,
     ProjectDetailsComponent,
+    TimeTrackingListComponent,
+    TimeTrackingComponent,
   ],
   imports: [
     BrowserModule,

@@ -5031,6 +5031,7 @@ input[type="button"].btn-block {
 
 .navbar-dark .navbar-brand {
   color: #fff;
+  font-size: 200%;
 }
 
 .navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {

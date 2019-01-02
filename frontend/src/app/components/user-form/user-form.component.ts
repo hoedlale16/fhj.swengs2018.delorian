@@ -22,7 +22,7 @@ export class UserFormComponent implements OnInit {
       'username': new FormControl('',[Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
       'password': new FormControl(),
       'firstName':  new FormControl('',[Validators.required, Validators.minLength(3)] ),
-      'lastName': new FormControl([Validators.required, Validators.minLength(3)]),
+      'lastName': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'eMail': new FormControl(),
       'userRoles': new FormControl(),
       'managedProjects': new FormControl(),

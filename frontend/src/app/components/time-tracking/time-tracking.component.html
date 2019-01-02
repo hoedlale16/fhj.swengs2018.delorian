@@ -1,0 +1,6 @@
+<div class="container mb-5" role="main">
+  <app-time-tracking-form [projectOptions]="projects" [currLoggedInUser]="currLoggedInUser"></app-time-tracking-form>
+</div>
+<div class="card bg-light">
+  <app-time-tracking-list [alreadyTrackedTimes]="alreadyTrackedTimes" [projects]="projects"></app-time-tracking-list>
+</div>

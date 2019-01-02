@@ -16,6 +16,8 @@ import {ProjectListOfUserResolver} from './resolver/project-list-of-user.resolve
 import {ProjectResolver} from './resolver/project.resolver';
 import {ProjectFormComponent} from './components/project-form/project-form.component';
 import {ProjectListResolver} from './resolver/project-list.resolver';
+import {TimeTrackingOfUserResolver} from './resolver/time-tracking-of-user.resolver';
+import {TimeTrackingComponent} from './components/time-tracking/time-tracking.component';
 
 const routes: Routes = [
   {
@@ -65,9 +67,11 @@ const routes: Routes = [
     }
   },
   {
-    path: 'time-tracking', component: TimeTrackingFormComponent, canActivate: [AuthGuard],
+    path: 'time-tracking', component: TimeTrackingComponent, canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always',
     resolve: {
       projects: ProjectListResolver,
+      alreadyTrackedTimes: TimeTrackingOfUserResolver
     }
   },
 

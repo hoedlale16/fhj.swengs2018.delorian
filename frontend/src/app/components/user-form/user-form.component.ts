@@ -24,7 +24,7 @@ export class UserFormComponent implements OnInit {
       'firstName':  new FormControl('',[Validators.required, Validators.minLength(3)] ),
       'lastName': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'eMail': new FormControl(),
-      'userRoles': new FormControl(),
+      'userRoles': new FormControl('',[Validators.required]),
       'managedProjects': new FormControl(),
       'projectTimes': new FormControl()
     });
@@ -42,6 +42,7 @@ export class UserFormComponent implements OnInit {
 
     } else {
       this.isEditMode = false;
+      this.userForm.controls.password.setValidators([Validators.required]);
     }
   }
 

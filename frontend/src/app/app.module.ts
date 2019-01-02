@@ -11,7 +11,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { ProjectManagementComponent } from './components/project-management/project-management.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
-import { TimeTrackingComponent } from './components/time-tracking/time-tracking.component';
+import { TimeTrackingFormComponent } from './components/time-tracking-form/time-tracking-form.component';
 import { NgxSelectModule } from 'ngx-select-ex';
 import { RatingModule } from 'ngx-bootstrap/rating';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -31,7 +31,7 @@ export function tokenGetter() {
     UserManagementComponent,
     UserFormComponent,
     ProjectManagementComponent,
-    TimeTrackingComponent,
+    TimeTrackingFormComponent,
     ProjectFormComponent,
   ],
   imports: [

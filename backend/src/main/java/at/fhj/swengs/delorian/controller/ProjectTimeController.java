@@ -41,11 +41,6 @@ public class ProjectTimeController {
         return projectTimeFacade.create(dto);
     }
 
-    @PutMapping("/projectTimes/{projectTimeID}")
-    ProjectTimeDTO update(@RequestBody @Valid ProjectTimeDTO dto, @PathVariable long projectTimeID) {
-        return projectTimeFacade.update(projectTimeID, dto);
-    }
-
     @DeleteMapping("/projectTimes/{projectTimeID}")
     void delete(@PathVariable long projectTimeID) {
         projectTimeFacade.delete(projectTimeID);

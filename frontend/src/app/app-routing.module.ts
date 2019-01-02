@@ -16,9 +16,9 @@ import {ProjectListOfUserResolver} from './resolver/project-list-of-user.resolve
 import {ProjectResolver} from './resolver/project.resolver';
 import {ProjectFormComponent} from './components/project-form/project-form.component';
 import {ProjectListResolver} from './resolver/project-list.resolver';
-import {ProjectDetailsComponent} from './components/project-details/project-details.component';
 import {TimeTrackingOfUserResolver} from './resolver/time-tracking-of-user.resolver';
 import {TimeTrackingComponent} from './components/time-tracking/time-tracking.component';
+import {ProjectDetailsComponent} from './components/project-details/project-details.component';
 
 const routes: Routes = [
   {

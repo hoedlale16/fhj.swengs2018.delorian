@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProjectService} from '../../services/project.service';
 import {AuthService} from '../../services/auth.service';
@@ -6,33 +6,30 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ProjectTimesService} from '../../services/project-times.service';
 
 @Component({
-  selector: 'app-time-tracking',
+  selector: 'app-time-tracking-form',
   templateUrl: './time-tracking-form.component.html',
   styleUrls: ['./time-tracking-form.component.scss']
 })
 export class TimeTrackingFormComponent implements OnInit {
 
+  @Input()
   currLoggedInUser: string;
-  timeTrackingForm: FormGroup;
+
+  @Input()
   projectOptions;
 
-  constructor(private projectTimesService: ProjectTimesService, private authService: AuthService,
-              private route: ActivatedRoute, private router: Router) {
+  timeTrackingForm: FormGroup;
+
+  constructor(private projectTimesService: ProjectTimesService, private router: Router) {
     this.timeTrackingForm = new FormGroup({
       'username': new FormControl(),
-      'projectID': new FormControl(),
-      'trackingDate': new FormControl(),
-      'workedHours': new FormControl()
+      'projectID': new FormControl('', [Validators.required]),
+      'trackingDate': new FormControl('',[Validators.required]),
+      'workedHours': new FormControl('', [Validators.required, Validators.pattern(/^(0|[1-9]\d*)?$/)])
     });
-
-    // Set preloaded data (projects for selection list)
-    const data = this.route.snapshot.data;
-    this.projectOptions = data.projects;
   }
 
-  ngOnInit() {
-    this.currLoggedInUser = this.authService.currLoggedInUserName;
-  }
+  ngOnInit() {}
 
   save() {
     // Just enable username control to get entered username
@@ -41,7 +38,7 @@ export class TimeTrackingFormComponent implements OnInit {
 
     this.projectTimesService.create(projectTime).subscribe((response: any) => {
         alert('Time booked sucessfully');
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/time-tracking']);
     });
   }
 

@@ -20,8 +20,8 @@ export class ProjectFormComponent implements OnInit {
     this.projectForm = new FormGroup({
       'id': new FormControl(),
       'topic': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
-      'projectManager': new FormControl(),
-      'totalPlannedHours': new FormControl(),
+      'projectManager': new FormControl('', [Validators.required]),
+      'totalPlannedHours': new FormControl('', [Validators.required, Validators.pattern(/^(0|[1-9]\d*)?$/)]),
       // 'totalPlannedHours': new FormControl('', [Validators.required, Validators.pattern('^\d*\.\[0,5]{0,1}')]),
       'description': new FormControl(),
       'projectTimes': new FormControl()

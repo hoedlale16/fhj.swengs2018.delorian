@@ -1,38 +1,3 @@
-<!--
-<div class="card bg-light " *ngIf="isLoggedIn">
-  <div class="card-body text-dark">
-    <div class="row page-header">
-
-      <!-- Navigation components -->
-<!--
-      <nav class="navbar navbar-expand-lg navbar-dark">
-
-        <a class="navbar-brand" [routerLink]="'/dashboard/'">Delorean</a>
-
-        <!-- Component links -->
-<!--
-        <ul class="navbar-nav justify-content-center">
-          <li class="nav-item " *ngIf="isLoggedInAndAdmin">
-            <a class="nav-link" [routerLink]="'/user-management/'">User Management</a>
-          </li>
-
-          <li class="nav-item " *ngIf="isLoggedInAndPrjMgr">
-            <a class="nav-link" [routerLink]="'/project-management/'">Project Management</a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" [routerLink]="'/time-tracking/'">Time Tracking</a>
-          </li>
-        </ul>
-
-        <!-- Logout -->
-<!--
-        <button class="btn btn-outline-danger navbar-btn right" type="button" (click)="logout()">Logout</button>
-      </nav>
-    </div>
-  </div>
-</div> -->
-
-
 <div class="card bg-light top" *ngIf="isLoggedIn">
   <div class="card-body text-dark">
     <div class="container-fluid">
@@ -41,7 +6,7 @@
 
       <nav class="navbar navbar-expand-lg navbar-dark justify-content-between">
         <div class="col-1">
-          <a class="navbar-brand" [routerLink]="'/dashboard/'">Delorean</a>
+          <a class="navbar-brand brand" [routerLink]="'/dashboard/'">Delorean</a>
         </div>
         <!-- Component links -->
           <div class="navbar-nav">

@@ -7,14 +7,15 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {UserListResolver} from './resolver/user-list.resolver';
 import {AdminRoleGuard} from './guards/admin-role.guard';
 import {UserManagementComponent} from './components/user-management/user-management.component';
-import {TimeTrackingComponent} from './components/time-tracking/time-tracking.component';
+import {TimeTrackingFormComponent} from './components/time-tracking-form/time-tracking-form.component';
 import {UserFormComponent} from './components/user-form/user-form.component';
 import {UserRolesResolver} from './resolver/user-roles.resolver';
 import {UserResolver} from './resolver/user.resolver';
 import {PrjMgrRoleGuard} from './guards/prj-mgr-role.guard';
-import {ProjectListResolver} from './resolver/project-list.resolver';
+import {ProjectListOfUserResolver} from './resolver/project-list-of-user.resolver';
 import {ProjectResolver} from './resolver/project.resolver';
 import {ProjectFormComponent} from './components/project-form/project-form.component';
+import {ProjectListResolver} from './resolver/project-list.resolver';
 
 const routes: Routes = [
   {
@@ -50,7 +51,7 @@ const routes: Routes = [
     path: 'project-management', component: ProjectManagementComponent, canActivate: [PrjMgrRoleGuard],
     runGuardsAndResolvers: 'always',
     resolve: {
-      projects: ProjectListResolver
+      projects: ProjectListOfUserResolver
     }
   },
   {
@@ -64,7 +65,10 @@ const routes: Routes = [
     }
   },
   {
-    path: 'time-tracking', component: TimeTrackingComponent, canActivate: [AuthGuard],
+    path: 'time-tracking', component: TimeTrackingFormComponent, canActivate: [AuthGuard],
+    resolve: {
+      projects: ProjectListResolver,
+    }
   },
 
 

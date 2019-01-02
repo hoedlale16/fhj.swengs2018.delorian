@@ -28,7 +28,7 @@ public class ProjectTimeFacade {
     private void mapDtoToEntity(ProjectTimeDTO dto, ProjectTime entity) {
         entity.setId(dto.getId());
         entity.setProject(projectService.findById(dto.getProjectID()).get());
-        entity.setUser(userService.findByUserName(dto.getUserName()).get());
+        entity.setUser(userService.findByUserName(dto.getUsername()).get());
         entity.setTrackingDate(dto.getTrackingDate());
         entity.setWorkedHours(dto.getWorkedHours());
     }
@@ -36,7 +36,7 @@ public class ProjectTimeFacade {
     private void mapEntityToDto(ProjectTime entity, ProjectTimeDTO dto) {
         dto.setId(entity.getId());
         dto.setProjectID(entity.getProject().getId());
-        dto.setUserName(entity.getUser().getUserName());
+        dto.setUsername(entity.getUser().getUserName());
         dto.setTrackingDate(entity.getTrackingDate());
         dto.setWorkedHours(entity.getWorkedHours());
     }
@@ -46,14 +46,6 @@ public class ProjectTimeFacade {
         mapDtoToEntity(dto, entity);
         mapEntityToDto(projectTimeService.save(entity), dto);
         return dto;
-    }
-
-    public ProjectTimeDTO update(long projectId, ProjectTimeDTO dto) {
-        ProjectTime entity  = projectTimeService.findById(projectId).get();
-        mapDtoToEntity(dto, entity);
-        mapEntityToDto(projectTimeService.save(entity), dto);
-        return dto;
-
     }
 
     public void delete(long projectTimeID) {

@@ -25,7 +25,6 @@ export class TimeTrackingFormComponent implements OnInit {
       'workedHours': new FormControl()
     });
 
-    this.timeTrackingForm
     // Set preloaded data (projects for selection list)
     const data = this.route.snapshot.data;
     this.projectOptions = data.projects;
@@ -37,7 +36,6 @@ export class TimeTrackingFormComponent implements OnInit {
 
   save() {
     // Just enable username control to get entered username
-    //this.timeTrackingForm.controls.username.enable();
     const projectTime = this.timeTrackingForm.value;
     projectTime.username = this.currLoggedInUser;
 

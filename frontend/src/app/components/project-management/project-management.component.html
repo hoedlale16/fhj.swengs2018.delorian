@@ -24,6 +24,8 @@
               <div>
                 <a class="btn btn-outline-success" title="Edit" [routerLink]="'/project-form/' + project.id">Edit</a>
                 <button class="btn btn-dark" type="button" (click)="deleteProject(project)">Delete</button>
+                <a class="btn btn-outline-info" title="Details" [routerLink]="'/project-details/'+ project.id"> Details </a>
+
               </div>
             </div>
           </div>

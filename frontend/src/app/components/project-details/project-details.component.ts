@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {ProjectTime} from '../../api/ProjectTime';
+import {Project} from '../../api/Project';
 
 @Component({
   selector: 'app-project-details',
@@ -7,9 +10,12 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ProjectDetailsComponent implements OnInit {
 
-  public doughnutChartLabels: string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
-  public doughnutChartData: number[] = [350, 450, 100];
-  public doughnutChartType: string = 'doughnut';
+  doughnutChartLabels: string[] = [];
+  doughnutChartData: number[] = [];
+  doughnutChartType: string = 'doughnut';
+
+  projectTimes: Array<ProjectTime>;
+  projects: Array<Project>;
 
 
   public chartClicked(e: any): void {
@@ -21,10 +27,27 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
+    this.loadData();
   }
 
 
   ngOnInit() {
   }
+
+  loadData() {
+    const data = this.route.snapshot.data;
+    this.projects = [data.project];
+
+    this.projectTimes = data.projectTimes;
+    if (this.projectTimes) {
+      this.projectTimes.forEach((p) => {
+        this.doughnutChartLabels.push(p.username);
+        this.doughnutChartData.push(p.workedHours);
+
+      });
+    }
+  }
+
+
 }

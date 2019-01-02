@@ -1,7 +1,7 @@
 export interface ProjectTime {
   id?: number;
   projectID: number;
-  userName: string;
+  username: string;
   trackingDate: Date;
   workedHours: number;
 }

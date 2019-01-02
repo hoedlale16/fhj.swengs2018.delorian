@@ -1,0 +1,89 @@
+.floating {
+  animation-name: floating;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  position: absolute;
+  top: 0;
+  left: -20%;
+}
+
+
+@keyframes floating {
+  from { transform: translate(0,  0px); }
+  55%  { transform: translate(0,15px); }
+  to   { transform: translate(0, -0px); }
+}
+
+.tossing {
+  animation-name: tossing;
+  -webkit-animation-name: tossing;
+  height: 100px;
+  margin-top: 40px;
+  -webkit-animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction : alternate-reverse;
+  -webkit-animation-direction : alternate-reverse;
+
+
+}
+
+@keyframes tossing {
+  0% {
+    transform: rotate(1.5deg);
+
+  }
+
+  100% {
+    transform: rotate(-1.5deg);
+  }
+
+}
+
+.shadow{
+  height: 30px;
+  margin-left: 15vw;
+  margin-top: 30px;
+  border-radius: 100%;
+  animation-name: shadow;
+  -webkit-animation-name: shadow;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-timing-function: ease-in-out;
+  background: #EAEAEA;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction : alternate;
+  transition-duration: 2s;
+}
+
+@keyframes shadow{
+  0% {
+    background: #EAEAEA;
+    width: 150px;
+  }
+  25%{
+    background: #E3E3E3;
+  }
+  50%{
+    background: #d8d8d8;
+  }
+  75%{
+    background: #d1d1d1;
+  }
+  100%{
+    background: #CACACA;
+    width: 170px;
+    margin-left: 15vw;
+  }
+}
+
+.round{
+  height: 200px;
+  width: 200px;
+  margin-left: 15vw ;
+  background: linear-gradient(145deg, rgba(206,81,203,1) 0%, rgba(207,90,192,1) 5%, rgba(222,226,45,1) 73%, rgba(222,226,45,1) 100%, rgba(222,226,45,1) 100%);
+  border-radius: 50%;
+  position: relative;
+}

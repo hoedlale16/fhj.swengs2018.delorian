@@ -1,0 +1,33 @@
+<form [formGroup]="timeTrackingForm" (ngSubmit)="save()">
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input id="username" type="text" name="username" formControlName="username" class="form-control" [value]="currLoggedInUser" readonly/>
+      </div>
+    </div>
+    <div class="col">
+      <label for="trackingDate">Date:</label>
+      <!-- TODO Datepicker  -->
+      <input id="trackingDate" type="text" bsDatepicker name="trackingDate" [bsConfig]="{dateInputFormat: 'DD.MM.YYYY'}"
+             formControlName="trackingDate" class="form-control"/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <label for="workedHours">Worked Hours:</label>
+      <input id="workedHours" type="number" name="workedHours" formControlName="workedHours" class="form-control"/>
+    </div>
+    <div class="col">
+      <label for="projectID">Project:</label>
+      <ngx-select id="projectID" [items]="projectOptions" name="projectID" [multiple]="false"
+                  formControlName="projectID" optionTextField="topic"></ngx-select>
+    </div>
+  </div>
+
+  <div class="btn-group">
+    <button type="submit" class="btn btn-primary" [disabled]="timeTrackingForm.invalid">Save</button>
+    <a class="btn btn-outline-success navbar-btn" [routerLink]="'/dashboard/'">Cancel</a>
+  </div>
+</form>

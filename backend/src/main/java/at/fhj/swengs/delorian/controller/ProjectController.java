@@ -14,9 +14,8 @@ public class ProjectController {
     @Autowired
     private ProjectFacade projectFacade;
 
-    //Not secure enough. just support list of project for a specific project manager!
-    //@GetMapping("/projects/")
-    //List<ProjectDTO> getAllProjects() { return projectFacade.getAllProjects(); }
+    @GetMapping("/projects/")
+    List<ProjectDTO> getAllProjects() { return projectFacade.getAllProjects(); }
 
     @GetMapping("/projectsPrjMgr/{projectManager}")
     List<ProjectDTO> getProjectsOfPrjMgr(@PathVariable String projectManager) {

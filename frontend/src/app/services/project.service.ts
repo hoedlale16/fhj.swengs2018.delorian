@@ -12,6 +12,12 @@ export class ProjectService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  getAllProjects() {
+    return this.http.get('/api/projects/').pipe(map((res: any) => {
+      return res;
+    }));
+  }
+
   getAllProjectsForUser(projectManager: string) {
     return this.http.get('/api/projectsPrjMgr/' + projectManager).pipe(
       map((response: any) => {

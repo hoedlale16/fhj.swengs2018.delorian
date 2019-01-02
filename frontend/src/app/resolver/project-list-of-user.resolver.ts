@@ -7,14 +7,18 @@ import {AuthService} from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectListResolver implements Resolve<Observable<Array<any>>> {
+export class ProjectListOfUserResolver implements Resolve<Observable<Array<any>>> {
 
   constructor(private projectService: ProjectService, private authService: AuthService) {
   }
 
   resolve(route: ActivatedRouteSnapshot,
           state: RouterStateSnapshot): Observable<Observable<any>> | Promise<Observable<any>> | Observable<any> {
-      return this.projectService.getAllProjects();
+    const projectManager = this.authService.currLoggedInUserName;
+    if (projectManager) {
+      return this.projectService.getAllProjectsForUser(projectManager);
+    }
+    return null;
   }
 
 }

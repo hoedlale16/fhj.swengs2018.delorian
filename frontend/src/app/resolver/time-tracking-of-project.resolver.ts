@@ -18,9 +18,9 @@ export class TimeTrackingOfProjectResolver implements Resolve<Observable<Array<a
   resolve(route: ActivatedRouteSnapshot,
           state: RouterStateSnapshot): Observable<Observable<any>> | Promise<Observable<any>> | Observable<any> {
 
-    const projcetID: number = route.data['projectID'];
-    if (projcetID) {
-      return this.projectTimesService.getProjectTimesForProject(projcetID);
+    const projectID = <number><any>route.paramMap.get('projectID');
+    if (projectID) {
+      return this.projectTimesService.getProjectTimesForProject(projectID);
     }
     return null;
   }

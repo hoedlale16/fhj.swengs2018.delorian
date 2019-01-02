@@ -19,6 +19,7 @@ import {ProjectListResolver} from './resolver/project-list.resolver';
 import {TimeTrackingOfUserResolver} from './resolver/time-tracking-of-user.resolver';
 import {TimeTrackingComponent} from './components/time-tracking/time-tracking.component';
 import {ProjectDetailsComponent} from './components/project-details/project-details.component';
+import {TimeTrackingOfProjectResolver} from './resolver/time-tracking-of-project.resolver';
 
 const routes: Routes = [
   {
@@ -78,7 +79,8 @@ const routes: Routes = [
   {
     path: 'project-details/:projectID', component: ProjectDetailsComponent, canActivate: [PrjMgrRoleGuard],
     resolve: {
-      projects: ProjectResolver,
+      project: ProjectResolver,
+      projectTimes: TimeTrackingOfProjectResolver
     }
   }
 

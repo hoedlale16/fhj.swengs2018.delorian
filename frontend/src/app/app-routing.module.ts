@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {LoginComponent} from './components/login/login.component';
 import {ProjectManagementComponent} from './components/project-management/project-management.component';
 import {AuthGuard} from './guards/auth.guard';
@@ -16,6 +16,7 @@ import {ProjectListOfUserResolver} from './resolver/project-list-of-user.resolve
 import {ProjectResolver} from './resolver/project.resolver';
 import {ProjectFormComponent} from './components/project-form/project-form.component';
 import {ProjectListResolver} from './resolver/project-list.resolver';
+import {ProjectDetailsComponent} from './components/project-details/project-details.component';
 
 const routes: Routes = [
   {
@@ -25,14 +26,14 @@ const routes: Routes = [
     path: 'login', component: LoginComponent
   },
   {
-    path: 'dashboard', component: DashboardComponent,  canActivate: [AuthGuard],
+    path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
   },
   {
     path: 'user-management', component: UserManagementComponent, canActivate: [AdminRoleGuard],
     runGuardsAndResolvers: 'always',
     resolve: {
-       users: UserListResolver
-     }
+      users: UserListResolver
+    }
   },
   {
     path: 'user-form', component: UserFormComponent, canActivate: [AdminRoleGuard],
@@ -70,14 +71,19 @@ const routes: Routes = [
       projects: ProjectListResolver,
     }
   },
-
-
+  {
+    path: 'project-details/:projectID', component: ProjectDetailsComponent, canActivate: [PrjMgrRoleGuard],
+    resolve: {
+      projects: ProjectResolver,
+    }
+  }
 
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{onSameUrlNavigation: 'reload'})],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

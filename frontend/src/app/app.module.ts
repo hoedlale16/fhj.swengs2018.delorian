@@ -17,6 +17,8 @@ import { RatingModule } from 'ngx-bootstrap/rating';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AppNavigationComponent } from './components/app-navigation/app-navigation.component';
 import { ProjectFormComponent } from './components/project-form/project-form.component';
+import { ProjectDetailsComponent } from './components/project-details/project-details.component';
+import {ChartsModule} from 'ng2-charts';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -33,12 +35,14 @@ export function tokenGetter() {
     ProjectManagementComponent,
     TimeTrackingFormComponent,
     ProjectFormComponent,
+    ProjectDetailsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ChartsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

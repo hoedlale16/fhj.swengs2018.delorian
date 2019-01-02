@@ -18,6 +18,12 @@ export class ProjectDetailsComponent implements OnInit {
   projects: Array<Project>;
 
 
+  chartColors: Array<any> = [
+    { // first color
+      backgroundColor: ['#d13537', '#b0o0b5']
+    }];
+
+
   public chartClicked(e: any): void {
     console.log(e);
   }

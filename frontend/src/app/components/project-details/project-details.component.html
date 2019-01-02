@@ -3,7 +3,7 @@
     <div class="card-body text-dark">
 
       <div style="display: block">
-        <canvas baseChart
+        <canvas baseChart [colors]="chartColors"
                 [data]="doughnutChartData"
                 [labels]="doughnutChartLabels"
                 [chartType]="doughnutChartType"

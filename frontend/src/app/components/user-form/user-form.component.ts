@@ -39,6 +39,7 @@ export class UserFormComponent implements OnInit {
       this.isEditMode = true;
       this.userForm.setValue(user);
       this.userForm.controls.username.disable();
+
     } else {
       this.isEditMode = false;
     }
@@ -48,7 +49,11 @@ export class UserFormComponent implements OnInit {
   }
 
   saveUser() {
+    // Just enable username control to get entered username
+    this.userForm.controls.username.enable();
     const user = this.userForm.value;
+    this.userForm.controls.username.disable();
+
     if (this.isEditMode) {
       this.userService.update(user).subscribe((response: any) => {
         alert('User updated sucessfully');

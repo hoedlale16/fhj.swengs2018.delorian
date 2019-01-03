@@ -19,7 +19,7 @@ export class ProjectDetailsComponent implements OnInit {
 
 
   chartColors: Array<any> = [
-    { // first color
+    {
       backgroundColor: ['#fe59c2', '#9559fe', '#c2fe59' , '#59fe95' , '#00ffff']
     }];
 

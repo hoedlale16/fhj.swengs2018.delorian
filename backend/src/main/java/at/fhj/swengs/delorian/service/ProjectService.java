@@ -20,13 +20,17 @@ public class ProjectService {
         return projectRepository.save(entity);
     }
 
-    //No deletion of projects possible - just update active flag of project
+    //No deletion of projects if there are booked times - just update active flag of project
     public  void delete(long projectId) {
         Optional<Project> optEntity  = findById(projectId);
         if(optEntity.isPresent()) {
             Project entity = optEntity.get();
-            entity.setActive(false);
-            save(entity);
+            if(entity.getProjectTimes().isEmpty()) {
+                projectRepository.deleteById(projectId);
+            } else {
+                entity.setActive(false);
+                save(entity);
+            }
         }
     }
 

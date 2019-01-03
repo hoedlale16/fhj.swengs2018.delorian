@@ -36,6 +36,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<ProjectTime> projectTimes;
 
+    private boolean active = true;
+
     @Version
     @JsonIgnore
     private long version;
@@ -125,6 +127,14 @@ public class User {
 
     public void setProjectTimes(List<ProjectTime> projectTimes) {
         this.projectTimes = projectTimes;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @Override

@@ -17,25 +17,36 @@ public class UserService {
     private UserRepository userRepository;
 
     public Optional<User> findByUserName(String username) {
-        return userRepository.findById(username);
+        return userRepository.findByUserNameAndActiveTrue(username);
     }
 
     public List<User> getUsers() {
-        return userRepository.findAll();
+        return userRepository.findAllByActiveTrue();
     }
 
     public User save(User entity) {
         return userRepository.save(entity);
     }
 
+    // No deletion of user if there there project time or not entries as managesProjects.
+    // In this case just deactivate user
     public void delete(String username) {
-        userRepository.deleteById(username);
+        Optional<User> optEntity  = findByUserName(username);
+        if(optEntity.isPresent()) {
+            User entity = optEntity.get();
+            if(entity.getProjectTimes().isEmpty() && entity.getManagedProjects().isEmpty()) {
+                userRepository.deleteById(username);
+            } else {
+                entity.setActive(false);
+                save(entity);
+            }
+        }
     }
 
     public Set<User> getUsersByName(Set<String> dtos) {
         Set<User> entities = new HashSet<>();
         if (dtos != null) {
-            dtos.forEach((dto) -> entities.add(userRepository.findById(dto).get()));
+            dtos.forEach((dto) -> entities.add(userRepository.findByUserNameAndActiveTrue(dto).get()));
         }
         return entities;
     }

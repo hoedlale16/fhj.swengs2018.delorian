@@ -31,6 +31,10 @@ const routes: Routes = [
   },
   {
     path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
+    resolve: {
+      projects: ProjectListResolver,
+      alreadyTrackedTimes: TimeTrackingOfUserResolver,
+    }
   },
   {
     path: 'user-management', component: UserManagementComponent, canActivate: [AdminRoleGuard],

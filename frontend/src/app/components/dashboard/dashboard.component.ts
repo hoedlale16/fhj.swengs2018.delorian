@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import {Project} from '../../api/Project';
 import {UserService} from '../../services/user.service';
+import {ProjectTime} from '../../api/ProjectTime';
 
 
 @Component({
@@ -13,43 +14,72 @@ import {UserService} from '../../services/user.service';
 })
 export class DashboardComponent implements OnInit {
   currLoggedInUser: string;
-  public barChartOptions: any = {
+  projects: Array<Project>;
+  alreadyTrackedTimes: Array<ProjectTime>;
+
+  // key: projectID, value: totalWorkedHoursOfProject
+  projectTimesMap: Map<number, number> = new Map();
+
+  // Chart variables
+  chartLabels: string[] = [];
+  chartData: any[] = [];
+  chartOptions: any = {
     scaleShowVerticalLines: false,
     responsive: true
   };
-  public barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType: string = 'bar';
-  public barChartLegend: boolean = true;
 
-  public barChartData: any[] = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-  ];
-
-  // events
-  public chartClicked(e: any): void {
-    console.log(e);
+  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService) {
+    // this.loadData();
   }
-
-  public chartHovered(e: any): void {
-    console.log(e);
-  }
-
-
-  constructor(private authService: AuthService, private userService: UserService, private route: ActivatedRoute) {
-    const data = this.route.snapshot.data;
-    const user = data.user;
-    if (user) {
-      console.log('User: ' + user.username);
-    } else {
-      console.log('no user');
-    }
-  }
-
 
   ngOnInit() {
-    this.currLoggedInUser = this.authService.currLoggedInUserName;
+    this.loadData();
 
+  }
+
+  loadData() {
+    this.currLoggedInUser = this.authService.currLoggedInUserName;
+    const data = this.route.snapshot.data;
+    this.projects = data.projects;
+    this.alreadyTrackedTimes = data.alreadyTrackedTimes;
+    this.prepareChartData();
+  }
+
+  prepareChartData() {
+    this.buildProjectTimesMap();
+
+    // Fill chart data
+    const hours: number[] = [];
+    this.projectTimesMap.forEach( (prjTotalHour, projectID) => {
+      this.chartLabels.push(this.getProjectTopicByID(projectID));
+      hours.push(prjTotalHour);
+    });
+
+    this.chartData = [ {data: hours, label: 'Worked hours' }
+    ];
+  }
+
+  buildProjectTimesMap() {
+    this.alreadyTrackedTimes.forEach( (p) => {
+      let currWorkedHours = p.workedHours;
+
+      // Add already stored worked hours of user
+      if (this.projectTimesMap.has(p.projectID)) {
+        currWorkedHours += this.projectTimesMap.get(p.projectID);
+      }
+      this.projectTimesMap.set(p.projectID, currWorkedHours);
+    });
+  }
+
+  getProjectTopicByID(projectID: number): string {
+    let topic = '???';
+    this.projects.forEach( (p) => {
+      if (p.id === projectID) {
+        topic = p.topic;
+        return;
+      }
+    });
+    return topic;
   }
 
 

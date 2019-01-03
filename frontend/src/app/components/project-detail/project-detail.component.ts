@@ -4,18 +4,19 @@ import {ProjectTime} from '../../api/ProjectTime';
 import {Project} from '../../api/Project';
 
 @Component({
-  selector: 'app-project-details',
-  templateUrl: './project-details.component.html',
-  styleUrls: ['./project-details.component.scss']
+  selector: 'app-project-detail',
+  templateUrl: './project-detail.component.html',
+  styleUrls: ['./project-detail.component.scss']
 })
-export class ProjectDetailsComponent implements OnInit {
+export class ProjectDetailComponent implements OnInit {
 
-  doughnutChartLabels: string[] = [];
-  doughnutChartData: number[] = [];
-  doughnutChartType: string = 'doughnut';
+  chartLabels: string[] = [];
+  chartData: number[] = [];
+  chartType = 'doughnut';
 
-  projectTimes: Array<ProjectTime>;
-  projects: Array<Project>;
+  projectTimes: Array<ProjectTime> = [];
+
+  project: Project;
 
 
   chartColors: Array<any> = [
@@ -43,13 +44,13 @@ export class ProjectDetailsComponent implements OnInit {
 
   loadData() {
     const data = this.route.snapshot.data;
-    this.projects = [data.project];
+    this.project = data.project;
 
     this.projectTimes = data.projectTimes;
     if (this.projectTimes) {
       this.projectTimes.forEach((p) => {
-        this.doughnutChartLabels.push(p.username);
-        this.doughnutChartData.push(p.workedHours);
+        this.chartLabels.push(p.username);
+        this.chartData.push(p.workedHours);
 
       });
     }

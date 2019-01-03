@@ -3,7 +3,6 @@ import {AuthService} from '../../services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {Project} from '../../api/Project';
-import {UserService} from '../../services/user.service';
 import {ProjectTime} from '../../api/ProjectTime';
 
 
@@ -27,6 +26,11 @@ export class DashboardComponent implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true
   };
+  chartColors: Array<any> = [
+    {
+      backgroundColor: ['#fe59c2', '#9559fe', '#c2fe59', '#59fe95', '#00ffff', '#FF0000']
+    }];
+
 
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService) {
     // this.loadData();
@@ -50,17 +54,17 @@ export class DashboardComponent implements OnInit {
 
     // Fill chart data
     const hours: number[] = [];
-    this.projectTimesMap.forEach( (prjTotalHour, projectID) => {
+    this.projectTimesMap.forEach((prjTotalHour, projectID) => {
       this.chartLabels.push(this.getProjectTopicByID(projectID));
       hours.push(prjTotalHour);
     });
 
-    this.chartData = [ {data: hours, label: 'Worked hours' }
+    this.chartData = [{data: hours, label: 'Worked hours'}
     ];
   }
 
   buildProjectTimesMap() {
-    this.alreadyTrackedTimes.forEach( (p) => {
+    this.alreadyTrackedTimes.forEach((p) => {
       let currWorkedHours = p.workedHours;
 
       // Add already stored worked hours of user
@@ -73,7 +77,7 @@ export class DashboardComponent implements OnInit {
 
   getProjectTopicByID(projectID: number): string {
     let topic = '???';
-    this.projects.forEach( (p) => {
+    this.projects.forEach((p) => {
       if (p.id === projectID) {
         topic = p.topic;
         return;

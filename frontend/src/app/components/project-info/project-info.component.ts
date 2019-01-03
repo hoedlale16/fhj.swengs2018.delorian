@@ -24,6 +24,11 @@ export class ProjectInfoComponent implements OnInit {
   options: any;
   maxValueChart: any;
 
+  chartColors: Array<any> = [
+    {
+      backgroundColor: ['#fe59c2', '#9559fe', '#c2fe59' , '#59fe95' , '#00ffff', '#FF0000']
+    }];
+
 
   constructor(private projectService: ProjectService, private router: Router) {
 

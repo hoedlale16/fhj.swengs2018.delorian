@@ -23,9 +23,8 @@
               <strong>Description:</strong> <em>{{project.description}}</em><br>
               <div>
                 <a class="btn btn-outline-success" title="Edit" [routerLink]="'/project-form/' + project.id">Edit</a>
-                <button class="btn btn-dark" type="button" (click)="deactivateProject(project)">Deactivate</button>
+                <button class="btn btn-outline-warning" type="button" (click)="deactivateProject(project)">Deactivate</button>
                 <a class="btn btn-outline-info" title="Details" [routerLink]="'/project-details/'+ project.id"> Details </a>
-
               </div>
             </div>
           </div>

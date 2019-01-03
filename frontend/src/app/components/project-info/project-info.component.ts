@@ -2,8 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Project} from '../../api/Project';
 import {ProjectService} from '../../services/project.service';
 import {Router} from '@angular/router';
-import {toInt} from 'ngx-bootstrap/chronos/utils/type-checks';
-import {toNumber} from 'ngx-bootstrap/timepicker/timepicker.utils';
+
 
 @Component({
   selector: 'app-project-info',
@@ -22,27 +21,34 @@ export class ProjectInfoComponent implements OnInit {
   totalBookedHours = 0;
 
   chartData: any[] = [];
-  options = {
-    scales: {
-      yAxes: [{
-        ticks: {
-          max: 100,
-          min: 0,
-          stepSize: 10
-        }
-      }]
-    }
-  };
+  options: any;
+  maxValueChart: any;
+
 
   constructor(private projectService: ProjectService, private router: Router) {
+
   }
 
 
   ngOnInit() {
+
+    this.maxValueChart = this.project.totalPlannedHours > this.totalBookedHours ? this.project.totalPlannedHours : this.totalBookedHours;
+
     this.chartData = [
       {data: [this.project.totalPlannedHours], label: 'Planned Hours'},
       {data: [this.totalBookedHours], label: 'Worked Hours'}
     ];
+    this.options = {
+      scales: {
+        yAxes: [{
+          ticks: {
+            max: this.maxValueChart,
+            min: 0,
+            stepSize: this.maxValueChart / 10
+          }
+        }]
+      }
+    };
 
 
   }

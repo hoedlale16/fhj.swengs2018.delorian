@@ -9,11 +9,11 @@
           <a class="navbar-brand brand" [routerLink]="'/dashboard/'">DELOREAN</a>
         </div>
         <!-- Component links -->
-          <div class="navbar-nav">
+          <div class="navbar-nav" *ngIf="isLoggedInAndAdmin">
             <a class="nav-link" [routerLink]="'/user-management/'">User Management</a>
           </div>
 
-          <div class="navbar-nav">
+          <div class="navbar-nav" *ngIf="isLoggedInAndPrjMgr">
             <a class="nav-link" [routerLink]="'/project-management/'">Project Management</a>
           </div>
 

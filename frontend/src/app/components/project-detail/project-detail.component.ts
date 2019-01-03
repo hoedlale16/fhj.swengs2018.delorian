@@ -10,18 +10,12 @@ import {Project} from '../../api/Project';
 })
 export class ProjectDetailComponent implements OnInit {
 
-<<<<<<< HEAD:frontend/src/app/components/project-details/project-details.component.ts
-  doughnutChartLabels: string[] = [];
-  doughnutChartData: number[] = [];
-  doughnutChartType: string = 'doughnut';
-  projektTimeMap: Map<string, number> = new Map ;
-=======
   chartLabels: string[] = [];
   chartData: number[] = [];
   chartType = 'doughnut';
->>>>>>> 952de02d664dfe8d690460b18fa3e94d7ac908d6:frontend/src/app/components/project-detail/project-detail.component.ts
 
   projectTimes: Array<ProjectTime> = [];
+  projectTimesMap: Map<string, number> = new Map();
 
   project: Project;
 
@@ -42,27 +36,31 @@ export class ProjectDetailComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute) {
-    this.loadData();
-  }
-
-
-
-  ngOnInit() {
-  }
-
-  loadData() {
     const data = this.route.snapshot.data;
     this.project = data.project;
 
     this.projectTimes = data.projectTimes;
-    if (this.projectTimes) {
-      this.projectTimes.forEach((p) => {
-        this.chartLabels.push(p.username);
-        this.chartData.push(p.workedHours);
-
-      });
-    }
+    this.prepareChartData();
   }
 
+  ngOnInit() {
+  }
 
+  prepareChartData() {
+    this.projectTimes.forEach( (p) => {
+      let currWorkedHours = p.workedHours;
+
+      // Add already stored worked hours of user
+      if (this.projectTimesMap.has(p.username)) {
+        currWorkedHours += this.projectTimesMap.get(p.username);
+      }
+      this.projectTimesMap.set(p.username, currWorkedHours);
+    });
+
+    // Fill chart data
+    this.projectTimesMap.forEach( (hours, user) => {
+      this.chartLabels.push(user);
+      this.chartData.push(hours);
+    });
+  }
 }

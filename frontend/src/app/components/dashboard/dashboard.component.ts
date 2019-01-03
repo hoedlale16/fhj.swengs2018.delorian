@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   currLoggedInUser: string;
   projects: Array<Project>;
   alreadyTrackedTimes: Array<ProjectTime>;
+  isBookedProjectTimesHidden = true;
 
   // key: projectID, value: totalWorkedHoursOfProject
   projectTimesMap: Map<number, number> = new Map();
@@ -22,19 +23,11 @@ export class DashboardComponent implements OnInit {
   // Chart variables
   chartLabels: string[] = [];
   chartData: any[] = [];
-  chartOptions: any = {
-    scaleShowVerticalLines: false,
-    responsive: true
-  };
-  chartColors: Array<any> = [
-    {
-      backgroundColor: ['#fe59c2', '#9559fe', '#c2fe59', '#59fe95', '#00ffff', '#FF0000']
-    }];
+  chartOptions: any;
+  chartColors: Array<any> = [{  backgroundColor: ['#fe59c2', '#9559fe', '#c2fe59', '#59fe95', '#00ffff', '#FF0000'] }];
 
 
-  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService) {
-    // this.loadData();
-  }
+  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     this.loadData();
@@ -61,6 +54,13 @@ export class DashboardComponent implements OnInit {
 
     this.chartData = [{data: hours, label: 'Worked hours'}
     ];
+
+    // Design chart
+    this.chartOptions = {
+      scaleShowVerticalLines: false,
+      responsive: true
+    };
+
   }
 
   buildProjectTimesMap() {
@@ -84,6 +84,10 @@ export class DashboardComponent implements OnInit {
       }
     });
     return topic;
+  }
+
+  toggleBookedProjectTimes() {
+    this.isBookedProjectTimesHidden ? this.isBookedProjectTimesHidden = false : this.isBookedProjectTimesHidden = true;
   }
 
 

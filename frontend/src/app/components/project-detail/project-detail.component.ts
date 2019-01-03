@@ -12,22 +12,14 @@ export class ProjectDetailComponent implements OnInit {
 
   chartLabels: string[] = [];
   chartData: number[] = [];
+  chartColors: Array<any> = [];
 
   projectTimes: Array<ProjectTime> = [];
   projectTimesMap: Map<string, number> = new Map();
   totalBookedHours = 0;
 
   project: Project;
-
-
-  chartColors: Array<any> = [
-    {
-      backgroundColor: ['#fe59c2', '#9559fe', '#c2fe59', '#59fe95', '#00ffff']
-    }];
-  public chartHovered(e: any): void {
-    console.log(e);
-  }
-
+  isBookedProjectTimesHidden = true;
 
   constructor(private route: ActivatedRoute) {
     const data = this.route.snapshot.data;
@@ -60,5 +52,14 @@ export class ProjectDetailComponent implements OnInit {
       this.chartLabels.push(user);
       this.chartData.push(hours);
     });
+
+    // Set chart colours
+    this.chartColors = [ {
+        backgroundColor: ['#fe59c2', '#9559fe', '#c2fe59', '#59fe95', '#00ffff', '#FF0000']
+      }];
+  }
+
+  toggleBookedProjectTimes() {
+    this.isBookedProjectTimesHidden ? this.isBookedProjectTimesHidden = false : this.isBookedProjectTimesHidden = true;
   }
 }

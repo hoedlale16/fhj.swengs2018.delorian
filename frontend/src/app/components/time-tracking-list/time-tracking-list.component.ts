@@ -12,11 +12,9 @@ import {Project} from '../../api/Project';
 })
 export class TimeTrackingListComponent implements OnInit  {
   isHidden = true;
-  @Input()
-  alreadyTrackedTimes: Array<ProjectTime>;
-
-  @Input()
-  projects: Array<Project>;
+  @Input() trackingListHeader: string;
+  @Input() alreadyTrackedTimes: Array<ProjectTime>;
+  @Input() projects: Array<Project>;
 
   constructor(private projectTimesService: ProjectTimesService, private route: ActivatedRoute, private router: Router) {
   }
@@ -43,12 +41,7 @@ export class TimeTrackingListComponent implements OnInit  {
   }
 
   toggleContent() {
-    if (this.isHidden === true) {
-      return this.isHidden = false;
-
-    } else  {
-      return this.isHidden = true;
-    }
+    this.isHidden ? this.isHidden = false : this.isHidden = true;
   }
 
 }

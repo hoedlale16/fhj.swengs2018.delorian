@@ -7,21 +7,25 @@
                     buttonLink="/project-management"></app-project-info>
 
   <div class="card bg-light">
+    <div class="card-header pointerCursor"  (click)="toggleBookedProjectTimes()">
+      <strong>Already booked project times: </strong>
+    </div>
 
     <div class="card-body text-dark" *ngIf="projectTimes.length === 0">
       No tracked times available
     </div>
-    <div class="card-body text-dark" *ngIf="projectTimes.length > 0">
+    <div class="card-body text-dark" *ngIf="projectTimes.length > 0" [hidden]="isBookedProjectTimesHidden">
         <canvas baseChart
                 [colors]="chartColors"
                 [data]="chartData"
                 [labels]="chartLabels"
-                chartType="doughnut"
-                (chartHover)="chartHovered($event)">
+                chartType="doughnut">
         </canvas>
 
         <div class="card bg-light">
-          <app-time-tracking-list [alreadyTrackedTimes]="projectTimes" [projects]="[project]"></app-time-tracking-list>
+          <app-time-tracking-list trackingListHeader="Details"
+                                  [alreadyTrackedTimes]="projectTimes"
+                                  [projects]="[project]"></app-time-tracking-list>
         </div>
     </div>
   </div>

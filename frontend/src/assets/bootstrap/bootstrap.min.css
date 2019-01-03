@@ -2621,7 +2621,8 @@ textarea.form-control {
 @media screen and (prefers-reduced-motion: reduce) {
   .btn {
     -webkit-transition: none;
-    transition: none
+    transition: none;
+    margin-right: 1px;
   }
 }
 

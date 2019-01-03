@@ -1,0 +1,33 @@
+<div class="container mb-5" role="main">
+  <!--Show project-info -->
+  <app-project-info [project]="project"
+                    [showFullDetails]="true"
+                    [totalBookedHours]="totalBookedHours"
+                    buttonLinkName="Back"
+                    buttonLink="/project-management"></app-project-info>
+
+  <div class="card bg-light">
+
+    <div class="card-body text-dark" *ngIf="projectTimes.length === 0">
+      No tracked times available
+    </div>
+    <div class="card-body text-dark" *ngIf="projectTimes.length > 0">
+        <canvas baseChart
+                [colors]="chartColors"
+                [data]="chartData"
+                [labels]="chartLabels"
+                chartType="doughnut"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+        </canvas>
+
+        <div class="card bg-light">
+          <app-time-tracking-list [alreadyTrackedTimes]="projectTimes" [projects]="[project]"></app-time-tracking-list>
+        </div>
+    </div>
+  </div>
+
+
+
+
+</div>

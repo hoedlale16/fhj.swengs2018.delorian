@@ -35,6 +35,9 @@ public class ProjectFacade {
         entity.setTopic(dto.getTopic());
         entity.setDescription(dto.getDescription());
 
+        // Projects comming from frontent are always active!
+        entity.setActive(true);
+
         Optional<User> optPrjMgr = userService.findByUserName(dto.getProjectManager());
         if(((Optional) optPrjMgr).isPresent()) {
             entity.setProjectManager(optPrjMgr.get());
@@ -69,6 +72,8 @@ public class ProjectFacade {
     }
 
     public void delete(long projectID) {
+        //We will not delete projects from database just set them inactive
+        //projectService will handle that...
         projectService.delete(projectID);
     }
 

@@ -1,0 +1,37 @@
+<div class="card text-dark">
+  <div class="card-header">
+    <strong>{{project.topic}}</strong>
+  </div>
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <strong>Project manager:</strong>
+          <em>{{project.projectManager}}</em><br>
+        <div *ngIf="showFullDetails">
+          <strong>Planned hours:</strong> <em>{{project.totalPlannedHours}}</em><br>
+          <strong>Booked hours:</strong> <em>{{totalBookedHours}}</em><br>
+        </div>
+        <strong>Description:</strong>
+          <em *ngIf="showFullDetails == false">{{project.description.substr(0,3)}}...</em><br>
+          <em *ngIf="showFullDetails == true">{{project.description}}</em><br>
+      </div>
+      <div class="col"  *ngIf="showFullDetails">
+        <canvas baseChart
+                [datasets]="chartData"
+                legend="true"
+                chartType="bar"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+
+        </canvas>
+      </div>
+    </div>
+
+    <div class="row">
+      <a class="btn btn-outline-success" title="Edit" [routerLink]="'/project-form/' + project.id">Edit</a>
+      <button class="btn btn-outline-warning" type="button" (click)="deactivateProject(project)">Deactivate</button>
+      <a *ngIf="buttonLink" class="btn btn-outline-info" title="Details" [routerLink]="buttonLink">{{buttonLinkName}}</a>
+    </div>
+  </div>
+</div>

@@ -43,15 +43,4 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
     const data = this.route.snapshot.data;
     this.projects = data.projects;
   }
-
-  deleteProject(project: Project) {
-
-    this.projectService.delete(project)
-      .subscribe(() => {
-        this.router.navigate(['/project-management']);
-      });
-
-  }
-
-
 }

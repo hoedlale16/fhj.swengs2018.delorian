@@ -10,10 +10,15 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @RepositoryRestResource
 @Transactional(isolation = Isolation.READ_COMMITTED)
 public interface ProjectRepository extends PagingAndSortingRepository<Project, Long>, JpaRepository<Project, Long>, CrudRepository<Project, Long> {
 
-    public List<Project> findProjectsByProjectManagerUserName(@Param("userName") String prjMgrUserName);
+    public Optional<Project> findByIdAndActiveTrue(@Param("id") long id);
+
+    public List<Project> findAllByActiveTrue();
+
+    public List<Project> findProjectsByActiveTrueAndProjectManagerUserName(@Param("userName") String prjMgrUserName);
 }

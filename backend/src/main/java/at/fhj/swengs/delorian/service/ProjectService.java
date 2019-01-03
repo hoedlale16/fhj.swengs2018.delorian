@@ -20,8 +20,14 @@ public class ProjectService {
         return projectRepository.save(entity);
     }
 
+    //No deletion of projects possible - just update active flag of project
     public  void delete(long projectId) {
-        projectRepository.deleteById(projectId);
+        Optional<Project> optEntity  = findById(projectId);
+        if(optEntity.isPresent()) {
+            Project entity = optEntity.get();
+            entity.setActive(false);
+            save(entity);
+        }
     }
 
     public Optional<Project> findById(long projectId) {
@@ -31,17 +37,17 @@ public class ProjectService {
     public Set<Project> getProjectsByID(Set<Long> dtos) {
         Set<Project> entities = new HashSet<>();
         if (dtos != null) {
-            dtos.forEach((dto) -> entities.add(projectRepository.findById(dto).get()));
+            dtos.forEach((dto) -> entities.add(projectRepository.findByIdAndActiveTrue(dto).get()));
         }
         return entities;
     }
 
     public List<Project> getAllProjects() {
-        return projectRepository.findAll();
+        return projectRepository.findAllByActiveTrue();
     }
 
     public List<Project> getAllProjectsOfPrjMgr(String prjMgrUserName) {
-        return projectRepository.findProjectsByProjectManagerUserName(prjMgrUserName);
+        return projectRepository.findProjectsByActiveTrueAndProjectManagerUserName(prjMgrUserName);
     }
 
 }

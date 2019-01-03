@@ -10,14 +10,29 @@
 
       <div class="row">
         <div class="col-4 card text-dark">
-            Letztes gebuchtes Projekt gleich zum erneuten Buchen für heutiges Datum
+          Letztes gebuchtes Projekt gleich zum erneuten Buchen für heutiges Datum
         </div>
         <!--  <div class="card text-dark"> -->
         <div class="col-4 card text-dark">
-            Coole diagramme für Prj Manager (gebuchte Stunden pro Projekt oder so
+          Coole diagramme für Prj Manager (gebuchte Stunden pro Projekt oder so
+          <div>
+            <div style="display: block">
+              <canvas baseChart
+                      [datasets]="barChartData"
+                      [labels]="barChartLabels"
+                      [options]="barChartOptions"
+                      [legend]="barChartLegend"
+                      [chartType]="barChartType"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)"></canvas>
+            </div>
+
+          </div>
+
+
         </div>
         <div class="col-4 card text-dark">
-            und vieles mehr.
+          und vieles mehr.
         </div>
       </div>
     </div>

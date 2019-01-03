@@ -20,6 +20,8 @@ export class ProjectDetailComponent implements OnInit {
   project: Project;
 
 
+
+
   chartColors: Array<any> = [
     {
       backgroundColor: ['#fe59c2', '#9559fe', '#c2fe59' , '#59fe95' , '#00ffff']
@@ -44,7 +46,7 @@ export class ProjectDetailComponent implements OnInit {
 
     this.projectTimes.forEach( (p) => {
       this.totalBookedHours += p.workedHours;
-    })
+    });
   }
 
   ngOnInit() {

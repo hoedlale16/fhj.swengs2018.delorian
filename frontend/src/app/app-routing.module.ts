@@ -20,6 +20,7 @@ import {TimeTrackingOfUserResolver} from './resolver/time-tracking-of-user.resol
 import {TimeTrackingComponent} from './components/time-tracking/time-tracking.component';
 import {ProjectDetailsComponent} from './components/project-details/project-details.component';
 import {TimeTrackingOfProjectResolver} from './resolver/time-tracking-of-project.resolver';
+import {AboutComponent} from './components/about/about.component';
 
 const routes: Routes = [
   {
@@ -82,6 +83,9 @@ const routes: Routes = [
       project: ProjectResolver,
       projectTimes: TimeTrackingOfProjectResolver
     }
+  },
+  {
+    path: 'about', component: AboutComponent
   }
 
 

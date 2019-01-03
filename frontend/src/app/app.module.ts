@@ -21,6 +21,7 @@ import { TimeTrackingListComponent } from './components/time-tracking-list/time-
 import { TimeTrackingComponent } from './components/time-tracking/time-tracking.component';
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import {ChartsModule} from 'ng2-charts';
+import { AboutComponent } from './components/about/about.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -40,6 +41,7 @@ export function tokenGetter() {
     TimeTrackingListComponent,
     TimeTrackingComponent,
     ProjectDetailsComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

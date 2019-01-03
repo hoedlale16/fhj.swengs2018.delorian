@@ -33,7 +33,9 @@
               "src/assets/bootstrap/bootstrap.css",
               "src/assets/bootstrap/_variables.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/bootstrap/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {

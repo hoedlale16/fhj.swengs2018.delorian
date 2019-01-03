@@ -1,3 +1,44 @@
+
+  <div class="card">
+    <div class="card-header pointerCursor"  (click)="toggleContent()">
+      <strong class="mb-0">
+          Already booked project times:
+      </strong>
+    </div>
+
+
+      <div class="card-body" [hidden]="isHidden">
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Project</th>
+              <th scope="col">User</th>
+              <th scope="col">Booked hours</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let timeTracking of alreadyTrackedTimes">
+              <td>{{timeTracking.trackingDate | date: 'dd.MM.yyyy'}}</td>
+              <td>{{getProjectTopic(timeTracking.projectID)}}</td>
+              <td>{{timeTracking.username}}</td>
+              <td>{{timeTracking.workedHours}}</td>
+              <td><button class="btn btn-dark" type="button" (click)="delete(timeTracking)">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+
+
+
+
+
+<!--
+
 <div id="trackingList">
   <div class="card">
     <div class="card-header" id="collapseHeader">
@@ -32,4 +73,6 @@
       </div>
     </div>
   </div>
-</div>
+
+</div> -->
+

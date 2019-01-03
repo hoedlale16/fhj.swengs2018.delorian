@@ -11,7 +11,7 @@ import {Project} from '../../api/Project';
   styleUrls: ['./time-tracking-list.component.scss']
 })
 export class TimeTrackingListComponent implements OnInit  {
-
+  isHidden = true;
   @Input()
   alreadyTrackedTimes: Array<ProjectTime>;
 
@@ -42,5 +42,13 @@ export class TimeTrackingListComponent implements OnInit  {
     return '???';
   }
 
+  toggleContent() {
+    if (this.isHidden === true) {
+      return this.isHidden = false;
+
+    } else  {
+      return this.isHidden = true;
+    }
+  }
 
 }

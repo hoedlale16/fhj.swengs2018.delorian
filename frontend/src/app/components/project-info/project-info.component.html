@@ -19,11 +19,9 @@
       <div class="col"  *ngIf="showFullDetails">
         <canvas baseChart
                 [datasets]="chartData"
-                [colors]="chartColors"
                 legend="true"
                 chartType="bar"
-                [options]="options"
-                (chartHover)="chartHovered($event)">
+                [options]="chartOptions">
 
         </canvas>
       </div>

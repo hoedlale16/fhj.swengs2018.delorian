@@ -16,7 +16,13 @@
 
       <div class="row">
         <div class="col card text-dark">
-          <strong>Bookings of projects</strong>
+          <div class="card-header pointerCursor"  (click)="toggleBookedProjectTimes()">
+            <strong>Bookings of projects:</strong>
+          </div>
+          <div class="card-body text-dark" *ngIf="chartData.length === 0">
+            No tracked times available
+          </div>
+          <div class="card-body text-dark" *ngIf="chartData.length > 0" [hidden]="isBookedProjectTimesHidden">
               <canvas baseChart
                       [datasets]="chartData"
                       [labels]="chartLabels"
@@ -27,6 +33,7 @@
                       (chartHover)="chartHovered($event)"
                       >
               </canvas>
+          </div>
         </div>
       </div>
     </div>

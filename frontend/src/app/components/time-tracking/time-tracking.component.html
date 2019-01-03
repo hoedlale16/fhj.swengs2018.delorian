@@ -2,5 +2,7 @@
   <app-time-tracking-form [projectOptions]="projects" [currLoggedInUser]="currLoggedInUser"></app-time-tracking-form>
 </div>
 <div class="card bg-light">
-  <app-time-tracking-list [alreadyTrackedTimes]="alreadyTrackedTimes" [projects]="projects"></app-time-tracking-list>
+  <app-time-tracking-list trackingListHeader="Already booked project times"
+                          [alreadyTrackedTimes]="alreadyTrackedTimes"
+                          [projects]="projects"></app-time-tracking-list>
 </div>

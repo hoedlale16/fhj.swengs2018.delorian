@@ -21,10 +21,11 @@
                       [datasets]="chartData"
                       [labels]="chartLabels"
                       [options]="chartOptions"
-                      legend="false"
+                      [colors]="chartColors"
+                      legend="true"
                       chartType="bar"
                       (chartHover)="chartHovered($event)"
-                      (chartClick)="chartClicked($event)">
+                      >
               </canvas>
         </div>
       </div>

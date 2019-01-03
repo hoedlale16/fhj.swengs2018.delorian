@@ -20,18 +20,10 @@ export class ProjectDetailComponent implements OnInit {
   project: Project;
 
 
-
-
   chartColors: Array<any> = [
     {
-      backgroundColor: ['#fe59c2', '#9559fe', '#c2fe59' , '#59fe95' , '#00ffff']
+      backgroundColor: ['#fe59c2', '#9559fe', '#c2fe59', '#59fe95', '#00ffff']
     }];
-
-
-  public chartClicked(e: any): void {
-    console.log(e);
-  }
-
   public chartHovered(e: any): void {
     console.log(e);
   }
@@ -44,7 +36,7 @@ export class ProjectDetailComponent implements OnInit {
     this.projectTimes = data.projectTimes;
     this.prepareChartData();
 
-    this.projectTimes.forEach( (p) => {
+    this.projectTimes.forEach((p) => {
       this.totalBookedHours += p.workedHours;
     });
   }
@@ -53,7 +45,7 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   prepareChartData() {
-    this.projectTimes.forEach( (p) => {
+    this.projectTimes.forEach((p) => {
       let currWorkedHours = p.workedHours;
 
       // Add already stored worked hours of user
@@ -64,7 +56,7 @@ export class ProjectDetailComponent implements OnInit {
     });
 
     // Fill chart data
-    this.projectTimesMap.forEach( (hours, user) => {
+    this.projectTimesMap.forEach((hours, user) => {
       this.chartLabels.push(user);
       this.chartData.push(hours);
     });

@@ -1,0 +1,20 @@
+<div class="card text-dark">
+  <div class="card-header">
+    <strong>{{project.topic}}</strong>
+  </div>
+
+  <div class="card-body">
+    <strong>Project manager:</strong> <em>{{project.projectManager}}</em><br>
+    <strong>Description:</strong> <em>{{project.description}}</em><br>
+
+    <div *ngIf="showFullDetails">
+      <strong>Total pl. hours:</strong> <em>{{project.totalPlannedHours}}</em><br>
+    </div>
+
+    <div>
+      <a *ngIf="showButtonCreate" class="btn btn-outline-success" title="Edit" [routerLink]="'/project-form/' + project.id">Edit</a>
+      <button *ngIf="showButtonEdit" class="btn btn-outline-warning" type="button" (click)="deactivateProject(project)">Deactivate</button>
+      <a *ngIf="showButtonDetails" class="btn btn-outline-info" title="Details" [routerLink]="'/project-details/'+ project.id"> Details </a>
+    </div>
+  </div>
+</div>

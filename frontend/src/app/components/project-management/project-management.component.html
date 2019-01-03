@@ -12,23 +12,7 @@
     <div class="col-md-12">
       <div class="row">
         <div *ngFor="let project of projects" class="col-4">
-
-          <div class="card text-dark">
-            <div class="card-header">
-              <strong>{{project.topic}}</strong>
-            </div>
-
-            <div class="card-body">
-              <strong>Project manager:</strong> <em>{{project.projectManager}}</em><br>
-              <strong>Total pl. hours:</strong> <em>{{project.totalPlannedHours}}</em><br>
-              <strong>Description:</strong> <em>{{project.description}}</em><br>
-              <div>
-                <a class="btn btn-outline-success" title="Edit" [routerLink]="'/project-form/' + project.id">Edit</a>
-                <button class="btn btn-outline-warning" type="button" (click)="deactivateProject(project)">Deactivate</button>
-                <a class="btn btn-outline-info" title="Details" [routerLink]="'/project-details/'+ project.id"> Details </a>
-              </div>
-            </div>
-          </div>
+          <app-project-info [project]="project"></app-project-info>
         </div>
       </div>
     </div>

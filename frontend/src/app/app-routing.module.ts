@@ -18,7 +18,7 @@ import {ProjectFormComponent} from './components/project-form/project-form.compo
 import {ProjectListResolver} from './resolver/project-list.resolver';
 import {TimeTrackingOfUserResolver} from './resolver/time-tracking-of-user.resolver';
 import {TimeTrackingComponent} from './components/time-tracking/time-tracking.component';
-import {ProjectDetailsComponent} from './components/project-details/project-details.component';
+import {ProjectDetailComponent} from './components/project-detail/project-detail.component';
 import {TimeTrackingOfProjectResolver} from './resolver/time-tracking-of-project.resolver';
 
 const routes: Routes = [
@@ -77,7 +77,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'project-details/:projectID', component: ProjectDetailsComponent, canActivate: [PrjMgrRoleGuard],
+    path: 'project-details/:projectID', component: ProjectDetailComponent, canActivate: [PrjMgrRoleGuard],
     resolve: {
       project: ProjectResolver,
       projectTimes: TimeTrackingOfProjectResolver

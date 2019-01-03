@@ -44,7 +44,7 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
     this.projects = data.projects;
   }
 
-  deleteProject(project: Project) {
+  deactivateProject(project: Project) {
 
     this.projectService.delete(project)
       .subscribe(() => {

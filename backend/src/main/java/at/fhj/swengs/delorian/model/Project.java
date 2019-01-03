@@ -27,6 +27,9 @@ public class Project {
 
     private double totalPlannedHours;
 
+    @Column(name = "active")
+    private boolean active = true;
+
 
     @OneToMany(mappedBy = "project")
     private List<ProjectTime> projectTimes;
@@ -101,6 +104,14 @@ public class Project {
 
     public void setProjectTimes(List<ProjectTime> projectTimes) {
         this.projectTimes = projectTimes;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @Override

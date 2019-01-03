@@ -10,6 +10,7 @@ public class ProjectDTO {
     private String projectManager;
     private double totalPlannedHours;
     private Set<Long> projectTimes;
+    //Frontend will just have active projects!
 
     public long getId() {
         return id;

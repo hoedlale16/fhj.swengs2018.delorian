@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Project} from '../../api/Project';
 import {ProjectService} from '../../services/project.service';
 import {Router} from '@angular/router';
+import {ProjectTime} from '../../api/ProjectTime';
 
 @Component({
   selector: 'app-project-info',
@@ -13,14 +14,23 @@ export class ProjectInfoComponent implements OnInit {
   @Input() project: Project;
   @Input() showFullDetails = false;
 
-  @Input() showButtonCreate = true;
-  @Input() showButtonEdit = true;
-  @Input() showButtonDetails = true;
+  @Input() buttonLink: string;
+  @Input() buttonLinkName: string;
 
+  @Input()
+  totalBookedHours = 0;
 
-  constructor(private projectService: ProjectService, private router: Router) { }
+  chartData: any[] = [];
+
+  constructor(private projectService: ProjectService, private router: Router) {
+  }
+
 
   ngOnInit() {
+    this.chartData = [
+      {data: [this.project.totalPlannedHours], label: 'Planned Hours'},
+      {data: [this.totalBookedHours], label: 'Worked Hours'}
+    ];
   }
 
 

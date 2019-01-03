@@ -12,10 +12,10 @@ export class ProjectDetailComponent implements OnInit {
 
   chartLabels: string[] = [];
   chartData: number[] = [];
-  chartType = 'doughnut';
 
   projectTimes: Array<ProjectTime> = [];
   projectTimesMap: Map<string, number> = new Map();
+  totalBookedHours = 0;
 
   project: Project;
 
@@ -41,6 +41,10 @@ export class ProjectDetailComponent implements OnInit {
 
     this.projectTimes = data.projectTimes;
     this.prepareChartData();
+
+    this.projectTimes.forEach( (p) => {
+      this.totalBookedHours += p.workedHours;
+    })
   }
 
   ngOnInit() {

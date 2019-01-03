@@ -4,17 +4,34 @@
   </div>
 
   <div class="card-body">
-    <strong>Project manager:</strong> <em>{{project.projectManager}}</em><br>
-    <strong>Description:</strong> <em>{{project.description}}</em><br>
+    <div class="row">
+      <div class="col">
+        <strong>Project manager:</strong>
+          <em>{{project.projectManager}}</em><br>
+        <div *ngIf="showFullDetails">
+          <strong>Planned hours:</strong> <em>{{project.totalPlannedHours}}</em><br>
+          <strong>Booked hours:</strong> <em>{{totalBookedHours}}</em><br>
+        </div>
+        <strong>Description:</strong>
+          <em *ngIf="showFullDetails == false">{{project.description.substr(0,3)}}...</em><br>
+          <em *ngIf="showFullDetails == true">{{project.description}}</em><br>
+      </div>
+      <div class="col"  *ngIf="showFullDetails">
+        <canvas baseChart
+                [datasets]="chartData"
+                legend="true"
+                chartType="bar"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
 
-    <div *ngIf="showFullDetails">
-      <strong>Total pl. hours:</strong> <em>{{project.totalPlannedHours}}</em><br>
+        </canvas>
+      </div>
     </div>
 
-    <div>
-      <a *ngIf="showButtonCreate" class="btn btn-outline-success" title="Edit" [routerLink]="'/project-form/' + project.id">Edit</a>
-      <button *ngIf="showButtonEdit" class="btn btn-outline-warning" type="button" (click)="deactivateProject(project)">Deactivate</button>
-      <a *ngIf="showButtonDetails" class="btn btn-outline-info" title="Details" [routerLink]="'/project-details/'+ project.id"> Details </a>
+    <div class="row">
+      <a class="btn btn-outline-success" title="Edit" [routerLink]="'/project-form/' + project.id">Edit</a>
+      <button class="btn btn-outline-warning" type="button" (click)="deactivateProject(project)">Deactivate</button>
+      <a *ngIf="buttonLink" class="btn btn-outline-info" title="Details" [routerLink]="buttonLink">{{buttonLinkName}}</a>
     </div>
   </div>
 </div>

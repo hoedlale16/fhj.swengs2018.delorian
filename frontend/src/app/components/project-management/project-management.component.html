@@ -12,7 +12,7 @@
     <div class="col-md-12">
       <div class="row">
         <div *ngFor="let project of projects" class="col-4">
-          <app-project-info [project]="project"></app-project-info>
+          <app-project-info [project]="project" buttonLinkName="Details" [buttonLink]="'/project-details/'+ project.id"></app-project-info>
         </div>
       </div>
     </div>

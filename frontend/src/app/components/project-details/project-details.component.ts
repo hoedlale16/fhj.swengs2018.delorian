@@ -13,6 +13,7 @@ export class ProjectDetailsComponent implements OnInit {
   doughnutChartLabels: string[] = [];
   doughnutChartData: number[] = [];
   doughnutChartType: string = 'doughnut';
+  projektTimeMap: Map<string, number> = new Map ;
 
   projectTimes: Array<ProjectTime>;
   projects: Array<Project>;

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ProjectTime} from '../../api/ProjectTime';
 import {Project} from '../../api/Project';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-project-details',
@@ -50,6 +51,7 @@ export class ProjectDetailsComponent implements OnInit {
       this.projectTimes.forEach((p) => {
         this.doughnutChartLabels.push(p.username);
         this.doughnutChartData.push(p.workedHours);
+
 
       });
     }

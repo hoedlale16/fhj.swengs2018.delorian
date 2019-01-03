@@ -1,8 +1,8 @@
 <div class="container mb-5" role="main">
-  <div class="card bg-light">
+  <div *ngIf="projectTimes != null" class="card bg-light">
     <div class="card-body text-dark">
 
-      <div style="display: block">
+      <div  style="display: block">
         <canvas baseChart [colors]="chartColors"
                 [data]="doughnutChartData"
                 [labels]="doughnutChartLabels"

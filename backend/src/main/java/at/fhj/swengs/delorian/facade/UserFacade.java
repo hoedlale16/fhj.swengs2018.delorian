@@ -47,6 +47,7 @@ public class UserFacade {
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.seteMail(dto.geteMail());
+        entity.setActive(true);
 
         entity.setUserRoles(userRoleService.getRolesByNames(dto.getUserRoles()));
         entity.setManagedProjects(projectService.getProjectsByID(dto.getManagedProjects()));
@@ -57,6 +58,7 @@ public class UserFacade {
 
         dto.setUsername(entity.getUserName());
         //Do NOT set password to send to frontend!
+        //Do not set active flag - not required for frontend. handels just with active users
 
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());

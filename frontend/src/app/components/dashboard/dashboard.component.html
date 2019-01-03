@@ -3,21 +3,30 @@
     <div class="col-md-12">
       <div class="row">
         <h1>WELCOME {{currLoggedInUser}}!</h1>
-        <div class="col-12">
-          TODO: Hier kommen noch fancy Funktionen:
+      </div>
+
+      <div class="row">
+        <div class="col card text-dark">
+          <strong>Last booking:</strong>
+          <app-time-tracking-form fillWithLastBooking="true"
+                                  [projectOptions]="projects"
+                                  [currLoggedInUser]="currLoggedInUser"></app-time-tracking-form>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-4 card text-dark">
-            Letztes gebuchtes Projekt gleich zum erneuten Buchen für heutiges Datum
-        </div>
-        <!--  <div class="card text-dark"> -->
-        <div class="col-4 card text-dark">
-            Coole diagramme für Prj Manager (gebuchte Stunden pro Projekt oder so
-        </div>
-        <div class="col-4 card text-dark">
-            und vieles mehr.
+        <div class="col card text-dark">
+          <strong>Bookings of projects</strong>
+              <canvas baseChart
+                      [datasets]="chartData"
+                      [labels]="chartLabels"
+                      [options]="chartOptions"
+                      [colors]="chartColors"
+                      legend="true"
+                      chartType="bar"
+                      (chartHover)="chartHovered($event)"
+                      >
+              </canvas>
         </div>
       </div>
     </div>

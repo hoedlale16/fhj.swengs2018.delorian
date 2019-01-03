@@ -29,11 +29,11 @@ public class ProjectTimeService {
     }
 
     public List<ProjectTime> getAllProjectTimesOfProject(long projectID) {
-        return projectTimeRepository.findProjectTimesByProjectId(projectID);
+        return projectTimeRepository.findProjectTimesByProjectIdAndProjectActiveTrue(projectID);
     }
 
     public List<ProjectTime> getAllProjectTimesOfUser(String username) {
-        return projectTimeRepository.findProjectTimesByUserUserName(username);
+        return projectTimeRepository.findProjectTimesByUserUserNameAndProjectActiveTrue(username);
     }
 
     //Not secure. Just return either all project times of a user or all project times of a project

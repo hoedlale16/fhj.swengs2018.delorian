@@ -6,7 +6,7 @@ import {AuthService} from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class LoginGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router
@@ -17,9 +17,12 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-    if (!this.authService.isLoggedIn) {
-      // User not logged in, navigate to login page...
-      this.router.navigate(['/login']);
+    // User is logged in, but want to login page - redirekt to dashboard
+    if (this.authService.isLoggedIn) {
+      // Other option is, logout of user and go to login page...
+      // this.authService.logout();
+
+      this.router.navigate(['/dashboard']);
       return false;
     }
 

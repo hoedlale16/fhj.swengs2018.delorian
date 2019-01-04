@@ -22,11 +22,17 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {
     this.jwtHelperService = new JwtHelperService();
     const token = localStorage.getItem(this.accessTokenLocalStorageKey);
-    if (token) {
-      console.log('Token expiration date: '
-        + this.jwtHelperService.getTokenExpirationDate(token));
-      this.isLoggedIn = !this.jwtHelperService.isTokenExpired(token);
+    if (token && ! this.jwtHelperService.isTokenExpired(token)) {
+      // Set login data parsed from JWT
+      this.isLoggedIn = true;
+      const decodedToken = this.jwtHelperService.decodeToken(token);
+      this.currLoggedInUserName = decodedToken.sub;
+      this.userRoles = decodedToken.authorities;
+
+      console.log('Auth-Data: '
+        + this.isLoggedIn + '/' + this.currLoggedInUserName + '/' + this.userRoles);
     }
+
     this.loggedInChange.subscribe((value) => {
       this.isLoggedIn = value;
 

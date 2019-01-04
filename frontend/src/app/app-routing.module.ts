@@ -21,13 +21,15 @@ import {TimeTrackingComponent} from './components/time-tracking/time-tracking.co
 import {ProjectDetailComponent} from './components/project-detail/project-detail.component';
 import {TimeTrackingOfProjectResolver} from './resolver/time-tracking-of-project.resolver';
 import {AboutComponent} from './components/about/about.component';
+import {LoginGuard} from './guards/login.guard';
 
 const routes: Routes = [
   {
     path: '', redirectTo: '/dashboard', pathMatch: 'full'
   },
   {
-    path: 'login', component: LoginComponent
+    // Guard checks if user is logged in. in that case redirect to dashboard...
+    path: 'login', component: LoginComponent, canActivate: [LoginGuard]
   },
   {
     path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],

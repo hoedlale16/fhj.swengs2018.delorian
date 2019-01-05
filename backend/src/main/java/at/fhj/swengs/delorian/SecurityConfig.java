@@ -52,8 +52,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // Define RBAC -Conect: Roles are NOT inherited (ADMIN > PRJMGR -> USER.
                 // If a user is requested to handle the full app, all three roles must be assigned to user!
                 .antMatchers("projectTimes/**").hasRole("USER")
-                .antMatchers(HttpMethod.GET,"/projects/**").hasRole("USER")
 
+                //GET for projects is allowed for all users to have a valid dashboard
+                .antMatchers(HttpMethod.GET,"/projects/**").authenticated()
+                //TO handle projeckts, role ROLE_PRJMGR is required
                 .antMatchers("/projects/**").hasRole("PRJMGR")
 
                 .antMatchers("/users/**").hasRole("ADMIN")

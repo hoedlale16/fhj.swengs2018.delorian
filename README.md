@@ -37,10 +37,14 @@ SWENGS Project. A application to track working time for projects. A project mana
  - /auth -> Post to authenticate user and get a JWT
  - /users -> GET,POST,PUT, DELETE - Manage users [ROLE_ADMIN]
  - /userroles -> GET,POST,PUT, DELETE - Manage userroles [ROLE_ADMIN]
+    - POST,PUT, DELETE implemented but not used in Frontend! Do not touch UserRoles to avoid errors in application!
  - /projects -> GET,POST,PUT, DELETE - Manage projects [ROLE_PRJMGR]
+    - GET: (special GET-Handling)
+        - /projects/ - Get all active projects ( to book times)
+        - /projectsPrjMgr/{username} - Get all project of a user (project manager)
+        - /projects/{projectID} - Get a specific project
  - /projectTimes ->  GET,POST,PUT, DELETE - Manage projects [ROLE_USER]
     - GET: (special GET-Handling)
         - /projectTimesProject/{projectID} - Get all booked project times of project
         - /projectTimesUser/{username} - Get all booked project times of user
         - /projectTimes/{projectTimesID} - Get specific booked time
-

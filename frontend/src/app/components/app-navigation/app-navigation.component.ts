@@ -10,21 +10,25 @@ export class AppNavigationComponent implements OnInit {
 
   isLoggedIn: boolean;
 
-  isLoggedInAndAdmin: boolean;
-  isLoggedInAndPrjMgr: boolean;
+  // Role based handling
+  isLoggedInAndUserRole: boolean;
+  isLoggedInAndAdminRole: boolean;
+  isLoggedInAndPrjMgrRole: boolean;
 
   constructor(private authService: AuthService) {
     // When refresh (F5) is done...
     this.isLoggedIn = this.authService.isLoggedIn;
-    this.isLoggedInAndAdmin = this.isLoggedIn && this.authService.userRoles.includes('ROLE_ADMIN');
-    this.isLoggedInAndPrjMgr = this.isLoggedIn && this.authService.userRoles.includes('ROLE_PRJMGR');
+    this.isLoggedInAndUserRole = this.isLoggedIn && this.authService.userRoles.includes('ROLE_USER');
+    this.isLoggedInAndAdminRole = this.isLoggedIn && this.authService.userRoles.includes('ROLE_ADMIN');
+    this.isLoggedInAndPrjMgrRole = this.isLoggedIn && this.authService.userRoles.includes('ROLE_PRJMGR');
   }
 
   ngOnInit() {
     this.authService.loggedInChange.subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
-      this.isLoggedInAndAdmin = this.isLoggedIn && this.authService.userRoles.includes('ROLE_ADMIN');
-      this.isLoggedInAndPrjMgr = this.isLoggedIn && this.authService.userRoles.includes('ROLE_PRJMGR');
+      this.isLoggedInAndUserRole = this.isLoggedIn && this.authService.userRoles.includes('ROLE_USER');
+      this.isLoggedInAndAdminRole = this.isLoggedIn && this.authService.userRoles.includes('ROLE_ADMIN');
+      this.isLoggedInAndPrjMgrRole = this.isLoggedIn && this.authService.userRoles.includes('ROLE_PRJMGR');
     });
   }
 

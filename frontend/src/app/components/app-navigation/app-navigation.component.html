@@ -3,25 +3,24 @@
     <div class="container-fluid">
 
       <!-- Navigation components -->
-
       <nav class="navbar navbar-expand-lg navbar-dark justify-content-between">
         <div class="col-1">
           <a class="navbar-brand brand" [routerLink]="'/dashboard/'">DELOREAN</a>
         </div>
         <!-- Component links -->
-          <div class="navbar-nav" *ngIf="isLoggedInAndAdmin">
+          <div class="navbar-nav" *ngIf="isLoggedInAndAdminRole">
             <a class="nav-link" [routerLink]="'/user-management/'">User Management</a>
           </div>
 
-          <div class="navbar-nav" *ngIf="isLoggedInAndPrjMgr">
+          <div class="navbar-nav" *ngIf="isLoggedInAndPrjMgrRole">
             <a class="nav-link" [routerLink]="'/project-management/'">Project Management</a>
           </div>
 
-          <div class="navbar-nav">
+          <div class="navbar-nav" *ngIf="isLoggedInAndUserRole">
             <a class="nav-link" [routerLink]="'/time-tracking/'">Time Tracking</a>
           </div>
-        <!-- Logout -->
 
+        <!-- Logout and About -->
         <div class="col-2 btn-group-sm">
           <button class="btn btn-outline-info navbar-btn right" type="button" [routerLink]="'/about/'">About</button>
           <button class="btn btn-outline-danger navbar-btn right" type="button" (click)="logout()">Logout</button>

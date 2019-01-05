@@ -74,4 +74,7 @@ export class AuthService {
   }
 
 
+  isLoggedInAndHasUserRole(userRole: string): boolean {
+    return this.isLoggedIn && this.userRoles.includes(userRole);
+  }
 }

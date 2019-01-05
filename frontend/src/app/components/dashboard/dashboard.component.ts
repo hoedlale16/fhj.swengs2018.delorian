@@ -13,6 +13,8 @@ import {ProjectTime} from '../../api/ProjectTime';
 })
 export class DashboardComponent implements OnInit {
   currLoggedInUser: string;
+  hasUserRole: boolean;
+
   projects: Array<Project>;
   alreadyTrackedTimes: Array<ProjectTime>;
   isBookedProjectTimesHidden = true;
@@ -36,6 +38,7 @@ export class DashboardComponent implements OnInit {
 
   loadData() {
     this.currLoggedInUser = this.authService.currLoggedInUserName;
+    this.hasUserRole = this.authService.isLoggedInAndHasUserRole('ROLE_USER');
     const data = this.route.snapshot.data;
     this.projects = data.projects;
     this.alreadyTrackedTimes = data.alreadyTrackedTimes;

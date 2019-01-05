@@ -4,8 +4,11 @@
       <div class="row">
         <h1>WELCOME {{currLoggedInUser}}!</h1>
       </div>
+      <div clas="row" *ngIf="hasUserRole == false">
+        No permission to track project times!
+      </div>
 
-      <div class="row">
+      <div class="row" *ngIf="hasUserRole">
         <div class="col card text-dark">
           <strong>Last booking:</strong>
           <app-time-tracking-form fillWithLastBooking="true"
@@ -14,7 +17,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row" *ngIf="hasUserRole">
         <div class="col card text-dark">
           <div class="card-header pointerCursor"  (click)="toggleBookedProjectTimes()">
             <strong>Bookings of projects:</strong>

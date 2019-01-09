@@ -23,7 +23,6 @@ import {TimeTrackingOfProjectResolver} from './resolver/time-tracking-of-project
 import {AboutComponent} from './components/about/about.component';
 import {LoginGuard} from './guards/login.guard';
 import {TimeTrackingResolver} from './resolver/time-tracking.resolver';
-import {TimeTrackingEditFormComponent} from './components/time-tracking-edit-form/time-tracking-edit-form.component';
 
 const routes: Routes = [
   {

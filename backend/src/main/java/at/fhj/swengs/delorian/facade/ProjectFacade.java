@@ -38,7 +38,7 @@ public class ProjectFacade {
         // Projects comming from frontent are always active!
         entity.setActive(true);
 
-        Optional<User> optPrjMgr = userService.findByUserName(dto.getProjectManager());
+        Optional<User> optPrjMgr = userService.findActiveUserByUsername(dto.getProjectManager());
         if(((Optional) optPrjMgr).isPresent()) {
             entity.setProjectManager(optPrjMgr.get());
         }

@@ -3,7 +3,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {catchError, map} from 'rxjs/operators';
 import {User} from '../api/User';
-import {of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +36,11 @@ export class UserService {
 
   create(user: User) {
     return this.http.post('/api/users', user);
+  }
+
+  isUsernameTaken(username: string): Observable<any> {
+    return this.http.get('/api/usernameTaken/' + username).pipe(map((res: any) => {
+      return res;
+    }));
   }
 }

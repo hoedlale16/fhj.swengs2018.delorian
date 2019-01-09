@@ -16,8 +16,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public Optional<User> findByUserName(String username) {
+    public Optional<User> findActiveUserByUsername(String username) {
         return userRepository.findByUserNameAndActiveTrue(username);
+    }
+
+    public Optional<User> findUserByUsername(String username) {
+        return userRepository.findById(username);
     }
 
     public List<User> getUsers() {
@@ -31,7 +35,7 @@ public class UserService {
     // No deletion of user if there there project time or not entries as managesProjects.
     // In this case just deactivate user
     public void delete(String username) {
-        Optional<User> optEntity  = findByUserName(username);
+        Optional<User> optEntity  = findActiveUserByUsername(username);
         if(optEntity.isPresent()) {
             User entity = optEntity.get();
             if(entity.getProjectTimes().isEmpty() && entity.getManagedProjects().isEmpty()) {

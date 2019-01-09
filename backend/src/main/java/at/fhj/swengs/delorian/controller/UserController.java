@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -23,6 +24,17 @@ public class UserController {
     UserDTO getById(@PathVariable String username) {
         return userFacade.getByUsername(username);
     }
+
+    @GetMapping("/usernameTaken/{username}")
+    UserDTO isUsernameTaken(@PathVariable String username) {
+        Optional<UserDTO> dto = userFacade.isUsernameTaken(username);
+        if (dto.isPresent()) {
+            return dto.get();
+        }
+        //TODO: schoener wer einen Fehlercode auch mitzuschicken!
+        return null;
+    }
+
 
     @PostMapping("/users")
     UserDTO create(@RequestBody @Valid UserDTO dto) {

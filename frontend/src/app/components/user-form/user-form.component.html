@@ -14,7 +14,10 @@
               Username must be at least 2 characters long.
             </div>
             <div *ngIf="userForm.controls.username.errors.maxLength">
-              Username max lengh is 32 characters!
+              Username max length is 32 characters!
+            </div>
+            <div *ngIf="userForm.controls.username.errors.usernameExists">
+              Username already taken.
             </div>
           </div>
         </div>

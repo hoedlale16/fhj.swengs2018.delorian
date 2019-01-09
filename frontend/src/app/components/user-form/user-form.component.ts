@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserRoles} from '../../api/UserRoles';
 import {UserService} from '../../services/user.service';
+import {existingUsernameValidator} from '../../validators/customValidators';
 
 @Component({
   selector: 'app-user-form',
@@ -19,12 +20,13 @@ export class UserFormComponent implements OnInit {
 
   constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {
     this.userForm = new FormGroup( {
-      'username': new FormControl('',[Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
+      'username': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(32)],
+        [existingUsernameValidator(this.userService)]),
       'password': new FormControl(),
-      'firstName':  new FormControl('',[Validators.required, Validators.minLength(3)] ),
-      'lastName': new FormControl('', [Validators.required, Validators.minLength(3)]),
+      'firstName':  new FormControl( '', [Validators.required, Validators.minLength(3)] ),
+      'lastName': new FormControl('',  [Validators.required, Validators.minLength(3)]),
       'eMail': new FormControl(),
-      'userRoles': new FormControl('',[Validators.required]),
+      'userRoles': new FormControl('', [Validators.required]),
       'managedProjects': new FormControl(),
       'projectTimes': new FormControl()
     });

@@ -28,7 +28,7 @@ public class ProjectTimeFacade {
     private void mapDtoToEntity(ProjectTimeDTO dto, ProjectTime entity) {
         entity.setId(dto.getId());
         entity.setProject(projectService.findById(dto.getProjectID()).get());
-        entity.setUser(userService.findByUserName(dto.getUsername()).get());
+        entity.setUser(userService.findActiveUserByUsername(dto.getUsername()).get());
         entity.setTrackingDate(dto.getTrackingDate());
         entity.setWorkedHours(dto.getWorkedHours());
     }

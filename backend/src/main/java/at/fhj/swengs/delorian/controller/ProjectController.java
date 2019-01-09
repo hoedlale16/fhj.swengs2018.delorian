@@ -14,8 +14,12 @@ public class ProjectController {
     @Autowired
     private ProjectFacade projectFacade;
 
+    /**
+     * /projects/ is allowed for all authenticated users. Therefore just send metaInfos of projects.
+     * @return
+     */
     @GetMapping("/projects/")
-    List<ProjectDTO> getAllProjects() { return projectFacade.getAllProjects(); }
+    List<ProjectDTO> getAllProjects() { return projectFacade.getAllProjects(false); }
 
     @GetMapping("/projectsPrjMgr/{projectManager}")
     List<ProjectDTO> getProjectsOfPrjMgr(@PathVariable String projectManager) {

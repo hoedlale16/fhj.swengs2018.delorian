@@ -47,26 +47,28 @@ public class ProjectFacade {
         entity.setProjectTimes(projectTimeService.getProjectTimes(dto.getProjectTimes()));
     }
 
-    private void mapEntityToDto(Project entity, ProjectDTO dto) {
+    private void mapEntityToDto(Project entity, ProjectDTO dto, boolean fullDetails) {
         dto.setId(entity.getId());
         dto.setTopic(entity.getTopic());
-        dto.setDescription(entity.getDescription());
-        dto.setProjectManager(entity.getProjectManager().getUserName());
-        dto.setTotalPlannedHours(entity.getTotalPlannedHours());
-        dto.setProjectTimes(entity.getProjectTimes().stream().map(pt -> pt.getId()).collect(Collectors.toSet()));
+        if(fullDetails) {
+            dto.setDescription(entity.getDescription());
+            dto.setProjectManager(entity.getProjectManager().getUserName());
+            dto.setTotalPlannedHours(entity.getTotalPlannedHours());
+            dto.setProjectTimes(entity.getProjectTimes().stream().map(pt -> pt.getId()).collect(Collectors.toSet()));
+        }
     }
 
     public ProjectDTO create(ProjectDTO dto) {
         Project entity = new Project();
         mapDtoToEntity(dto, entity);
-        mapEntityToDto(projectService.save(entity), dto);
+        mapEntityToDto(projectService.save(entity), dto, true);
         return dto;
     }
 
     public ProjectDTO update(long projectId, ProjectDTO dto) {
         Project entity  = projectService.findById(projectId).get();
         mapDtoToEntity(dto, entity);
-        mapEntityToDto(projectService.save(entity), dto);
+        mapEntityToDto(projectService.save(entity), dto, true);
         return dto;
 
     }
@@ -80,16 +82,16 @@ public class ProjectFacade {
     public ProjectDTO getProjectByID(long projectId) {
         Project entity = projectService.findById(projectId).get();
         ProjectDTO dto = new ProjectDTO();
-        mapEntityToDto(entity, dto);
+        mapEntityToDto(entity, dto,true);
         return dto;
     }
 
-    public List<ProjectDTO> getAllProjects() {
+    public List<ProjectDTO> getAllProjects(boolean withAllInfos) {
         List<ProjectDTO> projects = new ArrayList<ProjectDTO>();
 
         projectService.getAllProjects().forEach(entity -> {
             ProjectDTO dto = new ProjectDTO();
-            mapEntityToDto(entity,dto);
+            mapEntityToDto(entity,dto,withAllInfos);
             projects.add(dto);
         });
 
@@ -101,7 +103,7 @@ public class ProjectFacade {
 
         projectService.getAllProjectsOfPrjMgr(prjMgrUserName).forEach(entity -> {
             ProjectDTO dto = new ProjectDTO();
-            mapEntityToDto(entity,dto);
+            mapEntityToDto(entity,dto,true);
             projects.add(dto);
         });
 

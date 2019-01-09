@@ -42,7 +42,7 @@
             <td>{{timeTracking.username}}</td>
             <td>{{timeTracking.workedHours}}</td>
             <td *ngIf="showActionButtons">
-              <a class="btn btn-outline-success" title="Edit" [routerLink]="'/time-tracking-edit-form/' + timeTracking.id">Edit</a>
+              <a class="btn btn-outline-success" title="Edit" [routerLink]="'/time-tracking-edit/' + timeTracking.id">Edit</a>
               <button class="btn btn-dark" type="button" (click)="delete(timeTracking)">Delete</button></td>
           </tr>
         </tbody>

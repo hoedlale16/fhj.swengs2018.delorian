@@ -22,6 +22,8 @@ import {ProjectDetailComponent} from './components/project-detail/project-detail
 import {TimeTrackingOfProjectResolver} from './resolver/time-tracking-of-project.resolver';
 import {AboutComponent} from './components/about/about.component';
 import {LoginGuard} from './guards/login.guard';
+import {TimeTrackingResolver} from './resolver/time-tracking.resolver';
+import {TimeTrackingEditFormComponent} from './components/time-tracking-edit-form/time-tracking-edit-form.component';
 
 const routes: Routes = [
   {
@@ -81,6 +83,13 @@ const routes: Routes = [
     resolve: {
       projects: ProjectListResolver,
       alreadyTrackedTimes: TimeTrackingOfUserResolver
+    }
+  },
+  {
+    path: 'time-tracking-edit/:timeTrackingID', component: TimeTrackingFormComponent, canActivate: [AuthGuard],
+    resolve: {
+      timeTracking: TimeTrackingResolver,
+      projectOptions: ProjectListResolver
     }
   },
   {

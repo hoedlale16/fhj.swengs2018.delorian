@@ -1,9 +1,11 @@
 <div class="container mb-5" role="main">
-  <app-time-tracking-form [projectOptions]="projects" [currLoggedInUser]="currLoggedInUser"></app-time-tracking-form>
+  <app-time-tracking-form currentRouteLink="/time-tracking/"
+                          [projectOptions]="projects"
+                          [currLoggedInUser]="currLoggedInUser"></app-time-tracking-form>
 </div>
 <div class="card bg-light">
   <app-time-tracking-list trackingListHeader="Already booked project times"
-                          currentRouteLink="/time-tracking"
+                          currentRouteLink="/time-tracking/"
                           [showActionButtons]="true"
                           [alreadyTrackedTimes]="alreadyTrackedTimes"
                           [projects]="projects"></app-time-tracking-list>

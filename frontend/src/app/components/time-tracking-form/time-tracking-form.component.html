@@ -3,7 +3,7 @@
     <div class="col">
       <div class="form-group">
         <label for="username">Username:</label>
-        <input id="username" type="text" name="username" formControlName="username" class="form-control" [value]="currLoggedInUser" readonly/>
+        <input id="username" type="text" name="username" formControlName="username" class="form-control" [value]="currLoggedInUser"/>
       </div>
     </div>
     <div class="col">
@@ -16,7 +16,14 @@
   <div class="row">
     <div class="col">
       <label for="workedHours">Worked Hours:</label>
-      <input id="workedHours" type="number" name="workedHours" formControlName="workedHours" class="form-control"/>
+      <input id="workedHours" type="number" min="0.5" max="24" step="0.5" name="workedHours" formControlName="workedHours" class="form-control"/>
+      <div *ngIf="timeTrackingForm.controls.workedHours.invalid && (timeTrackingForm.controls.workedHours.dirty || timeTrackingForm.controls.workedHours.touched)"
+           class="alert alert-danger">
+        <strong>Invalid input!</strong>
+        <div *ngIf="timeTrackingForm.controls.workedHours.errors.min || timeTrackingForm.controls.workedHours.errors.max">
+          Working hours can just between 0,5 and 24h per day!
+        </div>
+      </div>
     </div>
     <div class="col">
       <label for="projectID">Project:</label>
@@ -26,6 +33,12 @@
   </div>
 
   <div class="btn-group">
-    <button type="submit" class="btn btn-primary" [disabled]="timeTrackingForm.invalid">Save</button>
+    <div *ngIf="isEditMode == true">
+      <button type="submit" class="btn btn-primary" [disabled]="timeTrackingForm.invalid">Update</button>
+      <button type="button" class="btn btn-outline-success " (click)="navigateToLastRoute()">Cancel</button>
+    </div>
+    <div *ngIf="isEditMode == false">
+      <button type="submit" class="btn btn-primary" [disabled]="timeTrackingForm.invalid">Save</button>
+    </div>
   </div>
 </form>

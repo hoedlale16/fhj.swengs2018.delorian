@@ -48,6 +48,14 @@ public class ProjectTimeFacade {
         return dto;
     }
 
+    public ProjectTimeDTO update(long projectTimeID, ProjectTimeDTO dto) {
+        ProjectTime entity  = projectTimeService.findById(projectTimeID).get();
+        mapDtoToEntity(dto, entity);
+        mapEntityToDto(projectTimeService.save(entity), dto);
+        return dto;
+
+    }
+
     public void delete(long projectTimeID) {
         projectTimeService.delete(projectTimeID);
     }

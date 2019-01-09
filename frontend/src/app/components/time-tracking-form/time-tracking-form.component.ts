@@ -18,15 +18,38 @@ export class TimeTrackingFormComponent implements OnInit {
   @Input() projectOptions;
   @Input() fillWithLastBooking = false;
 
-  timeTrackingForm: FormGroup;
+  // Default value route to /time-tracking but might overwritten (e.g. for dashboard)
+  @Input() currentRouteLink = '/time-tracking';
 
-  constructor(private projectTimesService: ProjectTimesService, private router: Router) {
+  timeTrackingForm: FormGroup;
+  isEditMode = false;
+
+  constructor(private projectTimesService: ProjectTimesService, private route: ActivatedRoute, private router: Router) {
     this.timeTrackingForm = new FormGroup({
+      'id': new FormControl(),
       'username': new FormControl(),
       'projectID': new FormControl('', [Validators.required]),
       'trackingDate': new FormControl('',[Validators.required]),
-      'workedHours': new FormControl('', [Validators.required, Validators.pattern(/^(0|[1-9]\d*)?$/)])
+      'workedHours': new FormControl('', [Validators.required, Validators.min(0.5), Validators.max(24)])
     });
+
+    // Load all UserRoles for selection
+    const data = this.route.snapshot.data;
+    const timeTracking: ProjectTime = data.timeTracking;
+    if (timeTracking) {
+      this.isEditMode = true;
+      this.timeTrackingForm.setValue(timeTracking);
+      this.projectOptions = data.projectOptions;
+      this.currLoggedInUser = timeTracking.username;
+      this.timeTrackingForm.controls.trackingDate.setValue( new Date(timeTracking.trackingDate));
+
+      this.handleNotChangeAbleForms(true);
+    } else {
+      this.isEditMode = false;
+      this.timeTrackingForm.controls.username.disable();
+    }
+
+
   }
 
   ngOnInit() {
@@ -36,18 +59,47 @@ export class TimeTrackingFormComponent implements OnInit {
     }
   }
 
+  handleNotChangeAbleForms(disable: boolean) {
+    if (disable) {
+      this.timeTrackingForm.controls.username.disable();
+      this.timeTrackingForm.controls.projectID.disable();
+      this.timeTrackingForm.controls.trackingDate.disable();
+    } else {
+      this.timeTrackingForm.controls.username.enable();
+      this.timeTrackingForm.controls.projectID.enable();
+      this.timeTrackingForm.controls.trackingDate.enable();
+    }
+  }
+
+
+
   save() {
-    // Just enable username control to get entered username
+    // Just controls to get data for storage
+    this.handleNotChangeAbleForms(false);
     const projectTime = this.timeTrackingForm.value;
+    this.handleNotChangeAbleForms(true);
+
+    // Set currentLogedInUser just to be sure that trackted time is assigned to logged in user...
     projectTime.username = this.currLoggedInUser;
 
-    this.projectTimesService.create(projectTime).subscribe((response: any) => {
+    if (this.isEditMode) {
+      this.projectTimesService.update(projectTime).subscribe((response: any) => {
+        alert('Update successfully');
+        this.navigateToLastRoute();
+      });
+    } else {
+      this.projectTimesService.create(projectTime).subscribe((response: any) => {
         this.storeLastBooking(projectTime);
 
         alert('Time booked sucessfully');
-        this.router.navigate(['/time-tracking']);
+        this.navigateToLastRoute();
+      });
+    }
+  }
 
-    });
+  navigateToLastRoute() {
+    console.log('NavigabeToLastRoute: ' + this.currentRouteLink);
+    this.router.navigate([this.currentRouteLink]);
   }
 
   storeLastBooking(projectTime: ProjectTime) {

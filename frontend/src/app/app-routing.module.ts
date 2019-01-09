@@ -85,6 +85,7 @@ const routes: Routes = [
   },
   {
     path: 'project-details/:projectID', component: ProjectDetailComponent, canActivate: [PrjMgrRoleGuard],
+    runGuardsAndResolvers: 'always',
     resolve: {
       project: ProjectResolver,
       projectTimes: TimeTrackingOfProjectResolver

@@ -3,6 +3,8 @@
 </div>
 <div class="card bg-light">
   <app-time-tracking-list trackingListHeader="Already booked project times"
+                          currentRouteLink="/time-tracking"
+                          [showActionButtons]="true"
                           [alreadyTrackedTimes]="alreadyTrackedTimes"
                           [projects]="projects"></app-time-tracking-list>
 </div>

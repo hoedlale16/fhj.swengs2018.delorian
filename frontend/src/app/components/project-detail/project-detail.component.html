@@ -24,6 +24,8 @@
 
         <div class="card bg-light">
           <app-time-tracking-list trackingListHeader="Details"
+                                  [showActionButtons]="false"
+                                  [currentRouteLink]="currentRouteLink"
                                   [alreadyTrackedTimes]="projectTimes"
                                   [projects]="[project]"></app-time-tracking-list>
         </div>

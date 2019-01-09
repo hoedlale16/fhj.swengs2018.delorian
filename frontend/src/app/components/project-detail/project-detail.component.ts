@@ -1,62 +1,88 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {ProjectTime} from '../../api/ProjectTime';
 import {Project} from '../../api/Project';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-project-detail',
   templateUrl: './project-detail.component.html',
   styleUrls: ['./project-detail.component.scss']
 })
-export class ProjectDetailComponent implements OnInit {
+export class ProjectDetailComponent implements OnInit, OnDestroy {
 
-  chartLabels: string[] = [];
-  chartData: number[] = [];
-  chartColors: Array<any> = [];
+  navigationSubscription;
+  chartLabels: string[];
+  chartData: number[];
+  chartColors = [{ backgroundColor: ['#fe59c2', '#9559fe', '#c2fe59', '#59fe95', '#00ffff', '#FF0000'] }];
 
   projectTimes: Array<ProjectTime> = [];
-  projectTimesMap: Map<string, number> = new Map();
   totalBookedHours = 0;
 
   project: Project;
   isBookedProjectTimesHidden = true;
+  currentRouteLink: string;
 
-  constructor(private route: ActivatedRoute) {
-    const data = this.route.snapshot.data;
-    this.project = data.project;
-
-    this.projectTimes = data.projectTimes;
-    this.prepareChartData();
-
-    this.projectTimes.forEach((p) => {
-      this.totalBookedHours += p.workedHours;
-    });
+  constructor(private route: ActivatedRoute, private router: Router) {
+    this.loadData();
   }
 
   ngOnInit() {
+    // Reload route after deleting - Handled like described on webpage because variant of sesson didn't work
+    // Source: https://medium.com/engineering-on-the-incline/reloading-current-route-on-click-angular-5-1a1bfc740ab2
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.loadData();
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    // source: https://medium.com/engineering-on-the-incline/reloading-current-route-on-click-angular-5-1a1bfc740ab2
+    // avoid memory leaks here by cleaning up after ourselves. If we
+    // don't then we will continue to run our initialiseInvites()
+    // method on every navigationEnd event.
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
+  }
+
+  loadData() {
+    const data = this.route.snapshot.data;
+    this.project = data.project;
+    this.projectTimes = data.projectTimes;
+
+    this.prepareChartData();
+    this.projectTimes.forEach((p) => {
+      this.totalBookedHours += p.workedHours;
+    });
+    this.currentRouteLink = '/project-details/' + this.project.id;
+    console.log('project-details.component: currentRouteLink: ' + this.currentRouteLink);
   }
 
   prepareChartData() {
+    // Clear possible old data:
+    this.chartLabels = [];
+    this.chartData = [];
+
+    // Generate Data
+    const projectTimesMap: Map<string, number> = new Map();
     this.projectTimes.forEach((p) => {
       let currWorkedHours = p.workedHours;
 
       // Add already stored worked hours of user
-      if (this.projectTimesMap.has(p.username)) {
-        currWorkedHours += this.projectTimesMap.get(p.username);
+      if (projectTimesMap.has(p.username)) {
+        currWorkedHours += projectTimesMap.get(p.username);
       }
-      this.projectTimesMap.set(p.username, currWorkedHours);
+      projectTimesMap.set(p.username, currWorkedHours);
     });
 
     // Fill chart data
-    this.projectTimesMap.forEach((hours, user) => {
+    projectTimesMap.forEach((hours, user) => {
       this.chartLabels.push(user);
       this.chartData.push(hours);
     });
-
-    // Set chart colours
-    this.chartColors = [ {
-        backgroundColor: ['#fe59c2', '#9559fe', '#c2fe59', '#59fe95', '#00ffff', '#FF0000']
-      }];
   }
 
   toggleBookedProjectTimes() {

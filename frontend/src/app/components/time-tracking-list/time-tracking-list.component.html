@@ -4,73 +4,49 @@
       <strong>{{trackingListHeader}}</strong>
     </div>
 
+    <div class="card-body" [hidden]="isHidden">
+      <form [formGroup]="filterTimeTrackingForm" (ngSubmit)="filterTrackedTimes()" >
+        <div class="row">
+          <strong>Filter Tracking List</strong>
+        </div>
+        <div class="row">
 
-      <div class="card-body" [hidden]="isHidden">
-        <table class="table">
-          <thead class="thead-light">
-            <tr>
-              <th scope="col">Date</th>
-              <th scope="col">Project</th>
-              <th scope="col">User</th>
-              <th scope="col">Booked hours</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let timeTracking of alreadyTrackedTimes">
-              <td>{{timeTracking.trackingDate | date: 'dd.MM.yyyy'}}</td>
-              <td>{{getProjectTopic(timeTracking.projectID)}}</td>
-              <td>{{timeTracking.username}}</td>
-              <td>{{timeTracking.workedHours}}</td>
-              <td><button class="btn btn-dark" type="button" (click)="delete(timeTracking)">Delete</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
+            <label for="filterDate">Date:</label>
+            <div class="col">
+            <input id="filterDate" type="text" bsDatepicker name="filterDate" [bsConfig]="{dateInputFormat: 'DD.MM.YYYY'}"
+                   formControlName="filterDate" class="form-control"/>
+            </div>
+            <div class="col-2 btn-group-sm">
+              <button type="submit" class="btn btn-primary right" [disabled]="filterTimeTrackingForm.invalid">Filter</button>
+              <button class="btn btn-outline-danger right" type="button" (click)="resetFilter()">Reset</button>
+            </div>
+        </div>
+      </form>
     </div>
 
-
-
-
-
-
-<!--
-
-<div id="trackingList">
-  <div class="card">
-    <div class="card-header" id="collapseHeader">
-      <h1 class="mb-0">
-        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#trackedProjectTimes" aria-expanded="false" aria-controls="trackedProjectTimes">
-          Already booked project times:
-        </button>
-      </h1>
-    </div>
-    <div id="trackedProjectTimes" class="collapse show" aria-labelledby="collapseHeader" data-parent="#trackingList">
-      <div class="card-body">
-        <table class="table">
-          <thead class="thead-light">
-            <tr>
-              <th scope="col">Date</th>
-              <th scope="col">Project</th>
-              <th scope="col">User</th>
-              <th scope="col">Booked hours</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let timeTracking of alreadyTrackedTimes">
-              <td>{{timeTracking.trackingDate | date: 'dd.MM.yyyy'}}</td>
-              <td>{{getProjectTopic(timeTracking.projectID)}}</td>
-              <td>{{timeTracking.username}}</td>
-              <td>{{timeTracking.workedHours}}</td>
-              <td><button class="btn btn-dark" type="button" (click)="delete(timeTracking)">Delete</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="card-body" [hidden]="isHidden">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Project</th>
+            <th scope="col">User</th>
+            <th scope="col">Booked hours</th>
+            <th scope="col"*ngIf="showActionButtons">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let timeTracking of alreadyTrackedTimes">
+            <td>{{timeTracking.trackingDate | date: 'dd.MM.yyyy'}}</td>
+            <td>{{getProjectTopic(timeTracking.projectID)}}</td>
+            <td>{{timeTracking.username}}</td>
+            <td>{{timeTracking.workedHours}}</td>
+            <td *ngIf="showActionButtons">
+              <a class="btn btn-outline-success" title="Edit" [routerLink]="'/time-tracking-edit-form/' + timeTracking.id">Edit</a>
+              <button class="btn btn-dark" type="button" (click)="delete(timeTracking)">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-
-</div> -->
 

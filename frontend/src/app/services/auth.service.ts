@@ -28,9 +28,6 @@ export class AuthService {
       const decodedToken = this.jwtHelperService.decodeToken(token);
       this.currLoggedInUserName = decodedToken.sub;
       this.userRoles = decodedToken.authorities;
-
-      console.log('Auth-Data: '
-        + this.isLoggedIn + '/' + this.currLoggedInUserName + '/' + this.userRoles);
     }
 
     this.loggedInChange.subscribe((value) => {

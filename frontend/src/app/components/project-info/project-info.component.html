@@ -11,10 +11,8 @@
         <div *ngIf="showFullDetails">
           <strong>Planned hours:</strong> <em>{{project.totalPlannedHours}}</em><br>
           <strong>Booked hours:</strong> <em>{{totalBookedHours}}</em><br>
-        </div>
-        <strong>Description:</strong>
-          <em *ngIf="showFullDetails == false">{{project.description.substr(0,3)}}...</em><br>
           <em *ngIf="showFullDetails == true">{{project.description}}</em><br>
+        </div>
       </div>
       <div class="col"  *ngIf="showFullDetails">
         <canvas baseChart

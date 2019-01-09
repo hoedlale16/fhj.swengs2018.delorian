@@ -15,12 +15,17 @@
       No tracked times available
     </div>
     <div class="card-body text-dark" *ngIf="projectTimes.length > 0" [hidden]="isBookedProjectTimesHidden">
-        <canvas baseChart
+      <div>
+        <button class="btn btn-outline-danger" type="button" (click)="generatePDF()">Export Times to PDF</button>
+      </div>
+
+      <canvas baseChart
                 [colors]="chartColors"
                 [data]="chartData"
                 [labels]="chartLabels"
                 chartType="doughnut">
-        </canvas>
+      </canvas>
+
 
         <div class="card bg-light">
           <app-time-tracking-list trackingListHeader="Details"

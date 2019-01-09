@@ -2,7 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {ProjectTime} from '../../api/ProjectTime';
 import {Project} from '../../api/Project';
-import {AuthService} from '../../services/auth.service';
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-project-detail',
@@ -67,6 +68,16 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     this.chartData = [];
 
     // Generate Data
+    const projectTimesMap = this.getSummarizedProjektTimes();
+
+    // Fill chart data
+    projectTimesMap.forEach((hours, user) => {
+      this.chartLabels.push(user);
+      this.chartData.push(hours);
+    });
+  }
+
+  getSummarizedProjektTimes(): Map<string, number> {
     const projectTimesMap: Map<string, number> = new Map();
     this.projectTimes.forEach((p) => {
       let currWorkedHours = p.workedHours;
@@ -78,14 +89,30 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
       projectTimesMap.set(p.username, currWorkedHours);
     });
 
-    // Fill chart data
-    projectTimesMap.forEach((hours, user) => {
-      this.chartLabels.push(user);
-      this.chartData.push(hours);
-    });
+    return projectTimesMap;
   }
 
   toggleBookedProjectTimes() {
     this.isBookedProjectTimesHidden ? this.isBookedProjectTimesHidden = false : this.isBookedProjectTimesHidden = true;
+  }
+
+  generatePDF() {
+    const doc = new jsPDF();
+    doc.text('Tracking ProjectTimes!', 10, 10);
+
+    const data: Array<Array<string>> = [];
+    this.projectTimes.forEach((pT: ProjectTime) => {
+      const date = new Date(pT.trackingDate);
+      data.push([date.toDateString(), pT.username, pT.workedHours + '' ]);
+    });
+
+    doc.autoTable({
+      head: [['Date', 'User', 'Booked hours']],
+      body: data
+    });
+
+
+    // Save report
+    doc.save(this.project.topic + '_report.pdf');
   }
 }

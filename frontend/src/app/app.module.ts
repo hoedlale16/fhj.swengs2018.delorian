@@ -23,6 +23,7 @@ import { ProjectDetailComponent } from './components/project-detail/project-deta
 import {ChartsModule} from 'ng2-charts';
 import { AboutComponent } from './components/about/about.component';
 import { ProjectInfoComponent } from './components/project-info/project-info.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -61,6 +62,7 @@ export function tokenGetter() {
     BsDatepickerModule.forRoot(),
     NgxSelectModule,
     ReactiveFormsModule,
+    AccordionModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

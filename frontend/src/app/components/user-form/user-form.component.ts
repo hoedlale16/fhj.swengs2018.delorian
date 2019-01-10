@@ -25,7 +25,7 @@ export class UserFormComponent implements OnInit {
       'password': new FormControl(),
       'firstName':  new FormControl( '', [Validators.required, Validators.minLength(3)] ),
       'lastName': new FormControl('',  [Validators.required, Validators.minLength(3)]),
-      'eMail': new FormControl(),
+      'eMail': new FormControl('', [Validators.email]),
       'userRoles': new FormControl('', [Validators.required]),
       'managedProjects': new FormControl(),
       'projectTimes': new FormControl()

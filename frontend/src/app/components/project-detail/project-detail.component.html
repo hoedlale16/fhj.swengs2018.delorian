@@ -1,5 +1,44 @@
 <div class="container mb-5" role="main">
-  <!--Show project-info -->
+  <!-- Show project-info -->
+  <app-project-info [project]="project"
+                    [showFullDetails]="true"
+                    [totalBookedHours]="totalBookedHours"
+                    buttonLinkName="Back"
+                    buttonLink="/project-management"></app-project-info>
+
+  <accordion class="card bg-light">
+    <accordion-group heading="Overview Diagramm">
+      <div class="card-body text-dark" *ngIf="projectTimes.length === 0">
+        No tracked times available
+      </div>
+      <div class="card-body text-dark" *ngIf="projectTimes.length > 0">
+        <canvas baseChart
+                [colors]="chartColors"
+                [data]="chartData"
+                [labels]="chartLabels"
+                chartType="doughnut">
+        </canvas>
+      </div>
+    </accordion-group>
+    <accordion-group heading="Already booked project times">
+      <div class="card-body text-dark" *ngIf="projectTimes.length === 0">
+        No tracked times available
+      </div>
+      <div class="card-body text-dark" *ngIf="projectTimes.length > 0">
+        <app-time-tracking-list trackingListHeader="Details"
+                                [showActionButtons]="false"
+                                [currentRouteLink]="currentRouteLink"
+                                [alreadyTrackedTimes]="projectTimes"
+                                [projects]="[project]"></app-time-tracking-list>
+        <button class="btn btn-outline-danger" type="button" (click)="generatePDF()">Export Times to PDF</button>
+      </div>
+    </accordion-group>
+  </accordion>
+</div>
+
+<!--
+<div class="container mb-5" role="main">
+  Show project-info
   <app-project-info [project]="project"
                     [showFullDetails]="true"
                     [totalBookedHours]="totalBookedHours"
@@ -36,8 +75,5 @@
         </div>
     </div>
   </div>
-
-
-
-
 </div>
+-->

@@ -4,29 +4,27 @@
       <div class="row">
         <h1>WELCOME {{currLoggedInUser}}!</h1>
       </div>
-      <div clas="row" *ngIf="hasUserRole == false">
-        No permission to track project times!
-      </div>
 
-      <div class="row" *ngIf="hasUserRole">
-        <div class="col card text-dark">
-          <strong>Last booking:</strong>
-          <app-time-tracking-form fillWithLastBooking="true"
-                                  currentRouteLink="/dashboard"
-                                  [projectOptions]="projects"
-                                  [currLoggedInUser]="currLoggedInUser"></app-time-tracking-form>
-        </div>
-      </div>
-
-      <div class="row" *ngIf="hasUserRole">
-        <div class="col card text-dark">
-          <div class="card-header pointerCursor"  (click)="toggleBookedProjectTimes()">
-            <strong>Bookings of projects:</strong>
+      <accordion>
+        <accordion-group heading="Quick booking" isOpen="true">
+          <div *ngIf="hasUserRole == false">
+            No permission to track project times!
           </div>
-          <div class="card-body text-dark" *ngIf="chartData.length === 0">
-            No tracked times available
+          <div *ngIf="hasUserRole">
+            <div class="card text-dark">
+              <app-time-tracking-form fillWithLastBooking="true"
+                                      currentRouteLink="/dashboard"
+                                      [projectOptions]="projects"
+                                      [currLoggedInUser]="currLoggedInUser"></app-time-tracking-form>
+            </div>
           </div>
-          <div class="card-body text-dark" *ngIf="chartData.length > 0" [hidden]="isBookedProjectTimesHidden">
+        </accordion-group>
+        <accordion-group heading="Bookings of projects">
+          <div class="card text-dark" *ngIf="hasUserRole">
+            <div *ngIf="chartData.length === 0">
+              No tracked times available
+            </div>
+            <div *ngIf="chartData.length > 0">
               <canvas baseChart
                       [datasets]="chartData"
                       [labels]="chartLabels"
@@ -34,12 +32,11 @@
                       [colors]="chartColors"
                       legend="true"
                       chartType="bar"
-                      (chartHover)="chartHovered($event)"
-                      >
-              </canvas>
+                      (chartHover)="chartHovered($event)"></canvas>
+            </div>
           </div>
-        </div>
-      </div>
+        </accordion-group>
+      </accordion>
     </div>
   </div>
 </div>

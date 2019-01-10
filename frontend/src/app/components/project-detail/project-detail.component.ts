@@ -21,7 +21,6 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   totalBookedHours = 0;
 
   project: Project;
-  isBookedProjectTimesHidden = true;
   currentRouteLink: string;
 
   constructor(private route: ActivatedRoute, private router: Router) {
@@ -90,10 +89,6 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     });
 
     return projectTimesMap;
-  }
-
-  toggleBookedProjectTimes() {
-    this.isBookedProjectTimesHidden ? this.isBookedProjectTimesHidden = false : this.isBookedProjectTimesHidden = true;
   }
 
   generatePDF() {

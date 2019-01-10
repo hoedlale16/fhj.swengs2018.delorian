@@ -17,7 +17,6 @@ export class DashboardComponent implements OnInit {
 
   projects: Array<Project>;
   alreadyTrackedTimes: Array<ProjectTime>;
-  isBookedProjectTimesHidden = true;
 
   // key: projectID, value: totalWorkedHoursOfProject
   projectTimesMap: Map<number, number> = new Map();
@@ -88,11 +87,5 @@ export class DashboardComponent implements OnInit {
     });
     return topic;
   }
-
-  toggleBookedProjectTimes() {
-    this.isBookedProjectTimesHidden ? this.isBookedProjectTimesHidden = false : this.isBookedProjectTimesHidden = true;
-  }
-
-
 }
 

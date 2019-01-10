@@ -1,52 +1,49 @@
-
-  <div class="card">
-    <div class="card-header pointerCursor"  (click)="toggleContent()">
-      <strong>{{trackingListHeader}}</strong>
-    </div>
-
-    <div class="card-body" [hidden]="isHidden">
-      <form [formGroup]="filterTimeTrackingForm" (ngSubmit)="filterTrackedTimes()" >
-        <div class="row">
-          <strong>Filter Tracking List</strong>
-        </div>
-        <div class="row">
-
-            <label for="filterDate">Date:</label>
-            <div class="col">
-            <input id="filterDate" type="text" bsDatepicker name="filterDate" [bsConfig]="{dateInputFormat: 'DD.MM.YYYY'}"
-                   formControlName="filterDate" class="form-control"/>
+<accordion>
+    <accordion-group heading="{{trackingListHeader}}">
+      <accordion>
+        <!-- Filter -->
+        <accordion-group heading="Filter">
+          <form [formGroup]="filterTimeTrackingForm" (ngSubmit)="filterTrackedTimes()" >
+            <div class="row">
+              <label for="filterDate">Date:</label>
+              <div class="col">
+                <input id="filterDate" type="text" bsDatepicker name="filterDate" [bsConfig]="{dateInputFormat: 'DD.MM.YYYY'}"
+                       formControlName="filterDate" class="form-control"/>
+              </div>
+              <div class="col-2 btn-group-sm">
+                <button type="submit" class="btn btn-primary right" [disabled]="filterTimeTrackingForm.invalid">Filter</button>
+                <button class="btn btn-outline-danger right" type="button" (click)="resetFilter()">Reset</button>
+              </div>
             </div>
-            <div class="col-2 btn-group-sm">
-              <button type="submit" class="btn btn-primary right" [disabled]="filterTimeTrackingForm.invalid">Filter</button>
-              <button class="btn btn-outline-danger right" type="button" (click)="resetFilter()">Reset</button>
-            </div>
-        </div>
-      </form>
-    </div>
-
-    <div class="card-body" [hidden]="isHidden">
-      <table class="table">
-        <thead class="thead-light">
-          <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Project</th>
-            <th scope="col">User</th>
-            <th scope="col">Booked hours</th>
-            <th scope="col"*ngIf="showActionButtons">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let timeTracking of alreadyTrackedTimes">
-            <td>{{timeTracking.trackingDate | date: 'dd.MM.yyyy'}}</td>
-            <td>{{getProjectTopic(timeTracking.projectID)}}</td>
-            <td>{{timeTracking.username}}</td>
-            <td>{{timeTracking.workedHours}}</td>
-            <td *ngIf="showActionButtons">
-              <a class="btn btn-outline-success" title="Edit" [routerLink]="'/time-tracking-edit/' + timeTracking.id">Edit</a>
-              <button class="btn btn-dark" type="button" (click)="delete(timeTracking)">Delete</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
+          </form>
+        </accordion-group>
+        <!-- List -->
+        <accordion-group heading="Booked project times" isOpen="true">
+          <div class="card-body">
+            <table class="table">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Project</th>
+                <th scope="col">User</th>
+                <th scope="col">Booked hours</th>
+                <th scope="col"*ngIf="showActionButtons">Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let timeTracking of alreadyTrackedTimes">
+                <td>{{timeTracking.trackingDate | date: 'dd.MM.yyyy'}}</td>
+                <td>{{getProjectTopic(timeTracking.projectID)}}</td>
+                <td>{{timeTracking.username}}</td>
+                <td>{{timeTracking.workedHours}}</td>
+                <td *ngIf="showActionButtons">
+                  <a class="btn btn-outline-success" title="Edit" [routerLink]="'/time-tracking-edit/' + timeTracking.id">Edit</a>
+                  <button class="btn btn-dark" type="button" (click)="delete(timeTracking)">Delete</button></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </accordion-group>
+      </accordion>
+    </accordion-group>
+</accordion>

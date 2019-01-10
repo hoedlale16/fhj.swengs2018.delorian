@@ -1,5 +1,5 @@
-import {Component, Input, OnDestroy, OnInit,} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ProjectTimesService} from '../../services/project-times.service';
 import {ProjectTime} from '../../api/ProjectTime';
 import {Project} from '../../api/Project';
@@ -13,7 +13,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class TimeTrackingListComponent implements OnInit {
 
   navigationSubscription;
-  isHidden = true;
   @Input() trackingListHeader: string;
   @Input() alreadyTrackedTimes: Array<ProjectTime>;
   @Input() currentRouteLink: string;
@@ -47,10 +46,6 @@ export class TimeTrackingListComponent implements OnInit {
       return project.topic;
     }
     return '???';
-  }
-
-  toggleContent() {
-    this.isHidden ? this.isHidden = false : this.isHidden = true;
   }
 
   filterTrackedTimes() {

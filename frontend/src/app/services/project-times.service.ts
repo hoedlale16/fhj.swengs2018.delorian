@@ -15,6 +15,7 @@ export class ProjectTimesService {
   getProjectTimesForProject(projectID: number) {
     return this.http.get('/api/projectTimesProject/' + projectID).pipe(
       map((response: any) => {
+        response.trackingDate = new Date(response.trackingDate);
         return response;
       })
     );
@@ -23,6 +24,7 @@ export class ProjectTimesService {
   getProjectTimesForUser(username: string) {
     return this.http.get('/api/projectTimesUser/' + username).pipe(
       map((response: any) => {
+        response.trackingDate = new Date(response.trackingDate);
         return response;
       })
     );
@@ -30,6 +32,7 @@ export class ProjectTimesService {
 
   getProjectTime(projectTimeID: number) {
     return this.http.get('/api/projectTimes/' + projectTimeID).pipe(map((res: any) => {
+      res.trackingDate = new Date(res.trackingDate);
       return res;
     }));
   }

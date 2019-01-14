@@ -4,6 +4,10 @@ import {ProjectTimesService} from '../../services/project-times.service';
 import {ProjectTime} from '../../api/ProjectTime';
 import {Project} from '../../api/Project';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {User} from '../../api/User';
+import {PageChangedEvent} from 'ngx-bootstrap';
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-time-tracking-list',
@@ -12,12 +16,15 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class TimeTrackingListComponent implements OnInit {
 
-  navigationSubscription;
   @Input() trackingListHeader: string;
   @Input() alreadyTrackedTimes: Array<ProjectTime>;
   @Input() currentRouteLink: string;
   @Input() projects: Array<Project>;
   @Input() showActionButtons = false;
+  @Input() showExportTimesButton = false;
+
+  @Input() alreadyTrackedTimesPage: Array<ProjectTime>;
+  @Input() timeTrackingPerPage: number;
 
   filterTimeTrackingForm: FormGroup;
 
@@ -67,5 +74,30 @@ export class TimeTrackingListComponent implements OnInit {
     this.filterTimeTrackingForm.controls.filterDate.reset();
     console.log('time-tracking-list.component: currentRouteLink: ' + this.currentRouteLink);
     this.router.navigate([this.currentRouteLink]);
+  }
+
+  pageChanged(event: PageChangedEvent): void {
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.alreadyTrackedTimesPage = this.alreadyTrackedTimes.slice(startItem, endItem);
+  }
+
+  generatePDF() {
+    const doc = new jsPDF();
+    doc.text('Tracking Times!', 10, 10);
+
+    const data: Array<Array<string>> = [];
+    this.alreadyTrackedTimes.forEach((pT: ProjectTime) => {
+      const date = new Date(pT.trackingDate);
+      data.push([date.toDateString(), pT.username, pT.workedHours + '' ]);
+    });
+
+    doc.autoTable({
+      head: [['Date', 'User', 'Booked hours']],
+      body: data
+    });
+
+    // Save report
+    doc.save('report.pdf');
   }
 }

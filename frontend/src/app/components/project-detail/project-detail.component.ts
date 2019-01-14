@@ -2,8 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {ProjectTime} from '../../api/ProjectTime';
 import {Project} from '../../api/Project';
-import * as jsPDF from 'jspdf';
-import 'jspdf-autotable';
 
 @Component({
   selector: 'app-project-detail',
@@ -18,8 +16,10 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   chartColors = [{ backgroundColor: ['#fe59c2', '#9559fe', '#c2fe59', '#59fe95', '#00ffff', '#FF0000'] }];
 
   projectTimes: Array<ProjectTime> = [];
-  totalBookedHours = 0;
+  alreadyTrackedTimesPage: Array<ProjectTime>;
+  timeTrackingPerPage = 3;
 
+  totalBookedHours = 0;
   project: Project;
   currentRouteLink: string;
 
@@ -52,6 +52,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     const data = this.route.snapshot.data;
     this.project = data.project;
     this.projectTimes = data.projectTimes;
+    this.alreadyTrackedTimesPage = this.projectTimes.slice(0, this.timeTrackingPerPage);
 
     this.prepareChartData();
     this.projectTimes.forEach((p) => {
@@ -89,25 +90,5 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     });
 
     return projectTimesMap;
-  }
-
-  generatePDF() {
-    const doc = new jsPDF();
-    doc.text('Tracking ProjectTimes!', 10, 10);
-
-    const data: Array<Array<string>> = [];
-    this.projectTimes.forEach((pT: ProjectTime) => {
-      const date = new Date(pT.trackingDate);
-      data.push([date.toDateString(), pT.username, pT.workedHours + '' ]);
-    });
-
-    doc.autoTable({
-      head: [['Date', 'User', 'Booked hours']],
-      body: data
-    });
-
-
-    // Save report
-    doc.save(this.project.topic + '_report.pdf');
   }
 }

@@ -19,6 +19,14 @@
         </accordion-group>
         <!-- List -->
         <accordion-group heading="Booked project times" isOpen="true">
+          <div class="row">
+            <div class="col-xs-12 col-12">
+              <pagination [totalItems]="alreadyTrackedTimes.length"
+                          [itemsPerPage]="timeTrackingPerPage"
+                          (pageChanged)="pageChanged($event)"></pagination>
+            </div>
+          </div>
+
           <div class="card-body">
             <table class="table">
               <thead class="thead-light">
@@ -31,7 +39,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let timeTracking of alreadyTrackedTimes">
+              <tr *ngFor="let timeTracking of alreadyTrackedTimesPage">
                 <td>{{timeTracking.trackingDate | date: 'dd.MM.yyyy'}}</td>
                 <td>{{getProjectTopic(timeTracking.projectID)}}</td>
                 <td>{{timeTracking.username}}</td>
@@ -42,6 +50,9 @@
               </tr>
               </tbody>
             </table>
+
+            <button *ngIf="showExportTimesButton" class="btn btn-outline-danger" type="button" (click)="generatePDF()">Export Times to PDF</button>
+
           </div>
         </accordion-group>
       </accordion>

@@ -2,6 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from '../../api/User';
 import {UserService} from '../../services/user.service';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {AuthService} from '../../services/auth.service';
+import {PageChangedEvent} from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-user-management',
@@ -12,8 +14,13 @@ export class UserManagementComponent implements OnInit, OnDestroy {
 
   users: Array<User>;
   navigationSubscription;
+  currLoggedInUser: string;
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {
+  usersPerPage = 3;
+  usersPage: Array<User>;
+
+
+  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -43,6 +50,9 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   loadData() {
     const data = this.route.snapshot.data;
     this.users = data.users;
+    this.currLoggedInUser = this.authService.currLoggedInUserName;
+    this.usersPage = this.users.slice(0, this.usersPerPage);
+
   }
 
   deleteUser(user: User) {
@@ -53,5 +63,11 @@ export class UserManagementComponent implements OnInit, OnDestroy {
         this.router.navigate(['/user-management']);
       });
 
+  }
+
+  pageChanged(event: PageChangedEvent): void {
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.usersPage = this.users.slice(startItem, endItem);
   }
 }

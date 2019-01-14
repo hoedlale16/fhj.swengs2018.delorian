@@ -15,6 +15,8 @@ export class TimeTrackingComponent implements OnInit, OnDestroy {
 
   currLoggedInUser: String;
   alreadyTrackedTimes: Array<ProjectTime>;
+  alreadyTrackedTimesPage: Array<ProjectTime>;
+  timeTrackingPerPage = 3;
   projects: Array<Project>;
 
 
@@ -48,6 +50,7 @@ export class TimeTrackingComponent implements OnInit, OnDestroy {
     this.currLoggedInUser = this.authService.currLoggedInUserName;
     const data = this.route.snapshot.data;
     this.alreadyTrackedTimes = data.alreadyTrackedTimes;
+    this.alreadyTrackedTimesPage = this.alreadyTrackedTimes.slice(0, this.timeTrackingPerPage);
     this.projects = data.projects;
   }
 

@@ -24,6 +24,7 @@ import {ChartsModule} from 'ng2-charts';
 import { AboutComponent } from './components/about/about.component';
 import { ProjectInfoComponent } from './components/project-info/project-info.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -62,7 +63,8 @@ export function tokenGetter() {
     BsDatepickerModule.forRoot(),
     NgxSelectModule,
     ReactiveFormsModule,
-    AccordionModule.forRoot()
+    AccordionModule.forRoot(),
+    PaginationModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

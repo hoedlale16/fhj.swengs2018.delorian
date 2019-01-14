@@ -2,6 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Project} from '../../api/Project';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {ProjectService} from '../../services/project.service';
+import {PageChangedEvent} from 'ngx-bootstrap';
+import {User} from '../../api/User';
 
 @Component({
   selector: 'app-project-management',
@@ -12,11 +14,14 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
   projects: Array<Project>;
   navigationSubscription;
 
+  projectsPerPage = 3;
+  projectsPage: Array<Project>;
+
   constructor(private projectService: ProjectService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
-    // Show online and offline users
+    // Show online and offline projects
     this.loadData();
 
     // Reload route after deleting - Handled like descriped on webpage because variant of sesson didn't work
@@ -42,5 +47,13 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
   loadData() {
     const data = this.route.snapshot.data;
     this.projects = data.projects;
+    this.projectsPage = this.projects.slice(0, this.projectsPerPage);
+
+  }
+
+  pageChanged(event: PageChangedEvent): void {
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.projectsPage = this.projects.slice(startItem, endItem);
   }
 }

@@ -3,10 +3,14 @@ package at.fhj.swengs.delorian.controller;
 import at.fhj.swengs.delorian.dto.ProjectDTO;
 import at.fhj.swengs.delorian.facade.ProjectFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ProjectController {
@@ -19,16 +23,35 @@ public class ProjectController {
      * @return
      */
     @GetMapping("/projects/")
-    List<ProjectDTO> getAllProjects() { return projectFacade.getAllProjects(false); }
+    ResponseEntity<List<ProjectDTO>> getAllProjects() {
+        List<ProjectDTO> projects = projectFacade.getAllProjects(false);
+        if(projects.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return ResponseEntity.ok(projects);
+    }
 
+    /*hoedlale16: I know we should use @RequestParam and filter for projectManager instead of this call
+    but I think it is more secure to have two requests because every user is allowed to trigger /projects/ because
+    it is required for boooking. Therefore the DTOs in /projects/ jut contains the projectnames and
+    /projectsPrjMgr/{projectManager} continas the full project information.
+    */
     @GetMapping("/projectsPrjMgr/{projectManager}")
-    List<ProjectDTO> getProjectsOfPrjMgr(@PathVariable String projectManager) {
-        return projectFacade.getAllProjectsOfPrjMgr(projectManager);
+    ResponseEntity<List<ProjectDTO>> getProjectsOfPrjMgr(@PathVariable String projectManager) {
+        List<ProjectDTO> projects = projectFacade.getAllProjectsOfPrjMgr(projectManager);
+        if(projects.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return ResponseEntity.ok(projects);
     }
 
     @GetMapping("/projects/{projectID}")
-    ProjectDTO getById(@PathVariable long projectID) {
-        return projectFacade.getProjectByID(projectID);
+    ResponseEntity<ProjectDTO> getById(@PathVariable long projectID) {
+        Optional<ProjectDTO> projectDTO =  projectFacade.getProjectByID(projectID);
+        if(projectDTO.isPresent()) {
+            return ResponseEntity.ok(projectDTO.get());
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PostMapping("/projects")
@@ -37,8 +60,12 @@ public class ProjectController {
     }
 
     @PutMapping("/projects/{projectID}")
-    ProjectDTO update(@RequestBody @Valid ProjectDTO dto, @PathVariable long projectID) {
-        return projectFacade.update(projectID, dto);
+    ResponseEntity<ProjectDTO> update(@RequestBody @Valid ProjectDTO dto, @PathVariable long projectID) {
+        Optional<ProjectDTO> projectDTO =  projectFacade.update(projectID, dto);
+        if(projectDTO.isPresent()) {
+            return ResponseEntity.ok(projectDTO.get());
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/projects/{projectID}")

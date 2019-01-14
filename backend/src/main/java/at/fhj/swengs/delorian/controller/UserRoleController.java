@@ -3,10 +3,13 @@ package at.fhj.swengs.delorian.controller;
 import at.fhj.swengs.delorian.dto.UserRoleDTO;
 import at.fhj.swengs.delorian.facade.UserRoleFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserRoleController {
@@ -15,13 +18,21 @@ public class UserRoleController {
     private UserRoleFacade userRoleFacade;
 
     @GetMapping("/userroles/")
-    List<UserRoleDTO> getAllRoles() {
-        return userRoleFacade.getAllRoles();
+    ResponseEntity<List<UserRoleDTO>> getAllRoles() {
+        List<UserRoleDTO> roles = userRoleFacade.getAllRoles();
+        if(roles.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return ResponseEntity.ok(roles);
     }
 
     @GetMapping("/userroles/{rolename}")
-    UserRoleDTO getById(@PathVariable String rolename) {
-        return userRoleFacade.getByUsername(rolename);
+    ResponseEntity<UserRoleDTO> getById(@PathVariable String rolename) {
+        Optional<UserRoleDTO> userRole = userRoleFacade.getByUsername(rolename);
+        if(userRole.isPresent()) {
+            return ResponseEntity.ok(userRole.get());
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 
@@ -40,8 +51,12 @@ public class UserRoleController {
     }
 
     @PutMapping("/userroles/{rolename}")
-    UserRoleDTO update(@RequestBody @Valid UserRoleDTO dto, @PathVariable String rolename) {
-        return userRoleFacade.update(rolename, dto);
+    ResponseEntity<UserRoleDTO> update(@RequestBody @Valid UserRoleDTO dto, @PathVariable String rolename) {
+        Optional<UserRoleDTO> userRole = userRoleFacade.update(rolename, dto);
+        if(userRole.isPresent()) {
+            return ResponseEntity.ok(userRole.get());
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/userroles/{rolename}")

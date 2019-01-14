@@ -71,15 +71,15 @@ public class UserFacade {
         //dto.setProjectTimes(entity.getProjectTimes().stream().map(t -> t.getId()).collect(Collectors.toList()));
     }
 
-    public UserDTO update(String usernameId, UserDTO dto) {
+    public Optional<UserDTO> update(String usernameId, UserDTO dto) {
 
         Optional<User> entity = userService.findActiveUserByUsername(usernameId);
         if(entity.isPresent()) {
             mapDtoToEntity(dto, entity.get());
             mapEntityToDto(userService.save(entity.get()), dto);
-            return dto;
+            return Optional.of(dto);
         }
-        return null;
+        return Optional.empty();
     }
 
     public UserDTO create(UserDTO dto) {
@@ -93,19 +93,18 @@ public class UserFacade {
         userService.delete(username);
     }
 
-    public UserDTO getByUsername(String username) {
+    public Optional<UserDTO> getByUsername(String username) {
         Optional<User> entity = userService.findActiveUserByUsername(username);
         if(entity.isPresent()) {
             UserDTO dto = new UserDTO();
             mapEntityToDto(entity.get(), dto);
-            return dto;
+            return Optional.of(dto);
         }
-        return null;
+        return Optional.empty();
     }
 
     public List<UserDTO> getAllUsers() {
         List<UserDTO> users = new ArrayList<>();
-
         userService.getUsers().forEach(entity -> {
             UserDTO dto = new UserDTO();
             mapEntityToDto(entity,dto);
@@ -114,6 +113,7 @@ public class UserFacade {
 
         return users;
     }
+
 
     public Optional<UserDTO> isUsernameTaken(String username) {
         Optional<User> entity = userService.findUserByUsername(username);

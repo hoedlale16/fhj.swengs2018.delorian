@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -48,11 +49,14 @@ public class ProjectTimeFacade {
         return dto;
     }
 
-    public ProjectTimeDTO update(long projectTimeID, ProjectTimeDTO dto) {
-        ProjectTime entity  = projectTimeService.findById(projectTimeID).get();
-        mapDtoToEntity(dto, entity);
-        mapEntityToDto(projectTimeService.save(entity), dto);
-        return dto;
+    public Optional<ProjectTimeDTO> update(long projectTimeID, ProjectTimeDTO dto) {
+        Optional<ProjectTime> entity  = projectTimeService.findById(projectTimeID);
+        if(entity.isPresent()) {
+            mapDtoToEntity(dto, entity.get());
+            mapEntityToDto(projectTimeService.save(entity.get()), dto);
+            return Optional.of(dto);
+        }
+        return Optional.empty();
 
     }
 
@@ -60,11 +64,14 @@ public class ProjectTimeFacade {
         projectTimeService.delete(projectTimeID);
     }
 
-    public ProjectTimeDTO getProjectTimeByID(long projectTimeID) {
-        ProjectTime entity = projectTimeService.findById(projectTimeID).get();
-        ProjectTimeDTO dto = new ProjectTimeDTO();
-        mapEntityToDto(entity, dto);
-        return dto;
+    public Optional<ProjectTimeDTO> getProjectTimeByID(long projectTimeID) {
+        Optional<ProjectTime> entity = projectTimeService.findById(projectTimeID);
+        if(entity.isPresent()) {
+            ProjectTimeDTO dto = new ProjectTimeDTO();
+            mapEntityToDto(entity.get(), dto);
+            return Optional.of(dto);
+        }
+        return Optional.empty();
     }
 
     public List<ProjectTimeDTO> getProjectTimesOfProject(long projectID) {

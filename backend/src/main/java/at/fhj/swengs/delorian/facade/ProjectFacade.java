@@ -65,11 +65,14 @@ public class ProjectFacade {
         return dto;
     }
 
-    public ProjectDTO update(long projectId, ProjectDTO dto) {
-        Project entity  = projectService.findById(projectId).get();
-        mapDtoToEntity(dto, entity);
-        mapEntityToDto(projectService.save(entity), dto, true);
-        return dto;
+    public Optional<ProjectDTO> update(long projectId, ProjectDTO dto) {
+        Optional<Project> entity  = projectService.findById(projectId);
+        if(entity.isPresent()) {
+            mapDtoToEntity(dto, entity.get());
+            mapEntityToDto(projectService.save(entity.get()), dto, true);
+            return Optional.of(dto);
+        }
+        return Optional.empty();
 
     }
 
@@ -79,11 +82,14 @@ public class ProjectFacade {
         projectService.delete(projectID);
     }
 
-    public ProjectDTO getProjectByID(long projectId) {
-        Project entity = projectService.findById(projectId).get();
-        ProjectDTO dto = new ProjectDTO();
-        mapEntityToDto(entity, dto,true);
-        return dto;
+    public Optional<ProjectDTO> getProjectByID(long projectId) {
+        Optional<Project> entity = projectService.findById(projectId);
+        if(entity.isPresent()) {
+            ProjectDTO dto = new ProjectDTO();
+            mapEntityToDto(entity.get(), dto, true);
+            return Optional.of(dto);
+        }
+        return Optional.empty();
     }
 
     public List<ProjectDTO> getAllProjects(boolean withAllInfos) {

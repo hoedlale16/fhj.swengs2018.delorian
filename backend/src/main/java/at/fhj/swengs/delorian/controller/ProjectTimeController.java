@@ -3,10 +3,13 @@ package at.fhj.swengs.delorian.controller;
 import at.fhj.swengs.delorian.dto.ProjectTimeDTO;
 import at.fhj.swengs.delorian.facade.ProjectTimeFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ProjectTimeController {
@@ -21,19 +24,32 @@ public class ProjectTimeController {
     }*/
 
     @GetMapping("/projectTimesProject/{projectID}")
-    List<ProjectTimeDTO> getProjectTimesOfProject(@PathVariable long projectID) {
-        return projectTimeFacade.getProjectTimesOfProject(projectID);
+    ResponseEntity<List<ProjectTimeDTO>> getProjectTimesOfProject(@PathVariable long projectID) {
+        List<ProjectTimeDTO> projectTimes = projectTimeFacade.getProjectTimesOfProject(projectID);
+        if(projectTimes.isEmpty())
+            return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+        return ResponseEntity.ok(projectTimes);
     }
 
     @GetMapping("/projectTimesUser/{username}")
-    List<ProjectTimeDTO> getProjectTimesOfUser(@PathVariable String username) {
-        return projectTimeFacade.getProjectTimesOfUser(username);
+    ResponseEntity<List<ProjectTimeDTO>> getProjectTimesOfUser(@PathVariable String username) {
+        List<ProjectTimeDTO> projectTimes = projectTimeFacade.getProjectTimesOfUser(username);
+        if(projectTimes.isEmpty())
+            return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+        return ResponseEntity.ok(projectTimes);
     }
 
 
     @GetMapping("/projectTimes/{projectTimeID}")
-    ProjectTimeDTO getById(@PathVariable long projectTimeID) {
-        return projectTimeFacade.getProjectTimeByID(projectTimeID);
+    ResponseEntity<ProjectTimeDTO> getById(@PathVariable long projectTimeID) {
+
+        Optional<ProjectTimeDTO> projectTimeDTO =  projectTimeFacade.getProjectTimeByID(projectTimeID);
+        if(projectTimeDTO.isPresent()) {
+            return ResponseEntity.ok(projectTimeDTO.get());
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PostMapping("/projectTimes")
@@ -42,8 +58,12 @@ public class ProjectTimeController {
     }
 
     @PutMapping("/projectTimes/{projectTimeID}")
-    ProjectTimeDTO update(@RequestBody @Valid ProjectTimeDTO dto, @PathVariable long projectTimeID) {
-        return projectTimeFacade.update(projectTimeID, dto);
+    ResponseEntity<ProjectTimeDTO> update(@RequestBody @Valid ProjectTimeDTO dto, @PathVariable long projectTimeID) {
+        Optional<ProjectTimeDTO> projectTimeDTO =  projectTimeFacade.update(projectTimeID, dto);
+        if(projectTimeDTO.isPresent()) {
+            return ResponseEntity.ok(projectTimeDTO.get());
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/projectTimes/{projectTimeID}")

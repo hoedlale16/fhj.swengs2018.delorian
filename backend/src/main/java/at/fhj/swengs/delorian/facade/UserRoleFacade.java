@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service()
@@ -28,17 +29,19 @@ public class UserRoleFacade {
     }
 
     private void mapEntityToDto(Role entity, UserRoleDTO dto) {
-
         dto.setRoleName(entity.getRoleName());
         dto.setDescription(entity.getDescription());
         dto.setAssignedUsers(entity.getAssignedUsers().stream().map(u -> u.getUserName()).collect(Collectors.toSet()));
     }
 
-    public UserRoleDTO update(String usernameId, UserRoleDTO dto) {
-        Role entity = userRoleService.findByRoleName(usernameId).get();
-        mapDtoToEntity(dto, entity);
-        mapEntityToDto(userRoleService.save(entity), dto);
-        return dto;
+    public Optional<UserRoleDTO> update(String usernameId, UserRoleDTO dto) {
+        Optional<Role> entity = userRoleService.findByRoleName(usernameId);
+        if(entity.isPresent()) {
+            mapDtoToEntity(dto, entity.get());
+            mapEntityToDto(userRoleService.save(entity.get()), dto);
+            return Optional.of(dto);
+        }
+        return Optional.empty();
     }
 
     public UserRoleDTO create(UserRoleDTO dto) {
@@ -52,11 +55,14 @@ public class UserRoleFacade {
         userRoleService.delete(username);
     }
 
-    public UserRoleDTO getByUsername(String username) {
-        Role entity = userRoleService.findByRoleName(username).get();
-        UserRoleDTO dto = new UserRoleDTO();
-        mapEntityToDto(entity, dto);
-        return dto;
+    public Optional<UserRoleDTO> getByUsername(String username) {
+        Optional<Role> entity = userRoleService.findByRoleName(username);
+        if(entity.isPresent()) {
+            UserRoleDTO dto = new UserRoleDTO();
+            mapEntityToDto(entity.get(), dto);
+            return Optional.of(dto);
+        }
+        return Optional.empty();
     }
 
     public List<UserRoleDTO> getAllRoles() {

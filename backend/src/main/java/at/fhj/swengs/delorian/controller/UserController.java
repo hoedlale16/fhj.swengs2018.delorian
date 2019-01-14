@@ -3,6 +3,8 @@ package at.fhj.swengs.delorian.controller;
 import at.fhj.swengs.delorian.dto.UserDTO;
 import at.fhj.swengs.delorian.facade.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,23 +18,31 @@ public class UserController {
     private UserFacade userFacade;
 
     @GetMapping("/users/")
-    List<UserDTO> getAllUsers() {
-        return userFacade.getAllUsers();
+    ResponseEntity<List<UserDTO>> getAllUsers() {
+        List<UserDTO> users = userFacade.getAllUsers();
+        if(users.isEmpty())
+            return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+        return ResponseEntity.ok(users);
     }
 
     @GetMapping("/users/{username}")
-    UserDTO getById(@PathVariable String username) {
-        return userFacade.getByUsername(username);
+    ResponseEntity<UserDTO> getById(@PathVariable String username) {
+        Optional<UserDTO> dto = userFacade.getByUsername(username);
+        if (dto.isPresent()) {
+            return ResponseEntity.ok(dto.get());
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/usernameTaken/{username}")
-    UserDTO isUsernameTaken(@PathVariable String username) {
+    ResponseEntity<UserDTO> isUsernameTaken(@PathVariable String username) {
+
         Optional<UserDTO> dto = userFacade.isUsernameTaken(username);
         if (dto.isPresent()) {
-            return dto.get();
+            return ResponseEntity.ok(dto.get());
         }
-        //TODO: schoener wer einen Fehlercode auch mitzuschicken!
-        return null;
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 
@@ -42,8 +52,12 @@ public class UserController {
     }
 
     @PutMapping("/users/{username}")
-    UserDTO update(@RequestBody @Valid UserDTO dto, @PathVariable String username) {
-        return userFacade.update(username, dto);
+    ResponseEntity<UserDTO> update(@RequestBody @Valid UserDTO dto, @PathVariable String username) {
+        Optional<UserDTO> optDto = userFacade.update(username, dto);
+        if (optDto.isPresent()) {
+            return ResponseEntity.ok(optDto.get());
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/users/{username}")

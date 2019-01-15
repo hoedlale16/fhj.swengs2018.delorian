@@ -47,8 +47,8 @@ public class UserController {
 
 
     @PostMapping("/users")
-    UserDTO create(@RequestBody @Valid UserDTO dto) {
-        return userFacade.create(dto);
+    ResponseEntity<UserDTO> create(@RequestBody @Valid UserDTO dto) {
+        return new ResponseEntity(userFacade.create(dto),HttpStatus.CREATED);
     }
 
     @PutMapping("/users/{username}")

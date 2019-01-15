@@ -28,8 +28,9 @@ public class ProjectTimeService {
         return projectTimeRepository.findById(projectTimeID);
     }
 
-    public List<ProjectTime> getAllProjectTimesOfProject(long projectID) {
-        return projectTimeRepository.findProjectTimesByProjectIdAndProjectActiveTrue(projectID);
+    public List<ProjectTime> getAllProjectTimesOfProject(long projectID, String projectManager) {
+        //I love this naming convetions, definetly the best name for a method... :-D
+        return projectTimeRepository.findProjectTimesByProjectIdAndProjectActiveTrueAndProjectProjectManagerUserName(projectID,projectManager);
     }
 
     public List<ProjectTime> getAllProjectTimesOfUser(String username) {

@@ -49,7 +49,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
 
   loadData() {
     const data = this.route.snapshot.data;
-    this.users = data.users;
+    this.users = data.users ? data.users : [];
     this.currLoggedInUser = this.authService.currLoggedInUserName;
     this.usersPage = this.users.slice(0, this.usersPerPage);
 

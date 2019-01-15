@@ -13,7 +13,7 @@ export class ProjectTimesService {
   constructor(private http: HttpClient, private router: Router) { }
 
   getProjectTimesForProject(projectID: number) {
-    return this.http.get('/api/projectTimesProject/' + projectID).pipe(
+    return this.http.get('/api/projectTimes?projectID=' + projectID).pipe(
       map((response: any) => {
         response.trackingDate = new Date(response.trackingDate);
         return response;
@@ -22,9 +22,11 @@ export class ProjectTimesService {
   }
 
   getProjectTimesForUser(username: string) {
-    return this.http.get('/api/projectTimesUser/' + username).pipe(
+    return this.http.get('/api/projectTimes?username=' + username).pipe(
       map((response: any) => {
-        response.trackingDate = new Date(response.trackingDate);
+        if (response != null) {
+          response.trackingDate = new Date(response.trackingDate);
+        }
         return response;
       })
     );

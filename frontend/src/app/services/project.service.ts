@@ -19,7 +19,8 @@ export class ProjectService {
   }
 
   getAllProjectsForUser(projectManager: string) {
-    return this.http.get('/api/projectsPrjMgr/' + projectManager).pipe(
+    // return this.http.get('/api/projectsPrjMgr/' + projectManager).pipe(
+    return this.http.get('/api/projects?projectManager=' + projectManager).pipe(
       map((response: any) => {
         return response;
       })

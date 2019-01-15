@@ -16,7 +16,8 @@ import java.util.List;
 @Transactional(isolation = Isolation.READ_COMMITTED)
 public interface ProjectTimeRepository extends PagingAndSortingRepository<ProjectTime, Long>, JpaRepository<ProjectTime, Long>, CrudRepository<ProjectTime, Long> {
 
-    public List<ProjectTime> findProjectTimesByProjectIdAndProjectActiveTrue(@Param("projectId") long projectId);
+    public List<ProjectTime> findProjectTimesByProjectIdAndProjectActiveTrueAndProjectProjectManagerUserName (@Param("projectId") long projectId,
+                                                                                                      @Param("userName") String projectManger);
 
     public List<ProjectTime> findProjectTimesByUserUserNameAndProjectActiveTrue(@Param("userName") String username);
 }

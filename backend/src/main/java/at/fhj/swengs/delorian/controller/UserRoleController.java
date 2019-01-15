@@ -46,9 +46,10 @@ public class UserRoleController {
     // deletable. Ohter roles just deleted if not used by users.
 
     @PostMapping("/userroles")
-    UserRoleDTO create(@RequestBody @Valid UserRoleDTO dto) {
-        return userRoleFacade.create(dto);
+    ResponseEntity<UserRoleDTO> create(@RequestBody @Valid UserRoleDTO dto) {
+        return new ResponseEntity(userRoleFacade.create(dto),HttpStatus.CREATED);
     }
+
 
     @PutMapping("/userroles/{rolename}")
     ResponseEntity<UserRoleDTO> update(@RequestBody @Valid UserRoleDTO dto, @PathVariable String rolename) {

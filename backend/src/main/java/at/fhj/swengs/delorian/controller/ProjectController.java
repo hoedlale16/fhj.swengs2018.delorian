@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,26 +21,26 @@ public class ProjectController {
     private ProjectFacade projectFacade;
 
     /**
-     * /projects/ is allowed for all authenticated users. Therefore just send metaInfos of projects.
+     * hoedlale16: Return list of projects. If filter option is given, return detailed information
+     * of projects. otherwhise jst return header information of projects.
+     * @param projectManager
      * @return
      */
-    @GetMapping("/projects/")
-    ResponseEntity<List<ProjectDTO>> getAllProjects() {
-        List<ProjectDTO> projects = projectFacade.getAllProjects(false);
-        if(projects.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @GetMapping("/projects")
+    ResponseEntity<List<ProjectDTO>> getProjects(@RequestParam Optional<String> projectManager) {
+        List<ProjectDTO> projects = new ArrayList<>();
+        if(projectManager.isPresent()) {
+            // Verfiy that logged in user from JWT is projectManager. Otherwise send him to hell...
+            String authenticatedUsername = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+            if (projectManager.get().equals(authenticatedUsername)) {
+                projects.addAll(projectFacade.getAllProjectsOfPrjMgr(projectManager.get()));
+            }
+        } else {
+            //Add all Projects but just meta data (id + topic)
+            projects.addAll(projectFacade.getAllProjects(false));
         }
-        return ResponseEntity.ok(projects);
-    }
 
-    /*hoedlale16: I know we should use @RequestParam and filter for projectManager instead of this call
-    but I think it is more secure to have two requests because every user is allowed to trigger /projects/ because
-    it is required for boooking. Therefore the DTOs in /projects/ jut contains the projectnames and
-    /projectsPrjMgr/{projectManager} continas the full project information.
-    */
-    @GetMapping("/projectsPrjMgr/{projectManager}")
-    ResponseEntity<List<ProjectDTO>> getProjectsOfPrjMgr(@PathVariable String projectManager) {
-        List<ProjectDTO> projects = projectFacade.getAllProjectsOfPrjMgr(projectManager);
+        //Retrun list.
         if(projects.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -55,8 +57,8 @@ public class ProjectController {
     }
 
     @PostMapping("/projects")
-    ProjectDTO create(@RequestBody @Valid ProjectDTO dto) {
-        return projectFacade.create(dto);
+    ResponseEntity<ProjectDTO> create(@RequestBody @Valid ProjectDTO dto) {
+        return new ResponseEntity(projectFacade.create(dto),HttpStatus.CREATED);
     }
 
     @PutMapping("/projects/{projectID}")

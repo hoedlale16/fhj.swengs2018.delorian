@@ -15,8 +15,8 @@ export class DashboardComponent implements OnInit {
   currLoggedInUser: string;
   hasUserRole: boolean;
 
-  projects: Array<Project>;
-  alreadyTrackedTimes: Array<ProjectTime>;
+  projects: Array<Project> = [];
+  alreadyTrackedTimes: Array<ProjectTime> = [];
 
   // key: projectID, value: totalWorkedHoursOfProject
   projectTimesMap: Map<number, number> = new Map();
@@ -39,8 +39,8 @@ export class DashboardComponent implements OnInit {
     this.currLoggedInUser = this.authService.currLoggedInUserName;
     this.hasUserRole = this.authService.isLoggedInAndHasUserRole('ROLE_USER');
     const data = this.route.snapshot.data;
-    this.projects = data.projects;
-    this.alreadyTrackedTimes = data.alreadyTrackedTimes;
+    this.projects = data.projects ? data.projects : [];
+    this.alreadyTrackedTimes = data.alreadyTrackedTimes ? data.alreadyTrackedTimes : [];
     this.prepareChartData();
   }
 
@@ -54,8 +54,11 @@ export class DashboardComponent implements OnInit {
       hours.push(prjTotalHour);
     });
 
-    this.chartData = [{data: hours, label: 'Worked hours'}
-    ];
+    if (hours.length > 0) {
+      this.chartData = [{data: hours, label: 'Worked hours'}];
+    } else {
+      this.chartData = [];
+    }
 
     // Design chart
     this.chartOptions = {

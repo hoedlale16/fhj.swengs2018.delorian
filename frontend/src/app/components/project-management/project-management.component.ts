@@ -46,7 +46,7 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
 
   loadData() {
     const data = this.route.snapshot.data;
-    this.projects = data.projects;
+    this.projects = data.projects ? data.projects : [];
     this.projectsPage = this.projects.slice(0, this.projectsPerPage);
 
   }

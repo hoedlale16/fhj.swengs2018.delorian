@@ -49,9 +49,9 @@ export class TimeTrackingComponent implements OnInit, OnDestroy {
   loadData() {
     this.currLoggedInUser = this.authService.currLoggedInUserName;
     const data = this.route.snapshot.data;
-    this.alreadyTrackedTimes = data.alreadyTrackedTimes;
+    this.alreadyTrackedTimes = data.alreadyTrackedTimes ? data.alreadyTrackedTimes : [];
     this.alreadyTrackedTimesPage = this.alreadyTrackedTimes.slice(0, this.timeTrackingPerPage);
-    this.projects = data.projects;
+    this.projects = data.projects ? data.projects : [];
   }
 
 }

@@ -74,10 +74,10 @@ public class ProjectTimeFacade {
         return Optional.empty();
     }
 
-    public List<ProjectTimeDTO> getProjectTimesOfProject(long projectID) {
+    public List<ProjectTimeDTO> getProjectTimesOfProject(long projectID, String projectManager) {
         List<ProjectTimeDTO> projects = new ArrayList<ProjectTimeDTO>();
 
-        projectTimeService.getAllProjectTimesOfProject(projectID).forEach(entity -> {
+        projectTimeService.getAllProjectTimesOfProject(projectID,projectManager).forEach(entity -> {
             ProjectTimeDTO dto = new ProjectTimeDTO();
             mapEntityToDto(entity,dto);
             projects.add(dto);

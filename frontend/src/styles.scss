@@ -19,5 +19,22 @@
   cursor: pointer;
 }
 
+html {
+  background: url("assets/images/login-background.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
+.center {
+  margin: 0 auto;
+}
 
+hr {
+  border: none;
+  height: 1px;
+  /* Set the hr color */
+  color: #333; /* old IE */
+  background-color: #333; /* Modern Browsers */
+}

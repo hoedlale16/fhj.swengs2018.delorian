@@ -44,8 +44,9 @@
 
 .shadow{
   height: 30px;
-  margin-left: 15vw;
-  margin-top: 30px;
+  margin: 0 auto;
+  //margin-left: 15vw;
+  //margin-top: 30px;
   border-radius: 100%;
   animation-name: shadow;
   -webkit-animation-name: shadow;
@@ -75,7 +76,7 @@
   100%{
     background: #CACACA;
     width: 170px;
-    margin-left: 15vw;
+    //margin-left: 15vw;
   }
 }
 

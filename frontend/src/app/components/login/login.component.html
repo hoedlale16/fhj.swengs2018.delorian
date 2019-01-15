@@ -1,24 +1,24 @@
-<div class="row justify-content-center login">
+<html>
+<div class="row justify-content-between test">
 
   <div style="margin: 30% auto">
     <h3> Please Sign in</h3>
     <hr style="color: #ffffff;">
-    <p> Sign In to track your Projects Working TIme</p>
+    <p> Sign n to your account to track your projects working tme</p>
   </div>
 
-  <div class="col-md-6"style="margin: 10% auto">
+  <div class="col-md-6" style="margin: 10% auto">
     <div class="card-group ">
       <div class="card bg-light p-4">
-        <div class=round >
-          <div class="floating">
-            <img class="tossing" src="http://svgur.com/i/im.svg"/>
+        <div class="round" style="margin: 0 auto;">
+          <div class="floating ">
+            <img class="tossing " src="http://svgur.com/i/im.svg"/>
           </div>
         </div>
         <div class="shadow">
         </div>
 
         <div class="card-body text-dark">
-          <p class="text-muted">Sign in to your account to track your project working time!</p>
 
           <form [formGroup]="loginForm" (ngSubmit)="login()">
             <div class="row">
@@ -51,6 +51,7 @@
   </div>
 </div>
 
+
 <!--
 <form (ngSubmit)="login()">
   <label>
@@ -66,3 +67,4 @@
   </button>
 </form>
 -->
+</html>

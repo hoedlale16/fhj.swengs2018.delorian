@@ -1,4 +1,4 @@
-<div class="container mb-5" role="main">
+<div class="container mb-5 " role="main">
   <!-- Show project-info -->
   <app-project-info [project]="project"
                     [showFullDetails]="true"
@@ -6,12 +6,12 @@
                     buttonLinkName="Back"
                     buttonLink="/project-management"></app-project-info>
 
-  <accordion class="card bg-light">
+  <accordion class="card bg-milch">
     <accordion-group heading="Overview Diagramm">
-      <div class="card-body text-dark" *ngIf="projectTimes.length === 0">
+      <div class="card-body bg-milch text-dark" *ngIf="projectTimes.length === 0">
         No tracked times available
       </div>
-      <div class="card-body text-dark" *ngIf="projectTimes.length > 0">
+      <div class="card-body bg-milch text-dark" *ngIf="projectTimes.length > 0">
         <canvas baseChart
                 [colors]="chartColors"
                 [data]="chartData"

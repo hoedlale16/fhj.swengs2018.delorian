@@ -1,6 +1,12 @@
-<div class="row justify-content-center ">
-  <h2>DeLorean - Get Your Time</h2>
-  <div class="col-md-8">
+<div class="row justify-content-center login">
+
+  <div style="margin: 30% auto">
+    <h3> Please Sign in</h3>
+    <hr style="color: #ffffff;">
+    <p> Sign In to track your Projects Working TIme</p>
+  </div>
+
+  <div class="col-md-6"style="margin: 10% auto">
     <div class="card-group ">
       <div class="card bg-light p-4">
         <div class=round >
@@ -12,7 +18,6 @@
         </div>
 
         <div class="card-body text-dark">
-          <h1>Login</h1>
           <p class="text-muted">Sign in to your account to track your project working time!</p>
 
           <form [formGroup]="loginForm" (ngSubmit)="login()">

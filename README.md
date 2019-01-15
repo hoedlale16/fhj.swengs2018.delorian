@@ -37,14 +37,21 @@ SWENGS Project. A application to track working time for projects. A project mana
  - /auth -> Post to authenticate user and get a JWT
  - /users -> GET,POST,PUT, DELETE - Manage users [ROLE_ADMIN]
  - /userroles -> GET,POST,PUT, DELETE - Manage userroles [ROLE_ADMIN]
-    - POST,PUT, DELETE implemented but not used in Frontend! Do not touch UserRoles to avoid errors in application!
+    - POST,PUT, DELETE implemented but not used in Frontend! 
+        - DELETE: ROLE_ADMIN,ROLE_PRJMGR and ROLE_USER are protected because used for Spring Security!
+        - POST,PUT, DELETE can used in future to create Roles for Client-Side handlings...
  - /projects -> GET,POST,PUT, DELETE - Manage projects [ROLE_PRJMGR]
     - GET: (special GET-Handling)
-        - /projects/ - Get all active projects ( to book times)
-        - /projectsPrjMgr/{username} - Get all project of a user (project manager)
+        - /projects - Get all active projects (to book times). Filter on projectManager is possible
+            - If no filter set, just all active Projects (Projectnames) are returned [booking]
+            - /projects?projectmanager={username} - Get all project of a user (project manager) [full information]
+                - Security: Authanticated user must be projectManger of project!
         - /projects/{projectID} - Get a specific project
  - /projectTimes ->  GET,POST,PUT, DELETE - Manage projects [ROLE_USER]
     - GET: (special GET-Handling)
-        - /projectTimesProject/{projectID} - Get all booked project times of project
-        - /projectTimesUser/{username} - Get all booked project times of user
-        - /projectTimes/{projectTimesID} - Get specific booked time
+        - /projectTimes - Get all booked project times of project. Filte required!
+            - /projectTimes?projectID={projectId} - Get all booked project times of project.
+                - Security: Authenticated user must be project manager of project!
+            - /projectTimes?username={username} - Get all booked project times of a user.
+                - Security: Authenticated user must be user of requested data
+       - /projectTimes/{projectTimesID} - Get specific booked time

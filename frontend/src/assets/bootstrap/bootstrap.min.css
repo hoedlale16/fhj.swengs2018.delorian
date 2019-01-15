@@ -2993,7 +2993,7 @@ a.btn.disabled, fieldset:disabled a.btn {
 .btn-outline-success:hover {
   color: #fff;
   background-color: #77B300;
-  border-color: #77B300
+  border-color: #77B300;
 }
 
 .btn-outline-success:focus, .btn-outline-success.focus {

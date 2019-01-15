@@ -25,6 +25,7 @@ import { AboutComponent } from './components/about/about.component';
 import { ProjectInfoComponent } from './components/project-info/project-info.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import {AlertModule} from 'ngx-bootstrap';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -64,7 +65,8 @@ export function tokenGetter() {
     NgxSelectModule,
     ReactiveFormsModule,
     AccordionModule.forRoot(),
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    AlertModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

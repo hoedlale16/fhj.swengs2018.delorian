@@ -1,7 +1,7 @@
 <form [formGroup]="userForm" (ngSubmit)="saveUser()">
-    <div class="row">
+    <div class="row ">
       <div class="col">
-        <div class="form-group">
+        <div class="form-group ">
           <label for="username">Username:</label>
           <input id="username" type="text" name="username" formControlName="username" class="form-control"/>
           <div *ngIf="userForm.controls.username.invalid && (userForm.controls.username.dirty || userForm.controls.username.touched)"

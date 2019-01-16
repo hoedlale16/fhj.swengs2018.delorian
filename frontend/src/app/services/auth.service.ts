@@ -60,6 +60,7 @@ export class AuthService {
       // Trigger that login was done and navigate to dashboard
       this.loggedInChange.next(true);
       this.router.navigate(['/dashboard']);
+      this.playAudio();
       return res;
     }));
   }
@@ -73,5 +74,11 @@ export class AuthService {
 
   isLoggedInAndHasUserRole(userRole: string): boolean {
     return this.isLoggedIn && this.userRoles.includes(userRole);
+  }
+  playAudio() {
+    const audio = new Audio();
+    audio.src = '../../../assets/sounds/car.m4a';
+    audio.load();
+    audio.play();
   }
 }

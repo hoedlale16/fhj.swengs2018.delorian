@@ -1,5 +1,7 @@
 <div class="card bg-milch ">
-<form [formGroup]="userForm" (ngSubmit)="saveUser()">
+  <div class="card-header"><h2>Create New User</h2></div>
+
+  <form [formGroup]="userForm" (ngSubmit)="saveUser()">
     <div class="row ">
       <div class="col">
         <div class="form-group ">
@@ -53,8 +55,9 @@
     </div>
 <br>
     <div class="btn-group">
-      <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Save</button>
-      <a class="btn btn-outline-success navbar-btn" [routerLink]="'/user-management/'">Cancel</a>
+      <button type="submit" class="btn btn-outline-success" [disabled]="userForm.invalid">Save</button>
+      <a class="btn btn-outline-danger navbar-btn" [routerLink]="'/user-management/'">Cancel</a>
+
     </div>
 </form>
 </div>

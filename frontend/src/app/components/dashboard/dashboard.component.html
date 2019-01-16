@@ -1,5 +1,6 @@
-<div>
 <div class="card bg-milch ">
+  <div class="card-header"><h2>Dashboard</h2></div>
+
   <div class="card-body">
 
     <div class="col-md-12">
@@ -59,7 +60,7 @@
 
 
         </accordion-group >
-        <accordion-group panelClass="bg-milch"  heading="Bookings of projects">
+        <accordion-group panelClass="bg-milch"  heading="Bookings Overview">
           <div class="card bg-milch text-dark" *ngIf="hasUserRole">
             <div *ngIf="chartData.length === 0">
               No tracked times available
@@ -79,5 +80,4 @@
       </accordion>
     </div>
   </div>
-</div>
 </div>

@@ -27,6 +27,15 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(user)
       .subscribe((res: any) => {
-      }, (error) => {});
+      }, (error) => {
+        this.playAudio();
+      });
+  }
+
+  playAudio() {
+    const audio = new Audio();
+    audio.src = '../../../assets/sounds/crash.mp3';
+    audio.load();
+    audio.play();
   }
 }

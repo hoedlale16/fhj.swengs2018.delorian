@@ -4,15 +4,13 @@
 </head>
 
 <div class="card bg-milch top " *ngIf="isLoggedIn">
-
       <!-- Navigation components -->
+
+
       <nav class="navbar navbar-expand-lg navbar-dark justify-content-between">
-        <div class="col-1">
+        <div class="col-2">
 
              <a class="navbar-brand brand" [routerLink]="'/dashboard/'">DELOREAN</a>
-
-
-
 
         </div>
         <!-- Component links -->
@@ -23,22 +21,25 @@
         </div>
 
 
-        <div class="navbar-nav" *ngIf="isLoggedInAndAdminRole">
+        <div class="navbar-nav" *ngIf="isLoggedInAndPrjMgrRole">
           <a class="nav-link" [routerLink]="'/project-management/'"><i class="fas fa-project-diagram"></i>
             <br>Projects</a>
         </div>
 
 
-        <div class="navbar-nav" *ngIf="isLoggedInAndAdminRole">
+        <div class="navbar-nav" *ngIf="isLoggedInAndUserRole">
           <a class="nav-link" [routerLink]="'/time-tracking/'"><i class="fas fa-stopwatch"></i>
             <br>Time Tracking</a>
         </div>
 
         <!-- Logout and About -->
+
         <div class="col-2 btn-group-sm">
+          <p>Logged in as: <b>{{username}}</b></p>
           <button class="btn btn-outline-info navbar-btn right" type="button" [routerLink]="'/about/'">About</button>
           <button class="btn btn-outline-danger navbar-btn right" type="button" (click)="logout()">Logout <i
-            class="fas fa-sign-out-alt"></i></button>
+            class="fas fa-sign-out-alt"></i></button><br>
+
 
         </div>
       </nav>

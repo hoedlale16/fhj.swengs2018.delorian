@@ -14,7 +14,7 @@ export class ProjectManagementComponent implements OnInit, OnDestroy {
   projects: Array<Project>;
   navigationSubscription;
 
-  projectsPerPage = 3;
+  projectsPerPage = 6;
   projectsPage: Array<Project>;
 
   constructor(private projectService: ProjectService, private route: ActivatedRoute, private router: Router) {

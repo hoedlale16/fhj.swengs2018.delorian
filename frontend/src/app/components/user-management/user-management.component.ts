@@ -16,7 +16,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   navigationSubscription;
   currLoggedInUser: string;
 
-  usersPerPage = 3;
+  usersPerPage = 6;
   usersPage: Array<User>;
 
 

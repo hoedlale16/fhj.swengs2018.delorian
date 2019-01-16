@@ -14,10 +14,35 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err instanceof HttpErrorResponse) {
-          this.toastrService.error(err.message);
+
+          let errMsg = 'Unkown error:' + err.message;
+
+          // Handle Message according response status
+          if ( err.status >= 400 && err.status < 500 ) {
+              errMsg = this.getErrorMessageClient(err.status);
+          } else {
+              errMsg = this.getErrorMessageServer(err.status);
+          }
+
+          this.toastrService.error(errMsg);
         }
         return throwError(err);
       })
     );
+  }
+
+
+
+  getErrorMessageClient(status: number): string {
+    switch (status) {
+      case 401: return 'Authentication failed!';
+      case 403: return 'You don\'t have the permission!';
+      case 404: return 'Page not found!';
+      default: return 'Ups, didn\'t understand your request. It seems your Fluxcompensator has not enough fuel.';
+    }
+  }
+
+  getErrorMessageServer(status: number): string {
+    return 'Sorry, Server not available! - This time is no booking time!';
   }
 }

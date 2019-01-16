@@ -3,19 +3,17 @@
         integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
 
-<div class="card bg-milch " *ngIf="isLoggedIn">
-  <div class="card-body text-dark">
-    <div class="container-fluid">
+<div class="card bg-milch top " *ngIf="isLoggedIn">
 
       <!-- Navigation components -->
       <nav class="navbar navbar-expand-lg navbar-dark justify-content-between">
         <div class="col-1">
-          <table>
-            <a [routerLink]="'/dashboard/'">
-              <th style="text-align: center"><img src="../../../assets/images/delorean.svg"></th>
-              <tr><a class="navbar-brand brand" [routerLink]="'/dashboard/'">DELOREAN</a></tr>
-            </a>
-          </table>
+
+             <a class="navbar-brand brand" [routerLink]="'/dashboard/'">DELOREAN</a>
+
+
+
+
         </div>
         <!-- Component links -->
 
@@ -44,7 +42,6 @@
 
         </div>
       </nav>
-    </div>
   </div>
 
-</div>
+

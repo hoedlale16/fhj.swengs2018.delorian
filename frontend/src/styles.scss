@@ -119,11 +119,21 @@ body {
 
 .flex-item {
     max-width: 100%;
-    min-width: 70%;
+    min-width: 40%;
   }
 
 
 .dash-card {
-
+  color: darkgrey;
 }
+
+.dash-card:hover{
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.top{
+  height: 10vh;
+}
+
 

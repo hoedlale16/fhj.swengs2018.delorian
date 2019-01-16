@@ -40,14 +40,14 @@
                               formControlName="projectID" optionTextField="topic"></ngx-select>
                 </div>
               </div>
-
+<br>
               <div class="btn-group">
                 <div *ngIf="isEditMode == true">
                   <button type="submit" class="btn btn-primary" [disabled]="timeTrackingForm.invalid">Update</button>
                   <button type="button" class="btn btn-outline-success " (click)="navigateToLastRoute()">Cancel</button>
                 </div>
                 <div *ngIf="isEditMode == false">
-                  <button type="submit" class="btn btn-primary" [disabled]="timeTrackingForm.invalid">Save</button>
+                  <button type="submit" class="btn btn-outline-success" [disabled]="timeTrackingForm.invalid">Save</button>
                 </div>
               </div>
 

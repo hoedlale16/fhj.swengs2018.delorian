@@ -45,7 +45,7 @@
       <br>
       <br>
       <accordion closeOthers="true">
-        <accordion-group panelClass="bg-milch"  heading="Quick booking" isOpen="true" >
+        <accordion-group panelClass="bg-milch" heading="Quick booking" isOpen="true" >
           <div *ngIf="hasUserRole == false" >
             No permission to track project times!
           </div>
@@ -58,7 +58,7 @@
             </div>
 
 
-        </accordion-group  >
+        </accordion-group >
         <accordion-group panelClass="bg-milch"  heading="Bookings of projects">
           <div class="card bg-milch text-dark" *ngIf="hasUserRole">
             <div *ngIf="chartData.length === 0">

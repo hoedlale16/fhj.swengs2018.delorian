@@ -5,12 +5,7 @@
 <div class="card bg-milch">
 
   <div class="row">
-    <div class="col-xs-12 col-12">
-      <pagination [totalItems]="users.length"
-                  [itemsPerPage]="usersPerPage"
-                  (pageChanged)="pageChanged($event)">
-      </pagination>
-    </div>
+
   </div>
 
   <div class="card-body">
@@ -34,8 +29,19 @@
               </div>
             </div>
           </div>
+
+
+
         </div>
+
       </div>
+
     </div>
+  </div>
+  <div class="col-xs-12 col-12">
+    <pagination [totalItems]="users.length"
+                [itemsPerPage]="usersPerPage"
+                (pageChanged)="pageChanged($event)">
+    </pagination>
   </div>
 </div>

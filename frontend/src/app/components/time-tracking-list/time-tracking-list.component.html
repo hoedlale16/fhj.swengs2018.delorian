@@ -1,8 +1,8 @@
 <accordion>
-    <accordion-group heading="{{trackingListHeader}}">
+    <accordion-group panelClass="bg-milch" heading="{{trackingListHeader}}">
       <accordion>
         <!-- Filter -->
-        <accordion-group heading="Filter">
+        <accordion-group  panelClass="bg-milch" heading="Filter">
           <form [formGroup]="filterTimeTrackingForm" (ngSubmit)="filterTrackedTimes()" >
             <div class="row">
               <label for="filterDate">Date:</label>
@@ -18,7 +18,7 @@
           </form>
         </accordion-group>
         <!-- List -->
-        <accordion-group heading="Booked project times" isOpen="true">
+        <accordion-group  panelClass="bg-milch" heading="Booked project times" isOpen="true">
           <div class="row">
             <div class="col-xs-12 col-12">
               <pagination [totalItems]="alreadyTrackedTimes.length"

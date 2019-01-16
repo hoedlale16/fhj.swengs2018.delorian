@@ -7,7 +7,7 @@ import {AuthService} from '../../services/auth.service';
   styleUrls: ['./app-navigation.component.scss']
 })
 export class AppNavigationComponent implements OnInit {
-
+  username: string;
   isLoggedIn: boolean;
 
   // Role based handling
@@ -31,10 +31,10 @@ export class AppNavigationComponent implements OnInit {
     this.isLoggedInAndUserRole = this.authService.isLoggedInAndHasUserRole('ROLE_USER');
     this.isLoggedInAndAdminRole = this.authService.isLoggedInAndHasUserRole('ROLE_ADMIN');
     this.isLoggedInAndPrjMgrRole = this.authService.isLoggedInAndHasUserRole('ROLE_PRJMGR');
+    this.username = this.authService.currLoggedInUserName;
   }
 
   logout() {
     this.authService.logout();
   }
-
 }

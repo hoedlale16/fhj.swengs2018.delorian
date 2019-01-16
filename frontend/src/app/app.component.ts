@@ -8,7 +8,7 @@ import {AuthService} from './services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Delorian - Track your time!';
+  title = 'Delorean - Get your Time!';
   background: string;
 
   public constructor(private titleService: Title, private authService: AuthService) {

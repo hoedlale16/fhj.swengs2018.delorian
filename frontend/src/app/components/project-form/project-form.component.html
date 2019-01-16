@@ -1,4 +1,5 @@
 <div class="card bg-milch">
+  <div class="card-header"><h2>Create New Project</h2></div>
 <form [formGroup]="projectForm" (ngSubmit)="saveProject()">
   <div class="row">
     <div class="col">
@@ -33,10 +34,10 @@
       <textarea rows="5" id="description" type="text" name="description" formControlName="description" class="form-control"></textarea>
     </div>
   </div>
-<br>p
+<br>
   <div class="btn-group">
-    <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid">Save</button>
-    <a class="btn btn-outline-success navbar-btn" [routerLink]="'/project-management/'">Cancel</a>
+    <button type="submit" class="btn btn-outline-success" [disabled]="projectForm.invalid">Save</button>
+    <a class="btn btn-outline-danger navbar-btn" [routerLink]="'/project-management/'">Cancel</a>
   </div>
 </form>
 </div>

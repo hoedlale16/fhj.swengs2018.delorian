@@ -1,12 +1,13 @@
-<div>
 <div class="card bg-milch ">
+  <div class="card-header"><h2>Dashboard</h2></div>
+
   <div class="card-body">
 
     <div class="col-md-12">
 
       <div class="row justify-content-center">
 
-        <div class="column">
+        <div class="column" >
           <a class="dash-card"[routerLink]="'/user-form/'">
           <div class="card bg-milch">
             <br>
@@ -18,7 +19,7 @@
         </div>
 
 
-        <div class="column">
+        <div class="column" >
           <a class="dash-card"[routerLink]="'/project-form/'">
             <div class="card bg-milch">
               <br>
@@ -29,7 +30,7 @@
           </a>
         </div>
 
-        <div class="column">
+        <div class="column" >
           <a class="dash-card"[routerLink]="'/time-tracking/'">
             <div class="card bg-milch">
               <br>
@@ -59,7 +60,7 @@
 
 
         </accordion-group >
-        <accordion-group panelClass="bg-milch"  heading="Bookings of projects">
+        <accordion-group class="acc" panelClass="bg-milch"  heading="Bookings Overview">
           <div class="card bg-milch text-dark" *ngIf="hasUserRole">
             <div *ngIf="chartData.length === 0">
               No tracked times available
@@ -79,5 +80,4 @@
       </accordion>
     </div>
   </div>
-</div>
 </div>

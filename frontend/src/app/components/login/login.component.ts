@@ -28,7 +28,17 @@ export class LoginComponent implements OnInit {
     this.authService.login(user)
       .subscribe((res: any) => {
       }, (error) => {
-        alert('wrong username or password');
+        this.playAudio();
+        // this.alarm();
       });
+  }
+  playAudio() {
+    const audio = new Audio();
+    audio.src = '../../../assets/sounds/crash.mp3';
+    audio.load();
+    audio.play();
+  }
+  alarm() {
+    alert('wrong username or password');
   }
 }

@@ -5444,7 +5444,7 @@ input[type="button"].btn-block {
   z-index: 2;
   color: #fff;
   text-decoration: none;
-  background-color: #2A9FD6;
+  background-color: #99e600;
   border-color: transparent;
 }
 
@@ -5472,9 +5472,9 @@ input[type="button"].btn-block {
 
 .page-item.active .page-link {
   z-index: 1;
-  color: #fff;
-  background-color: #2A9FD6;
-  border-color: #2A9FD6;
+  color: #99e600;
+  background-color: transparent;
+  border-color: #99e600;
 }
 
 .page-item.disabled .page-link {

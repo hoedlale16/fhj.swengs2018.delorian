@@ -17,15 +17,9 @@
 
 .pointerCursor {
   cursor: pointer;
+
 }
 
-html {
-  background: url("assets/images/dl-darker.png") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
 
 .center {
   margin: 0 auto;
@@ -50,3 +44,22 @@ pL{
 
 }
 
+.bg-tag{
+  background: url("assets/images/dl-darker.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-notag{
+  background: url("assets/images/bg-notag.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.no-scroll {
+  height:100vh; overflow: hidden
+}

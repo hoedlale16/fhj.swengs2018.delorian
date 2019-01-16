@@ -1,70 +1,60 @@
 <html>
-<div class="row justify-content-between test">
 
-  <div style="margin: 30% auto">
-    <h3> Please Sign in</h3>
-    <hr style="color: #ffffff;">
-    <p> Sign to your account to track your project working times</p>
-  </div>
+<div class="no-scroll">
 
-  <div class="col-md-6" style="margin: 10% auto">
-    <div class="card-group ">
-      <div class="card bg-milch p-4">
-        <div class="round" style="margin: 0 auto;">
-          <div class="floating ">
-            <img class="tossing " src="http://svgur.com/i/im.svg"/>
+  <div class="row justify-content-between">
+
+
+    <div class="col-md-6" style="margin: 20% auto;">
+      <div class="card-group ">
+        <div class="card bg-milch p-4">
+          <div class="round" style="margin: 0 auto;">
+            <div class="floating ">
+              <img class="tossing " src="http://svgur.com/i/im.svg"/>
+            </div>
           </div>
-        </div>
-        <div class="shadow">
-        </div>
+          <div class="shadow">
+          </div>
 
-        <div class="card-body text-dark">
+          <div class="card-body text-dark">
 
-          <form [formGroup]="loginForm" (ngSubmit)="login()">
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <label for="username">Username:</label>
-                  <input id="username" type="text" name="username" formControlName="username" class="form-control"/>
+            <div class="col-md-12">
+
+
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input id="username" type="text" name="username" formControlName="username" class="form-control"/>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <label for="password">Password:</label>
-                  <input id="password" type="password" name="password" formControlName="password" class="form-control"/>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input id="password" type="password" name="password" formControlName="password"
+                           class="form-control"/>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="btn-group">
-              <button type="submit" class="btn btn-info" [disabled]="loginForm.invalid">
-                Login
-              </button>
+              <div class="btn-group">
+                <button type="submit" class="btn btn-info" [disabled]="loginForm.invalid">
+                  Login
+                </button>
+              </div>
+            </form>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
+
+
   </div>
+
 </div>
-
-
-<!--
-<form (ngSubmit)="login()">
-  <label>
-    Username:
-    <input type="text" name="username" [(ngModel)]="user.username"/>
-  </label>
-  <label>
-    Password:
-    <input type="password" name="password" [(ngModel)]="user.password"/>
-  </label>
-  <button type="submit">
-    Login
-  </button>
-</form>
--->
 </html>

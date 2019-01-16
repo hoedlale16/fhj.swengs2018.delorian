@@ -1,3 +1,4 @@
+<div style="height:100vh; overflow: hidden">
 <div class="card bg-milch ">
   <div class="card-body">
     <div class="col-md-12">
@@ -5,13 +6,13 @@
         <h1>Welcome {{currLoggedInUser.toUpperCase()}}!</h1>
       </div>
 
-      <accordion>
-        <accordion-group heading="Quick booking" isOpen="true">
+      <accordion class="bg-milch">
+        <accordion-group heading="Quick booking" isOpen="true" class="bg-milch">
           <div *ngIf="hasUserRole == false">
             No permission to track project times!
           </div>
           <div *ngIf="hasUserRole">
-            <div class="card text-dark">
+            <div class="card bg-milch text-dark">
               <app-time-tracking-form fillWithLastBooking="true"
                                       currentRouteLink="/dashboard"
                                       [projectOptions]="projects"
@@ -19,8 +20,8 @@
             </div>
           </div>
         </accordion-group>
-        <accordion-group heading="Bookings of projects">
-          <div class="card text-dark" *ngIf="hasUserRole">
+        <accordion-group heading="Bookings of projects" class="bg-milch">
+          <div class="card bg-milch text-dark" *ngIf="hasUserRole">
             <div *ngIf="chartData.length === 0">
               No tracked times available
             </div>
@@ -39,4 +40,5 @@
       </accordion>
     </div>
   </div>
+</div>
 </div>

@@ -62,7 +62,7 @@ export class TimeTrackingListComponent implements OnInit {
       const filterDate: Date = new Date(filterValue);
       filterDate.setHours(0, 0, 0, 0);
 
-      this.alreadyTrackedTimes = this.alreadyTrackedTimes.filter((att: ProjectTime) => {
+      this.alreadyTrackedTimesPage = this.alreadyTrackedTimes.filter((att: ProjectTime) => {
         const tDate: Date = new Date(att.trackingDate);
         tDate.setHours(0, 0, 0, 0);
         return (tDate.getTime() === filterDate.getTime());

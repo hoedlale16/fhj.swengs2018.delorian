@@ -51,7 +51,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   loadData() {
     const data = this.route.snapshot.data;
     this.project = data.project;
-    this.projectTimes = data.projectTimes;
+    this.projectTimes = data.projectTimes ? data.projectTimes : [];
     this.alreadyTrackedTimesPage = this.projectTimes.slice(0, this.timeTrackingPerPage);
 
     this.prepareChartData();

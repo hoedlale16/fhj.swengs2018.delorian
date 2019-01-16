@@ -1,31 +1,50 @@
 <div style="height:100vh; overflow: hidden">
 <div class="card bg-milch ">
   <div class="card-body">
+
     <div class="col-md-12">
+
       <div class="row">
-        <h1>Welcome {{currLoggedInUser.toUpperCase()}}!</h1>
+        <div class="column">
+          <div class="card"><i class="fas fa-user-plus"></i></div>
+          <div class="card-body"> Add new User</div>
+        </div>
+        <div class="column">
+          <div class="card"> <i class="fas fa-user-edit"></i></div>
+          <div class="card-body">Edit User</div>
+        </div>
+        <div class="column">
+          <div class="card"> <i class="fas fa-folder-plus"></i></div>
+          <div>Add Project</div>
+        </div>
+        <div class="column">
+          <div class="card"> <i class="fas fa-business-time"></i></div>
+          <div> Track Time</div>
+        </div>
       </div>
 
-      <accordion class="bg-milch">
-        <accordion-group heading="Quick booking" isOpen="true" class="bg-milch">
-          <div *ngIf="hasUserRole == false">
+
+      <accordion>
+        <accordion-group panelClass="bg-milch"  heading="Quick booking" isOpen="true" >
+          <div *ngIf="hasUserRole == false" >
             No permission to track project times!
           </div>
           <div *ngIf="hasUserRole">
-            <div class="card bg-milch text-dark">
+
               <app-time-tracking-form fillWithLastBooking="true"
                                       currentRouteLink="/dashboard"
                                       [projectOptions]="projects"
                                       [currLoggedInUser]="currLoggedInUser"></app-time-tracking-form>
             </div>
-          </div>
-        </accordion-group>
-        <accordion-group heading="Bookings of projects" class="bg-milch">
+
+
+        </accordion-group  >
+        <accordion-group panelClass="bg-milch"  heading="Bookings of projects">
           <div class="card bg-milch text-dark" *ngIf="hasUserRole">
             <div *ngIf="chartData.length === 0">
               No tracked times available
             </div>
-            <div *ngIf="chartData.length > 0">
+            <div *ngIf="chartData.length > 0" class="bg-milch">
               <canvas baseChart
                       [datasets]="chartData"
                       [labels]="chartLabels"

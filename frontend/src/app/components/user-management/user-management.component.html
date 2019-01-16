@@ -22,7 +22,7 @@
               <strong>Last name:</strong> <em>{{user.lastName}}</em><br>
               <div>
                 <a class="btn btn-outline-success" title="Edit" [routerLink]="'/user-form/' + user.username">Edit</a>
-                <button *ngIf="user.username !== currLoggedInUser" class="btn btn-outline-warning" type="button"
+                <button *ngIf="user.username !== currLoggedInUser" class="btn btn-outline-danger" type="button"
                         (click)="deleteUser(user)">Delete
                 </button>
               </div>

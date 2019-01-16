@@ -3343,12 +3343,12 @@ fieldset:disabled a.btn {
 
 .btn-link {
   font-weight: 400;
-  color: #2A9FD6;
+  color: #99e600;
 }
 
 .btn-link:hover {
-  color: #1d7097;
-  text-decoration: underline;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .btn-link:focus, .btn-link.focus {

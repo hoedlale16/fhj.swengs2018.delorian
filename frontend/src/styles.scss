@@ -60,8 +60,9 @@ pL{
   background-size: cover;
 }
 
-.no-scroll {
-  height:100vh; overflow: scroll;
+.fullscreen  {
+  height:100vh;
+  overflow: scroll;
 }
 
 /* ######################## Dashboard Cards #################################################################### */
@@ -108,3 +109,15 @@ body {
   }
 }
 /* ######################## ENDE Dashboard Cards #################################################################### */
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-item {
+    max-width: 100%;
+    min-width: 70%;
+  }
+

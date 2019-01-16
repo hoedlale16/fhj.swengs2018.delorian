@@ -1,29 +1,49 @@
-<div style="height:100vh; overflow: hidden">
+<div>
 <div class="card bg-milch ">
   <div class="card-body">
 
     <div class="col-md-12">
 
-      <div class="row">
+      <div class="row justify-content-center">
+
         <div class="column">
-          <div class="card"><i class="fas fa-user-plus"></i></div>
-          <div class="card-body"> Add new User</div>
+          <a [routerLink]="'/user-form/'">
+          <div class="card">
+            <br>
+            <i class="fas fa-user-plus"></i>
+            <br>
+            <p>Add new User</p>
+          </div>
+          </a>
         </div>
+
+
         <div class="column">
-          <div class="card"> <i class="fas fa-user-edit"></i></div>
-          <div class="card-body">Edit User</div>
+          <a [routerLink]="'/project-form/'">
+            <div class="card">
+              <br>
+              <i class="fas fa-user-plus"></i>
+              <br>
+              <p>Add new Project</p>
+            </div>
+          </a>
         </div>
+
         <div class="column">
-          <div class="card"> <i class="fas fa-folder-plus"></i></div>
-          <div>Add Project</div>
+          <a [routerLink]="'/time-tracking/'">
+            <div class="card">
+              <br>
+              <i class="fas fa-user-plus"></i>
+              <br>
+              <p>Track your project time</p>
+            </div>
+          </a>
         </div>
-        <div class="column">
-          <div class="card"> <i class="fas fa-business-time"></i></div>
-          <div> Track Time</div>
-        </div>
+
       </div>
 
-
+      <br>
+      <br>
       <accordion>
         <accordion-group panelClass="bg-milch"  heading="Quick booking" isOpen="true" >
           <div *ngIf="hasUserRole == false" >

@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     this.authService.loggedInChange.subscribe((isLoggedIn) => {
       this.setBackground(isLoggedIn);
     });
-    
+
     this.setTitle(this.title);
   }
 

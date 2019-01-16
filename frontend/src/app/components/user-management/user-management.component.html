@@ -38,8 +38,13 @@
   </div>
   <div class="col-xs-12 col-12">
     <pagination [totalItems]="users.length"
+                [directionLinks]="1"
                 [itemsPerPage]="usersPerPage"
-                (pageChanged)="pageChanged($event)">
+
+                (pageChanged)="pageChanged($event)"
+                previousText="&lsaquo;"
+                nextText="&rsaquo;">
+
     </pagination>
   </div>
 </div>

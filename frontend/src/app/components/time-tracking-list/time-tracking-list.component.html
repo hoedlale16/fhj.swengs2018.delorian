@@ -20,11 +20,7 @@
         <!-- List -->
         <accordion-group  panelClass="bg-milch" heading="Booked project times" isOpen="true">
           <div class="row">
-            <div class="col-xs-12 col-12">
-              <pagination [totalItems]="alreadyTrackedTimes.length"
-                          [itemsPerPage]="timeTrackingPerPage"
-                          (pageChanged)="pageChanged($event)"></pagination>
-            </div>
+
           </div>
 
           <div class="card-body">
@@ -50,6 +46,13 @@
               </tr>
               </tbody>
             </table>
+            <div class="col-xs-12 col-12">
+              <pagination [totalItems]="alreadyTrackedTimes.length"
+                          [itemsPerPage]="timeTrackingPerPage"
+                          (pageChanged)="pageChanged($event)"
+                          previousText="&lsaquo;"
+                          nextText="&rsaquo;"></pagination>
+            </div>
 
             <button *ngIf="showExportTimesButton && alreadyTrackedTimesPage.length > 0" class="btn btn-outline-danger" type="button" (click)="generatePDF()">Export Times to PDF</button>
 

@@ -20,8 +20,13 @@
     </div>
   </div>
   <div class="col-xs-12 col-12">
-    <pagination [totalItems]="projects.length"
+
+    <pagination
+                [totalItems]="projects.length"
                 [itemsPerPage]="projectsPerPage"
-                (pageChanged)="pageChanged($event)"></pagination>
+
+                (pageChanged)="pageChanged($event)"
+                 previousText="&lsaquo;"
+                 nextText="&rsaquo;"></pagination>
   </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Title} from '@angular/platform-browser';
+import {AuthService} from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import {Title} from '@angular/platform-browser';
 export class AppComponent {
   title = 'Delorian - Track your time!';
 
-  public constructor(private titleService: Title ) {
+  public constructor(private titleService: Title, private authService: AuthService) {
     this.setTitle(this.title);
   }
 

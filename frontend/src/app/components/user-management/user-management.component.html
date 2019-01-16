@@ -2,13 +2,14 @@
   <a class="btn btn-outline-success navbar-btn" [routerLink]="'/user-form/'">New user</a>
 </div>
 
-<div class="card bg-light">
+<div class="card bg-milch">
 
   <div class="row">
     <div class="col-xs-12 col-12">
       <pagination [totalItems]="users.length"
                   [itemsPerPage]="usersPerPage"
-                  (pageChanged)="pageChanged($event)"></pagination>
+                  (pageChanged)="pageChanged($event)">
+      </pagination>
     </div>
   </div>
 

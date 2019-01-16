@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import {Project} from '../../api/Project';
 import {ProjectTime} from '../../api/ProjectTime';
+import {UserService} from '../../services/user.service';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class DashboardComponent implements OnInit {
   chartColors: Array<any> = [{  backgroundColor: ['#fe59c2', '#9559fe', '#c2fe59', '#59fe95', '#00ffff', '#FF0000'] }];
 
 
-  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService, private userService: UserService) { }
 
   ngOnInit() {
     this.loadData();

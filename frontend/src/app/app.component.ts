@@ -9,10 +9,11 @@ import {AuthService} from './services/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'Delorian - Track your time!';
-  background = 'bg-tag';
+  background: string;
 
   public constructor(private titleService: Title, private authService: AuthService) {
     this.setTitle(this.title);
+    this.setBackground(authService.isLoggedIn);
   }
 
   public setTitle(newTitle: string) {
@@ -22,12 +23,18 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.authService.loggedInChange.subscribe((isLoggedIn) => {
-      if (isLoggedIn) {
-        this.background = 'bg-notag';
-      } else {
-        this.background = 'bg-tag';
-      }
+      this.setBackground(isLoggedIn);
     });
+    
+    this.setTitle(this.title);
+  }
+
+  setBackground(isLoggedIn: boolean) {
+    if (isLoggedIn) {
+      this.background = 'bg-notag';
+    } else {
+      this.background = 'bg-tag';
+    }
   }
 
 

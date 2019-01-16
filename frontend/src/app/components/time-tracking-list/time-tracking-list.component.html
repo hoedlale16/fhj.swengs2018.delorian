@@ -42,7 +42,7 @@
                 <td>{{timeTracking.workedHours}}</td>
                 <td *ngIf="showActionButtons">
                   <a class="btn btn-outline-success" title="Edit" [routerLink]="'/time-tracking-edit/' + timeTracking.id">Edit</a>
-                  <button class="btn btn-dark" type="button" (click)="delete(timeTracking)">Delete</button></td>
+                  <button class="btn btn-outline-danger" type="button" (click)="delete(timeTracking)">Delete</button></td>
               </tr>
               </tbody>
             </table>
@@ -54,7 +54,7 @@
                           nextText="&rsaquo;"></pagination>
             </div>
 
-            <button *ngIf="showExportTimesButton && alreadyTrackedTimesPage.length > 0" class="btn btn-outline-danger" type="button" (click)="generatePDF()">Export Times to PDF</button>
+            <button *ngIf="showExportTimesButton && alreadyTrackedTimesPage.length > 0" class="btn btn-outline-info" type="button" (click)="generatePDF()">Export Times to PDF</button>
 
           </div>
         </accordion-group>

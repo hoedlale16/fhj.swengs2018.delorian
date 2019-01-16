@@ -12,9 +12,6 @@
 
              <a class="navbar-brand brand" [routerLink]="'/dashboard/'">DELOREAN</a>
 
-
-
-
         </div>
         <!-- Component links -->
 
@@ -38,7 +35,7 @@
         <!-- Logout and About -->
 
         <div class="col-2 btn-group-sm">
-          <p>Logged in as: {{username}}</p>
+          <p>Logged in as: <b>{{username}}</b></p>
           <button class="btn btn-outline-info navbar-btn right" type="button" [routerLink]="'/about/'">About</button>
           <button class="btn btn-outline-danger navbar-btn right" type="button" (click)="logout()">Logout <i
             class="fas fa-sign-out-alt"></i></button><br>

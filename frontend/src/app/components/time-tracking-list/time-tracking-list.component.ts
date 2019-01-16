@@ -136,8 +136,8 @@ export class TimeTrackingListComponent implements OnInit {
     doc.text('Total worked hours:', 15, 50);
 
     doc.setFontType('normal');
-    doc.text(project.projectManager, 80, 30);
-    doc.text(project.totalPlannedHours + '', 80, 40);
+    doc.text(project.projectManager ? project.projectManager : 'n/a', 80, 30);
+    doc.text(project.totalPlannedHours ? project.totalPlannedHours + '' : 'n/a' , 80, 40);
     const sumTrackeTimes: number = this.alreadyTrackedTimes.map(x => x.workedHours).reduce( (a, b) => a + b );
     doc.text(sumTrackeTimes + '', 80, 50);
 

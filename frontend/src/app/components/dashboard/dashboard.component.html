@@ -7,7 +7,7 @@
 
       <div class="row justify-content-center">
 
-        <div class="column">
+        <div class="column" *ngIf="isLoggedInAndAdminRole">
           <a class="dash-card"[routerLink]="'/user-form/'">
           <div class="card bg-milch">
             <br>
@@ -19,7 +19,7 @@
         </div>
 
 
-        <div class="column">
+        <div class="column" *ngIf="isLoggedInAndPrjMgrRole">
           <a class="dash-card"[routerLink]="'/project-form/'">
             <div class="card bg-milch">
               <br>
@@ -30,7 +30,7 @@
           </a>
         </div>
 
-        <div class="column">
+        <div class="column" *ngIf="isLoggedInAndUserRole">
           <a class="dash-card"[routerLink]="'/time-tracking/'">
             <div class="card bg-milch">
               <br>

@@ -19,6 +19,10 @@ export class DashboardComponent implements OnInit {
   projects: Array<Project> = [];
   alreadyTrackedTimes: Array<ProjectTime> = [];
 
+  isLoggedInAndUserRole: boolean;
+  isLoggedInAndAdminRole: boolean;
+  isLoggedInAndPrjMgrRole: boolean;
+
   // key: projectID, value: totalWorkedHoursOfProject
   projectTimesMap: Map<number, number> = new Map();
 
@@ -38,6 +42,10 @@ export class DashboardComponent implements OnInit {
 
   loadData() {
     this.currLoggedInUser = this.authService.currLoggedInUserName;
+    this.isLoggedInAndUserRole = this.authService.isLoggedInAndHasUserRole('ROLE_USER');
+    this.isLoggedInAndAdminRole = this.authService.isLoggedInAndHasUserRole('ROLE_ADMIN');
+    this.isLoggedInAndPrjMgrRole = this.authService.isLoggedInAndHasUserRole('ROLE_PRJMGR');
+
     this.hasUserRole = this.authService.isLoggedInAndHasUserRole('ROLE_USER');
     const data = this.route.snapshot.data;
     this.projects = data.projects ? data.projects : [];

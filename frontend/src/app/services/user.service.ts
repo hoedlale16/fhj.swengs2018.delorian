@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {catchError, map} from 'rxjs/operators';
 import {User} from '../api/User';
 import {Observable, of} from 'rxjs';
 import {AuthService} from './auth.service';
+import {Alert, AlertType} from '../api/Alert';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
+  alert: Alert;
 
   constructor(private http: HttpClient, private router: Router) { }
 

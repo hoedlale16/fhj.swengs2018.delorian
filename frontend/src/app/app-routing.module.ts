@@ -47,6 +47,13 @@ const routes: Routes = [
     }
   },
   {
+    path: 'user-management/:alert', component: UserManagementComponent, canActivate: [AdminRoleGuard],
+    runGuardsAndResolvers: 'always',
+    resolve: {
+      users: UserListResolver
+    }
+  },
+  {
     path: 'user-form', component: UserFormComponent, canActivate: [AdminRoleGuard],
     resolve: {
       usersRoles: UserRolesResolver

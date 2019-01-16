@@ -4,6 +4,7 @@ import {UserService} from '../../services/user.service';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {PageChangedEvent} from 'ngx-bootstrap';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-management',
@@ -20,7 +21,8 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   usersPage: Array<User>;
 
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private authService: AuthService) {
+  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private authService: AuthService,
+              private toastrService: ToastrService) {
   }
 
   ngOnInit() {
@@ -58,8 +60,8 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   deleteUser(user: User) {
 
     this.userService.delete(user)
-      .subscribe(() => {
-
+      .subscribe((res: any) => {
+        this.toastrService.success('User deleted');
         this.router.navigate(['/user-management']);
       });
 

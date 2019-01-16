@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserRoles} from '../../api/UserRoles';
 import {UserService} from '../../services/user.service';
 import {existingUsernameValidator} from '../../validators/customValidators';
+import {ToastrService} from 'ngx-toastr';
+import {UserManagementComponent} from '../user-management/user-management.component';
 
 @Component({
   selector: 'app-user-form',
@@ -18,7 +20,8 @@ export class UserFormComponent implements OnInit {
   userRoleOptions:  Array<UserRoles>;
   projectOptions;
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {
+  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router,
+              private toastrService: ToastrService) {
     this.userForm = new FormGroup( {
       'username': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(32)],
         [existingUsernameValidator(this.userService)]),
@@ -59,13 +62,17 @@ export class UserFormComponent implements OnInit {
 
     if (this.isEditMode) {
       this.userService.update(user).subscribe((response: any) => {
-        alert('User updated sucessfully');
         this.router.navigate(['/user-management']);
+        if (response) {
+          this.toastrService.info('Update sucessfully');
+        }
       });
     } else {
       this.userService.create(user).subscribe((response: any) => {
-        alert('User created sucessfully');
         this.router.navigate(['/user-management']);
+        if (response) {
+          this.toastrService.success('Created sucessfully');
+        }
       });
     }
   }

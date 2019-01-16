@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ProjectTimesService} from '../../services/project-times.service';
 import {ProjectTime} from '../../api/ProjectTime';
 import {Project} from '../../api/Project';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-time-tracking-form',
@@ -24,12 +25,12 @@ export class TimeTrackingFormComponent implements OnInit {
   timeTrackingForm: FormGroup;
   isEditMode = false;
 
-  constructor(private projectTimesService: ProjectTimesService, private route: ActivatedRoute, private router: Router) {
+  constructor(private toastrService: ToastrService, private projectTimesService: ProjectTimesService, private route: ActivatedRoute, private router: Router) {
     this.timeTrackingForm = new FormGroup({
       'id': new FormControl(),
       'username': new FormControl(),
       'projectID': new FormControl('', [Validators.required]),
-      'trackingDate': new FormControl('',[Validators.required]),
+      'trackingDate': new FormControl('', [Validators.required]),
       'workedHours': new FormControl('', [Validators.required, Validators.min(0.5), Validators.max(24)])
     });
 
@@ -41,7 +42,7 @@ export class TimeTrackingFormComponent implements OnInit {
       this.timeTrackingForm.setValue(timeTracking);
       this.projectOptions = data.projectOptions;
       this.currLoggedInUser = timeTracking.username;
-      this.timeTrackingForm.controls.trackingDate.setValue( new Date(timeTracking.trackingDate));
+      this.timeTrackingForm.controls.trackingDate.setValue(new Date(timeTracking.trackingDate));
 
       this.handleNotChangeAbleForms(true);
     } else {
@@ -54,7 +55,7 @@ export class TimeTrackingFormComponent implements OnInit {
 
   ngOnInit() {
     // Set last booking with current date if requested.
-    if (this.fillWithLastBooking &&  this.getLastBooking()) {
+    if (this.fillWithLastBooking && this.getLastBooking()) {
       this.timeTrackingForm.setValue(this.getLastBooking());
     }
   }
@@ -72,7 +73,6 @@ export class TimeTrackingFormComponent implements OnInit {
   }
 
 
-
   save() {
     // Just controls to get data for storage
     this.handleNotChangeAbleForms(false);
@@ -84,14 +84,17 @@ export class TimeTrackingFormComponent implements OnInit {
 
     if (this.isEditMode) {
       this.projectTimesService.update(projectTime).subscribe((response: any) => {
-        alert('Update successfully');
+        if (response) {
+          this.toastrService.info('Update sucessfully');
+        }
         this.navigateToLastRoute();
       });
     } else {
       this.projectTimesService.create(projectTime).subscribe((response: any) => {
         this.storeLastBooking(projectTime);
-
-        alert('Time booked sucessfully');
+        if (response) {
+          this.toastrService.success('Booking sucessfully');
+        }
         this.navigateToLastRoute();
       });
     }
@@ -105,7 +108,7 @@ export class TimeTrackingFormComponent implements OnInit {
   storeLastBooking(projectTime: ProjectTime) {
     // Just keep all last bookings of all other users than current one
     let lastBookings = localStorage.getItem('lastBookings') ? <Array<ProjectTime>>JSON.parse(localStorage.getItem('lastBookings')) : [];
-    lastBookings = lastBookings.filter( (pt) => {
+    lastBookings = lastBookings.filter((pt) => {
       return pt.username !== projectTime.username;
     });
     lastBookings.push(projectTime);

@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProjectService} from '../../services/project.service';
 import {AuthService} from '../../services/auth.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-project-form',
@@ -16,7 +17,7 @@ export class ProjectFormComponent implements OnInit {
   projectForm: FormGroup;
 
   constructor(private projectService: ProjectService, private authService: AuthService,
-              private route: ActivatedRoute, private router: Router) {
+              private route: ActivatedRoute, private router: Router, private toastrService: ToastrService) {
     this.projectForm = new FormGroup({
       'id': new FormControl(),
       'topic': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
@@ -54,13 +55,17 @@ export class ProjectFormComponent implements OnInit {
 
     if (this.isEditMode) {
       this.projectService.update(project).subscribe((response: any) => {
-        alert('Project updated sucessfully');
         this.router.navigate(['/project-management']);
+        if (response) {
+          this.toastrService.success('Project update sucessfully');
+        }
       });
     } else {
       this.projectService.create(project).subscribe((response: any) => {
-        alert('Project created sucessfully');
         this.router.navigate(['/project-management']);
+        if (response) {
+          this.toastrService.success('Project created sucessfully');
+        }
       });
     }
   }

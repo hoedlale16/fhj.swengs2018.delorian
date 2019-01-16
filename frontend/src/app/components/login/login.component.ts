@@ -27,8 +27,6 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(user)
       .subscribe((res: any) => {
-      }, (error) => {
-        alert('wrong username or password');
-      });
+      }, (error) => {});
   }
 }

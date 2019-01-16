@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { ProjectManagementComponent } from './components/project-management/project-management.component';
@@ -26,10 +26,17 @@ import { ProjectInfoComponent } from './components/project-info/project-info.com
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import {AlertModule} from 'ngx-bootstrap';
+import {ToastrModule, ToastContainerModule } from 'ngx-toastr';
+import {ErrorInterceptor} from './httpinterceptor/error.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
 }
+
+export const httpInterceptorProviders = [
+  {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+];
 
 @NgModule({
   declarations: [
@@ -66,9 +73,12 @@ export function tokenGetter() {
     ReactiveFormsModule,
     AccordionModule.forRoot(),
     PaginationModule.forRoot(),
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    ToastContainerModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

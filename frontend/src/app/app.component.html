@@ -1,12 +1,15 @@
-<div [ngStyle]="background" ]>
+<div [ngClass]="background" >
 
-<div class="container mb-5 " role="main">
-  <app-app-navigation></app-app-navigation>
-</div>
+<div class="no-scroll">
+
+<app-app-navigation></app-app-navigation>
+<br><br>
 
 
 <div class="container ">
   <router-outlet></router-outlet>
 </div>
+</div>
 
 </div>
+

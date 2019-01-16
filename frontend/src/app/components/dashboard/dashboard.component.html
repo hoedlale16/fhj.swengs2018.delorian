@@ -1,21 +1,42 @@
+<div style="height:100vh; overflow: hidden">
 <div class="card bg-milch ">
   <div class="card-body">
+
     <div class="col-md-12">
+
       <div class="row">
-        <h1>Welcome {{currLoggedInUser.toUpperCase()}}!</h1>
+        <div class="column">
+          <div class="card"><i class="fas fa-user-plus"></i></div>
+          <div class="card-body"> Add new User</div>
+        </div>
+        <div class="column">
+          <div class="card"> <i class="fas fa-user-edit"></i></div>
+          <div class="card-body">Edit User</div>
+        </div>
+        <div class="column">
+          <div class="card"> <i class="fas fa-folder-plus"></i></div>
+          <div>Add Project</div>
+        </div>
+        <div class="column">
+          <div class="card"> <i class="fas fa-business-time"></i></div>
+          <div> Track Time</div>
+        </div>
       </div>
 
-      <accordion >
+
+      <accordion>
         <accordion-group panelClass="bg-milch"  heading="Quick booking" isOpen="true" >
           <div *ngIf="hasUserRole == false" >
             No permission to track project times!
           </div>
           <div *ngIf="hasUserRole">
+
               <app-time-tracking-form fillWithLastBooking="true"
                                       currentRouteLink="/dashboard"
                                       [projectOptions]="projects"
                                       [currLoggedInUser]="currLoggedInUser"></app-time-tracking-form>
             </div>
+
 
         </accordion-group  >
         <accordion-group panelClass="bg-milch"  heading="Bookings of projects">
@@ -38,4 +59,5 @@
       </accordion>
     </div>
   </div>
+</div>
 </div>

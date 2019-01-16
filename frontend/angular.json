@@ -34,7 +34,6 @@
               "src/assets/bootstrap/_variables.scss"
             ],
             "scripts": [
-              "src/assets/bootstrap/bootstrap.js"
             ]
           },
           "configurations": {

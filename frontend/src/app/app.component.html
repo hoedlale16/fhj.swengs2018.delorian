@@ -1,15 +1,14 @@
-<div class="bg-notag fullscreen">
-<!--
-<div class="container mb-5 " role="main">
-  <app-app-navigation></app-app-navigation>
-</div>
--->
-<app-app-navigation></app-app-navigation>
-<br><br>
+<div [ngClass]="background">
+
+  <div class="fullscreen">
+
+    <app-app-navigation></app-app-navigation>
+    <br><br>
 
 
-<div class="container ">
-  <router-outlet></router-outlet>
-</div>
+    <div class="container ">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
 

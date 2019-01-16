@@ -3,12 +3,13 @@
                           [projectOptions]="projects"
                           [currLoggedInUser]="currLoggedInUser"></app-time-tracking-form>
 </div>
-<div class="card bg-milch">
+<div>
   <app-time-tracking-list trackingListHeader="Already booked project times"
                           currentRouteLink="/time-tracking/"
                           [showActionButtons]="true"
                           [alreadyTrackedTimes]="alreadyTrackedTimes"
                           [alreadyTrackedTimesPage]="alreadyTrackedTimesPage"
                           [timeTrackingPerPage]="timeTrackingPerPage"
-                          [projects]="projects"></app-time-tracking-list>
+                          [projects]="projects"
+                          showExportTimesButton="true"></app-time-tracking-list>
 </div>

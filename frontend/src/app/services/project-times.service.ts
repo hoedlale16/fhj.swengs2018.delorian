@@ -15,7 +15,9 @@ export class ProjectTimesService {
   getProjectTimesForProject(projectID: number) {
     return this.http.get('/api/projectTimes?projectID=' + projectID).pipe(
       map((response: any) => {
-        response.trackingDate = new Date(response.trackingDate);
+        if (response != null) {
+          response.trackingDate = new Date(response.trackingDate);
+        }
         return response;
       })
     );

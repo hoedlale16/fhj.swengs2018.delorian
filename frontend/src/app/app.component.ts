@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {AuthService} from './services/auth.service';
 
@@ -7,14 +7,35 @@ import {AuthService} from './services/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Delorian - Track your time!';
+  background: string;
 
   public constructor(private titleService: Title, private authService: AuthService) {
     this.setTitle(this.title);
+    this.setBackground(authService.isLoggedIn);
   }
 
-  public setTitle( newTitle: string) {
+  public setTitle(newTitle: string) {
     this.titleService.setTitle(newTitle);
   }
+
+
+  ngOnInit() {
+    this.authService.loggedInChange.subscribe((isLoggedIn) => {
+      this.setBackground(isLoggedIn);
+    });
+    
+    this.setTitle(this.title);
+  }
+
+  setBackground(isLoggedIn: boolean) {
+    if (isLoggedIn) {
+      this.background = 'bg-notag';
+    } else {
+      this.background = 'bg-tag';
+    }
+  }
+
+
 }

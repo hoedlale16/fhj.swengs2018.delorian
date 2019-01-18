@@ -101,7 +101,6 @@ export class MediainputComponent implements OnInit, ControlValueAccessor, OnDest
     // Load existing medias
     for (const mediaID in this.existingMedia) {
       if (this.existingMedia.hasOwnProperty(mediaID)) {
-        console.log('Add Media <' + mediaID + '> , <' + this.existingMedia[mediaID] + '>to list');
         this.medias.push({
           id: +mediaID,
           originalFileName: this.existingMedia[mediaID],

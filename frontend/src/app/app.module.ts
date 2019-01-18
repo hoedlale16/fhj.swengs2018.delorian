@@ -29,6 +29,10 @@ import {AlertModule} from 'ngx-bootstrap';
 import {ToastrModule, ToastContainerModule } from 'ngx-toastr';
 import {ErrorInterceptor} from './httpinterceptor/error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MediainputComponent } from './components/mediainput/mediainput.component';
+import {FileUploadModule} from 'ng2-file-upload';
+import { ProjectMediaComponent } from './components/project-media/project-media.component';
+
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -54,6 +58,8 @@ export const httpInterceptorProviders = [
     AboutComponent,
     ProjectDetailComponent,
     ProjectInfoComponent,
+    MediainputComponent,
+    ProjectMediaComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +82,8 @@ export const httpInterceptorProviders = [
     AlertModule.forRoot(),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    ToastContainerModule
+    ToastContainerModule,
+    FileUploadModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

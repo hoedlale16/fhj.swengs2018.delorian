@@ -13,7 +13,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   navigationSubscription;
   chartLabels: string[];
   chartData: number[];
-  chartColors = [{ backgroundColor: ['#fe59c2', '#9559fe', '#c2fe59', '#59fe95', '#00ffff', '#FF0000'] }];
+  chartColors = [{backgroundColor: ['#fe59c2', '#9559fe', '#c2fe59', '#59fe95', '#00ffff', '#FF0000']}];
 
   projectTimes: Array<ProjectTime> = [];
   alreadyTrackedTimesPage: Array<ProjectTime>;

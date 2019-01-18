@@ -6,6 +6,10 @@
                     buttonLinkName="Back"
                     buttonLink="/project-management"></app-project-info>
 
+
+  <div class="card bg-milch">
+    <app-project-media></app-project-media>
+  </div>
   <accordion class="card bg-milch ">
     <accordion-group heading="Overview Diagramm" panelClass="bg-milch">
       <div class="card-body bg-milch text-dark" *ngIf="projectTimes.length === 0">
@@ -24,12 +28,12 @@
 
   <div *ngIf="projectTimes.length > 0">
     <app-time-tracking-list trackingListHeader="Details"
-                                [showActionButtons]="false"
-                                [showExportTimesButton]="true"
-                                [currentRouteLink]="currentRouteLink"
-                                [alreadyTrackedTimes]="projectTimes"
-                                [alreadyTrackedTimesPage]="alreadyTrackedTimesPage"
-                                [timeTrackingPerPage]="timeTrackingPerPage"
-                                [projects]="[project]"></app-time-tracking-list>
+                            [showActionButtons]="false"
+                            [showExportTimesButton]="true"
+                            [currentRouteLink]="currentRouteLink"
+                            [alreadyTrackedTimes]="projectTimes"
+                            [alreadyTrackedTimesPage]="alreadyTrackedTimesPage"
+                            [timeTrackingPerPage]="timeTrackingPerPage"
+                            [projects]="[project]"></app-time-tracking-list>
   </div>
 </div>

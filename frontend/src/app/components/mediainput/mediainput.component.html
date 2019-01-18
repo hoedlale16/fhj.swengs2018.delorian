@@ -1,0 +1,35 @@
+<div>
+  <table class="table" *ngIf="medias?.length">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Size</th>
+      <th>State</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let media of medias; let i = index;">
+      <td><strong>{{ media.originalFileName }}</strong></td>
+      <td>{{ media.size / 1024 / 1024 | number }}&nbsp;MB</td>
+      <td>
+        <span *ngIf="!media.id">Uploading ...</span>
+        <span *ngIf="media.id">Successfully Uploaded</span>
+      </td>
+
+      <td>
+        <div class="btn-group">
+          <button type="button" class="btn btn-outline-success" (click)="downloadMedia(media)">
+            Download
+          </button>
+          <button type="button" class="btn btn-outline-danger" (click)="deleteMedia(i)">
+            Delete
+          </button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <!-- add accept type -->
+  <input [id]="'field_' + name" type="file" ng2FileSelect [uploader]="uploader" [multiple]="true" [accept]="accept"/>
+</div>

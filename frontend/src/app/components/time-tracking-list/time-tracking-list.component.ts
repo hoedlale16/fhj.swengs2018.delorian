@@ -9,7 +9,6 @@ import {PageChangedEvent} from 'ngx-bootstrap';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import {ToastrService} from 'ngx-toastr';
-import {HexBase64BinaryEncoding} from 'crypto';
 
 @Component({
   selector: 'app-time-tracking-list',

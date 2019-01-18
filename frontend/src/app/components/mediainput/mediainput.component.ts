@@ -73,7 +73,6 @@ export class MediainputComponent implements OnInit, ControlValueAccessor, OnDest
 
     };
     this.uploader.onCompleteAll = () => {
-      this.loadExistingFiles();
       this.onChange(this.medias);
     };
 

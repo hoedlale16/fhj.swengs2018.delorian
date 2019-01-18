@@ -75,7 +75,6 @@ export class TimeTrackingListComponent implements OnInit {
 
   resetFilter() {
     this.filterTimeTrackingForm.controls.filterDate.reset();
-    console.log('time-tracking-list.component: currentRouteLink: ' + this.currentRouteLink);
     this.router.navigate([this.currentRouteLink]);
   }
 
@@ -89,7 +88,6 @@ export class TimeTrackingListComponent implements OnInit {
 
     this.getProjectTimeMap().forEach((projectTimes, projectID) => {
       const project: Project = this.getProjectByID(projectID);
-      console.log('buildPDF <' + project + '>');
       this.buildPDF(project, projectTimes);
     });
   }

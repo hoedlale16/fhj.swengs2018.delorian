@@ -7,10 +7,22 @@
                     buttonLink="/project-management"></app-project-info>
 
 
-  <div class="card bg-milch">
-    <app-project-media></app-project-media>
-  </div>
+
   <accordion class="card bg-milch ">
+
+    <!-- File upload -->
+    <accordion-group heading="Attachments" panelClass="bg-milch">
+      <div class="card-body bg-milch text-dark">
+        <form [formGroup]="projectMediaForm">
+          <app-mediainput id="files"
+                          name="files"
+                          [projectID]="project.id"
+                          [existingMedia]="projectMedia"
+                          formControlName="files"
+                          accept="application/pdf"></app-mediainput>
+        </form>
+      </div>
+    </accordion-group>
     <accordion-group heading="Overview Diagramm" panelClass="bg-milch">
       <div class="card-body bg-milch text-dark" *ngIf="projectTimes.length === 0">
         No tracked times available

@@ -17,6 +17,9 @@ export class ProjectResolver implements Resolve<Observable<Array<any>>> {
     const projectID = <number><any>route.paramMap.get('projectID');
     if (projectID) {
       return this.projectService.getProject(projectID);
+
+
+
     }
     return null;
   }

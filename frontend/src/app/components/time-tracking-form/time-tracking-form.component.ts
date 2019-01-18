@@ -101,7 +101,6 @@ export class TimeTrackingFormComponent implements OnInit {
   }
 
   navigateToLastRoute() {
-    console.log('NavigabeToLastRoute: ' + this.currentRouteLink);
     this.router.navigate([this.currentRouteLink]);
   }
 

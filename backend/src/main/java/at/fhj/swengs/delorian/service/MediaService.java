@@ -1,7 +1,9 @@
 package at.fhj.swengs.delorian.service;
 
 import at.fhj.swengs.delorian.model.Media;
+import at.fhj.swengs.delorian.model.Project;
 import at.fhj.swengs.delorian.repository.MediaRepository;
+import at.fhj.swengs.delorian.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class MediaService {
@@ -20,6 +22,8 @@ public class MediaService {
     @Autowired
     private MediaRepository mediaRepository;
 
+    @Autowired
+    private ProjectRepository projectRepository;
 
     /**
      * Save a media.
@@ -50,26 +54,37 @@ public class MediaService {
      */
     public void delete(Long id) {
         mediaRepository.deleteById(id);
+
+        //Delete the file from filesystem...
+        File dest = retrieveMediaFile(id);
+        dest.delete();
     }
 
-    public Media createMedia(MultipartFile multipartFile) throws IOException {
-        Media dbMedia = new Media();
-        dbMedia.setOriginalFileName(multipartFile.getOriginalFilename());
-        dbMedia.setContentType(multipartFile.getContentType());
-        dbMedia.setSize(multipartFile.getSize());
-        Media savedDbMedia = save(dbMedia);
+    public Optional<Media> createMedia(Long projectID, MultipartFile multipartFile) throws IOException {
 
-        // Store file on filesystem
-        File dest = retrieveMediaFile(savedDbMedia);
-        try (FileOutputStream fos = new FileOutputStream(dest)) {
-            fos.write(multipartFile.getBytes());
+        Optional<Project> optProject = projectRepository.findById(projectID);
+        if(optProject.isPresent()) {
+            Media dbMedia = new Media();
+            dbMedia.setOriginalFileName(multipartFile.getOriginalFilename());
+            dbMedia.setContentType(multipartFile.getContentType());
+            dbMedia.setSize(multipartFile.getSize());
+            dbMedia.setProject(optProject.get());
+
+            Media savedDbMedia = save(dbMedia);
+
+            // Store file on filesystem
+            File dest = retrieveMediaFile(savedDbMedia.getId());
+            try (FileOutputStream fos = new FileOutputStream(dest)) {
+                fos.write(multipartFile.getBytes());
+            }
+            return Optional.of(savedDbMedia);
         }
-        return savedDbMedia;
+        return Optional.empty();
     }
 
-    public File retrieveMediaFile(Media media) {
+    public File retrieveMediaFile(long mediaId) {
         File uploadsDir = retrieveUploadsDirectory();
-        String filePath = uploadsDir.getAbsolutePath() + "/" + media.getId();
+        String filePath = uploadsDir.getAbsolutePath() + "/" + mediaId;
         return new File(filePath);
     }
 
@@ -80,6 +95,14 @@ public class MediaService {
             uploadsDir.mkdir();
         }
         return uploadsDir;
+    }
+
+    public Set<Media> getProjectMedias(Map<Long,String> dtos) {
+        Set<Media> entities = new HashSet<>();
+        if (dtos != null) {
+            dtos.keySet().forEach((mediaID) -> entities.add(mediaRepository.findById(mediaID).get()));
+        }
+        return entities;
     }
 
 }

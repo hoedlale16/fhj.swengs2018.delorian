@@ -77,7 +77,6 @@ const routes: Routes = [
     path: 'project-form', component: ProjectFormComponent, canActivate: [PrjMgrRoleGuard],
   },
   {
-    // TODO Guard der ueberprueft ob eingeloggter User auch ProjectManager von georderten PRojekt ist.
     path: 'project-form/:projectID', component: ProjectFormComponent, canActivate: [PrjMgrRoleGuard],
     resolve: {
       project: ProjectResolver,

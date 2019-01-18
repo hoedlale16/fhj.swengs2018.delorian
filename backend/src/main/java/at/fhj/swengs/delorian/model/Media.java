@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "media")
@@ -24,6 +25,9 @@ public class Media implements Serializable {
     @NotNull
     @Column(nullable = false)
     private Long size;
+
+    @ManyToOne
+    private Project project;
 
     public Long getId() {
         return id;
@@ -86,6 +90,14 @@ public class Media implements Serializable {
             return false;
         }
         return Objects.equals(getId(), media.getId());
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     @Override

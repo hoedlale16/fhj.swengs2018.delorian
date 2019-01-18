@@ -37,10 +37,8 @@ public class Project {
     private List<ProjectTime> projectTimes;
 
 
-    // hoedlale16: according to Krausler we should implement a M2M Connection to have more flexiblity for future implmentations.
-    @ManyToMany
-    @JoinTable(name = "project_media", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "media_id"))
-    private Set<Media> mediaSet = new HashSet<>();
+    @OneToMany(mappedBy = "project")
+    private Set<Media> mediaSet;
 
 
     @Version

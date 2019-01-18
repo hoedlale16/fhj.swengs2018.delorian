@@ -1,5 +1,8 @@
 package at.fhj.swengs.delorian.dto;
 
+import at.fhj.swengs.delorian.model.Media;
+
+import java.util.HashSet;
 import java.util.Set;
 
 public class ProjectDTO {
@@ -11,6 +14,8 @@ public class ProjectDTO {
     private double totalPlannedHours;
     private Set<Long> projectTimes;
     //Frontend will just have active projects!
+    private Set<Media> mediaSet = new HashSet<>();
+
 
     public long getId() {
         return id;
@@ -58,5 +63,13 @@ public class ProjectDTO {
 
     public void setProjectTimes(Set<Long> projectTimes) {
         this.projectTimes = projectTimes;
+    }
+
+    public Set<Media> getMediaSet() {
+        return mediaSet;
+    }
+
+    public void setMediaSet(Set<Media> pictures) {
+        this.mediaSet = pictures;
     }
 }

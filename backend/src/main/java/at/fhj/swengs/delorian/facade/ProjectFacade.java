@@ -45,6 +45,7 @@ public class ProjectFacade {
 
         entity.setTotalPlannedHours(dto.getTotalPlannedHours());
         entity.setProjectTimes(projectTimeService.getProjectTimes(dto.getProjectTimes()));
+        entity.setMediaSet(dto.getMediaSet());
     }
 
     private void mapEntityToDto(Project entity, ProjectDTO dto, boolean fullDetails) {
@@ -55,6 +56,7 @@ public class ProjectFacade {
             dto.setProjectManager(entity.getProjectManager().getUserName());
             dto.setTotalPlannedHours(entity.getTotalPlannedHours());
             dto.setProjectTimes(entity.getProjectTimes().stream().map(pt -> pt.getId()).collect(Collectors.toSet()));
+            dto.setMediaSet(entity.getMediaSet());
         }
     }
 

@@ -5,8 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @JsonIdentityInfo(
@@ -33,6 +35,12 @@ public class Project {
 
     @OneToMany(mappedBy = "project")
     private List<ProjectTime> projectTimes;
+
+
+    // hoedlale16: according to Krausler we should implement a M2M Connection to have more flexiblity for future implmentations.
+    @ManyToMany
+    @JoinTable(name = "project_media", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "media_id"))
+    private Set<Media> mediaSet = new HashSet<>();
 
 
     @Version
@@ -112,6 +120,14 @@ public class Project {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public Set<Media> getMediaSet() {
+        return mediaSet;
+    }
+
+    public void setMediaSet(Set<Media> mediaSet) {
+        this.mediaSet = mediaSet;
     }
 
     @Override

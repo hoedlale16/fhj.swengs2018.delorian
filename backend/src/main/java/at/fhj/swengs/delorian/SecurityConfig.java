@@ -58,6 +58,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //TO handle projeckts, role ROLE_PRJMGR is required
                 .antMatchers("/projects/**").hasRole("PRJMGR")
 
+                //Just allow project managers to upload data
+                .antMatchers("/media/**").hasRole("PRJMGR")
+
+
                 .antMatchers("/users/**").hasRole("ADMIN")
                 .antMatchers( "/userroles/**").hasRole("ADMIN")
                 // any other requests must be authenticated

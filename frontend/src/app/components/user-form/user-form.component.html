@@ -28,6 +28,10 @@
       <div class="col">
         <label for="password">Password:</label>
         <input id="password" type="password" name="password" formControlName="password" class="form-control"/>
+        <div *ngIf="isEditMode === false && userForm.controls.password.invalid && (userForm.controls.password.dirty || userForm.controls.password.touched)"
+             class="alert alert-danger">
+          <strong>Password is required!</strong>
+        </div>
       </div>
     </div>
 
@@ -35,10 +39,18 @@
       <div class="col">
         <label for="firstName">Firstname:</label>
         <input id="firstName" type="text" name="firstName" formControlName="firstName" class="form-control"/>
+        <div *ngIf="userForm.controls.firstName.invalid && (userForm.controls.firstName.dirty || userForm.controls.firstName.touched)"
+             class="alert alert-danger">
+          <strong>Firstname is required (min 3 characters)!</strong>
+        </div>
       </div>
       <div class="col">
         <label for="lastName">Lastname:</label>
         <input id="lastName" type="text" name="lastName" formControlName="lastName" class="form-control"/>
+        <div *ngIf="userForm.controls.lastName.invalid && (userForm.controls.lastName.dirty || userForm.controls.lastName.touched)"
+             class="alert alert-danger">
+          <strong>Lastname is required! (min 3 characters)</strong>
+        </div>
       </div>
     </div>
 

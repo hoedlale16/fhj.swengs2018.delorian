@@ -2,6 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {ProjectTime} from '../../api/ProjectTime';
 import {Project} from '../../api/Project';
+import {FormControl, FormGroup} from '@angular/forms';
+import {Media} from '../../api/Media';
 
 @Component({
   selector: 'app-project-detail',
@@ -19,12 +21,20 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   alreadyTrackedTimesPage: Array<ProjectTime>;
   timeTrackingPerPage = 3;
 
+  projectMediaForm: FormGroup;
+  projectMedia;
+
   totalBookedHours = 0;
   project: Project;
   currentRouteLink: string;
 
   constructor(private route: ActivatedRoute, private router: Router) {
     this.loadData();
+    this.projectMediaForm = new FormGroup({
+      'files': new FormControl([])
+    });
+
+
   }
 
   ngOnInit() {
@@ -53,13 +63,14 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     this.project = data.project;
     this.projectTimes = data.projectTimes ? data.projectTimes : [];
     this.alreadyTrackedTimesPage = this.projectTimes.slice(0, this.timeTrackingPerPage);
+    this.projectMedia = this.project.mediaMap;
 
     this.prepareChartData();
     this.projectTimes.forEach((p) => {
       this.totalBookedHours += p.workedHours;
     });
     this.currentRouteLink = '/project-details/' + this.project.id;
-    console.log('project-details.component: currentRouteLink: ' + this.currentRouteLink);
+
   }
 
   prepareChartData() {

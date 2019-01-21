@@ -31,7 +31,6 @@ import {ErrorInterceptor} from './httpinterceptor/error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MediainputComponent } from './components/mediainput/mediainput.component';
 import {FileUploadModule} from 'ng2-file-upload';
-import { ProjectMediaComponent } from './components/project-media/project-media.component';
 
 
 export function tokenGetter() {
@@ -59,7 +58,6 @@ export const httpInterceptorProviders = [
     ProjectDetailComponent,
     ProjectInfoComponent,
     MediainputComponent,
-    ProjectMediaComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,6 @@ import {Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {User} from '../api/User';
 import {Project} from '../api/Project';
-
 @Injectable({
   providedIn: 'root'
 })

@@ -3,6 +3,7 @@ package at.fhj.swengs.delorian.dto;
 import at.fhj.swengs.delorian.model.Media;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class ProjectDTO {
@@ -13,8 +14,9 @@ public class ProjectDTO {
     private String projectManager;
     private double totalPlannedHours;
     private Set<Long> projectTimes;
-    //Frontend will just have active projects!
-    private Set<Media> mediaSet = new HashSet<>();
+
+    //Frontend just see filename... ID just required for ID
+    private Map<Long,String> mediaMap;
 
 
     public long getId() {
@@ -65,11 +67,11 @@ public class ProjectDTO {
         this.projectTimes = projectTimes;
     }
 
-    public Set<Media> getMediaSet() {
-        return mediaSet;
+    public Map<Long, String> getMediaMap() {
+        return mediaMap;
     }
 
-    public void setMediaSet(Set<Media> pictures) {
-        this.mediaSet = pictures;
+    public void setMediaMap(Map<Long, String> mediaMap) {
+        this.mediaMap = mediaMap;
     }
 }

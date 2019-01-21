@@ -1,5 +1,6 @@
 package at.fhj.swengs.delorian.controller;
 
+import at.fhj.swengs.delorian.dto.ProjectDTO;
 import at.fhj.swengs.delorian.model.Media;
 import at.fhj.swengs.delorian.service.MediaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,15 @@ public class MediaController {
     @Autowired
     private MediaService mediaService;
 
-    @PostMapping("/media")
-    public ResponseEntity<Media> uploadMedia(@RequestPart MultipartFile file) throws IOException, URISyntaxException {
-        return new ResponseEntity(mediaService.createMedia(file), HttpStatus.CREATED);
+    @PostMapping("/media/{projectID}")
+    public ResponseEntity<Media> uploadMedia(@RequestPart MultipartFile file,@PathVariable long projectID) throws IOException, URISyntaxException {
+        Optional<Media> optionalMedia=  mediaService.createMedia(projectID, file);
+        if(optionalMedia.isPresent()) {
+            return new ResponseEntity(optionalMedia.get(), HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
 
     @GetMapping("/media/{id}")
     public ResponseEntity<InputStreamResource> getMediaDownload(@PathVariable Long id) throws FileNotFoundException {
@@ -40,11 +46,16 @@ public class MediaController {
             throw new FileNotFoundException("Media with id " + id + " not found");
         }
         Media media = mediaResult.get();
-        File mediaFile = mediaService.retrieveMediaFile(media);
+        File mediaFile = mediaService.retrieveMediaFile(media.getId());
         InputStreamResource resource = new InputStreamResource(new FileInputStream(mediaFile));
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + media.getOriginalFileName())
                 .contentType(MediaType.parseMediaType(media.getContentType())).contentLength(media.getSize())
                 .body(resource);
+    }
+
+    @DeleteMapping("/media/{id}")
+    void delete(@PathVariable Long id) {
+        mediaService.delete(id);
     }
 }

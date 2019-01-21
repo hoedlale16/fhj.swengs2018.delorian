@@ -5,4 +5,5 @@ export interface Project {
   projectManager: string;
   totalPlannedHours: number;
   projectTimes: Array<number>;
+  mediaMap?: Map<number, string>;
 }

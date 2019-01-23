@@ -35,10 +35,10 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   getErrorMessageClient(status: number): string {
     switch (status) {
-      case 401: return 'Authentication failed!';
+      case 401: return 'Wrong Username or Password!';
       case 403: return 'You don\'t have the permission!';
       case 404: return 'Page not found!';
-      default: return 'Ups, didn\'t understand your request. It seems your Fluxcompensator has not enough fuel.';
+      default: return 'Ups, didn\'t understand your request. It seems that your Fluxcompensator has not enough fuel.';
     }
   }
 

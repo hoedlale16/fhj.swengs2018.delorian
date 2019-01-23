@@ -77,12 +77,12 @@ export class TimeTrackingFormComponent implements OnInit {
     // Just controls to get data for storage
     this.handleNotChangeAbleForms(false);
     const projectTime = this.timeTrackingForm.value;
-    this.handleNotChangeAbleForms(true);
 
     // Set currentLogedInUser just to be sure that trackted time is assigned to logged in user...
     projectTime.username = this.currLoggedInUser;
 
     if (this.isEditMode) {
+      this.handleNotChangeAbleForms(true);
       this.projectTimesService.update(projectTime).subscribe((response: any) => {
         if (response) {
           this.toastrService.info('Update sucessfully');
@@ -90,6 +90,7 @@ export class TimeTrackingFormComponent implements OnInit {
         this.navigateToLastRoute();
       });
     } else {
+      this.timeTrackingForm.controls.username.disable();
       this.projectTimesService.create(projectTime).subscribe((response: any) => {
         this.storeLastBooking(projectTime);
         if (response) {

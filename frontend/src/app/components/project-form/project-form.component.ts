@@ -25,7 +25,8 @@ export class ProjectFormComponent implements OnInit {
       'totalPlannedHours': new FormControl('', [Validators.required, Validators.pattern(/^(0|[1-9]\d*)?$/)]),
       // 'totalPlannedHours': new FormControl('', [Validators.required, Validators.pattern('^\d*\.\[0,5]{0,1}')]),
       'description': new FormControl(),
-      'projectTimes': new FormControl()
+      'projectTimes': new FormControl(),
+      'mediaMap': new FormControl()
     });
 
     // Set current logged in user as project manager and disable field (not changeable for user!)
